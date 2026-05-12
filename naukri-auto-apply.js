@@ -20,7 +20,15 @@ const EMAIL = process.env.NAUKRI_EMAIL;
 const PASSWORD = process.env.NAUKRI_PASSWORD;
 const TARGET = parseInt(process.env.TARGET || '50', 10);
 const SOURCE = 'naukri';
-const SEARCH_URL = 'https://www.naukri.com/full-stack-developer-react-node-js-jobs-in-hyderabad?k=full+stack+developer+react+node+js&l=hyderabad&experience=2&jobAge=15';
+// Multiple searches so we get fresh jobs beyond the first 15-day window
+const SEARCH_URLS_LIST = [
+  'https://www.naukri.com/full-stack-developer-jobs-in-hyderabad?k=full+stack+developer&l=hyderabad&experience=2&jobAge=30',
+  'https://www.naukri.com/react-developer-jobs-in-hyderabad?k=react+developer&l=hyderabad&experience=2&jobAge=30',
+  'https://www.naukri.com/nodejs-developer-jobs-in-hyderabad?k=node+js+developer&l=hyderabad&experience=2&jobAge=30',
+  'https://www.naukri.com/mern-stack-developer-jobs-in-hyderabad?k=mern+stack+developer&l=hyderabad&experience=2&jobAge=30',
+];
+// Kept for backward compat inside collectJobs
+const SEARCH_URL = SEARCH_URLS_LIST[0];
 const EXTERNAL_FILE = path.join(__dirname, 'naukri-external-jobs.json');
 
 const PROFILE = {
@@ -72,34 +80,37 @@ async function login(page) {
 }
 
 async function collectJobs(page, target) {
-  const jobs = new Map(); // url -> {title, company, location, experience, salary, postedAt, url}
-  for (let p = 1; p <= 30 && jobs.size < target * 4; p++) {
-    const url = SEARCH_URL + `&pageNo=${p}`;
-    await page.goto(url, { waitUntil: 'domcontentloaded' }).catch(() => {});
-    await sleep(2200);
-    const pageJobs = await page.evaluate(() => {
-      const titleAnchors = Array.from(document.querySelectorAll('a.title'));
-      return titleAnchors.map((a) => {
-        const card = a.closest('div.srp-jobtuple-wrapper, div.jobTuple, article') || a.parentElement?.parentElement;
-        const text = (sel) => card?.querySelector(sel)?.innerText?.trim() || '';
-        return {
-          title: a.innerText.trim(),
-          url: a.href,
-          company: text('a.subTitle, a.comp-name, .companyInfo a, .comp-dtls a') || text('span.subTitle'),
-          location: text('span.locWdth, .loc, .locations span') || text('.styles_locations__yRPSz'),
-          experience: text('span.expwdth, .exp, .styles_jhc__exp__k_giM') || text('.expwd'),
-          salary: text('span.sal, .sal, .salary') || text('.styles_jhc__salary__jdfEC'),
-          postedAt: text('.job-post-day, span.job-post-day') || text('.styles_jhc__jobpost__pjp7g'),
-        };
+  const jobs = new Map(); // url -> job object
+  for (const baseUrl of SEARCH_URLS_LIST) {
+    if (jobs.size >= target * 5) break;
+    for (let p = 1; p <= 15 && jobs.size < target * 5; p++) {
+      const url = baseUrl + `&pageNo=${p}`;
+      await page.goto(url, { waitUntil: 'domcontentloaded' }).catch(() => {});
+      await sleep(2200);
+      const pageJobs = await page.evaluate(() => {
+        const titleAnchors = Array.from(document.querySelectorAll('a.title'));
+        return titleAnchors.map((a) => {
+          const card = a.closest('div.srp-jobtuple-wrapper, div.jobTuple, article') || a.parentElement?.parentElement;
+          const text = (sel) => card?.querySelector(sel)?.innerText?.trim() || '';
+          return {
+            title: a.innerText.trim(),
+            url: a.href,
+            company: text('a.subTitle, a.comp-name, .companyInfo a, .comp-dtls a') || text('span.subTitle'),
+            location: text('span.locWdth, .loc, .locations span') || text('.styles_locations__yRPSz'),
+            experience: text('span.expwdth, .exp, .styles_jhc__exp__k_giM') || text('.expwd'),
+            salary: text('span.sal, .sal, .salary') || text('.styles_jhc__salary__jdfEC'),
+            postedAt: text('.job-post-day, span.job-post-day') || text('.styles_jhc__jobpost__pjp7g'),
+          };
+        });
       });
-    });
-    if (!pageJobs.length) break;
-    let added = 0;
-    for (const j of pageJobs) {
-      if (!jobs.has(j.url)) { jobs.set(j.url, j); added++; }
+      if (!pageJobs.length) break;
+      let added = 0;
+      for (const j of pageJobs) {
+        if (!jobs.has(j.url)) { jobs.set(j.url, j); added++; }
+      }
+      console.log(`  [${new URL(baseUrl).searchParams.get('k')}] page ${p}: +${added} (total ${jobs.size})`);
+      if (added === 0 && p > 1) break;
     }
-    console.log(`  page ${p}: +${added} (total ${jobs.size})`);
-    if (added === 0 && p > 1) break;
   }
   return [...jobs.values()];
 }
