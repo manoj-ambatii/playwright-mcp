@@ -29,7 +29,11 @@
       "mcp__playwright__browser_run_code",
       "mcp__playwright__browser_network_requests",
       "mcp__playwright__browser_console_messages",
-      "PowerShell(Get-NetTCPConnection -LocalPort 3000 | Select-Object LocalAddress, LocalPort, State, OwningProcess | ForEach-Object { $p = Get-Process -Id $_.OwningProcess -ErrorAction SilentlyContinue; \"$\\($_.State\\) PID=$\\($_.OwningProcess\\) Name=$\\($p.Name\\) Path=$\\($p.Path\\)\" })"
+      "PowerShell(Get-NetTCPConnection -LocalPort 3000 | Select-Object LocalAddress, LocalPort, State, OwningProcess | ForEach-Object { $p = Get-Process -Id $_.OwningProcess -ErrorAction SilentlyContinue; \"$\\($_.State\\) PID=$\\($_.OwningProcess\\) Name=$\\($p.Name\\) Path=$\\($p.Path\\)\" })",
+      "mcp__notion__notion-search",
+      "mcp__notion__notion-fetch",
+      "mcp__notion__notion-create-pages",
+      "mcp__notion__notion-update-page"
     ],
     "defaultMode": "auto"
   }
