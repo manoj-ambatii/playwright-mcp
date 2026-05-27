@@ -1,788 +1,834 @@
-◇ injected env (4) from .env // tip: ⌘ enable debugging { debug: true }
+◇ injected env (4) from .env // tip: ⌘ suppress logs { quiet: true }
 Logging in...
 Already logged in.
 Collecting up to 200 jobs...
   [full stack developer] page 1: +20 (total 20)
-  [full stack developer] page 2: +20 (total 40)
-  [full stack developer] page 3: +20 (total 60)
-  [full stack developer] page 4: +20 (total 80)
-  [full stack developer] page 5: +19 (total 99)
-  [full stack developer] page 6: +20 (total 119)
-  [full stack developer] page 7: +20 (total 139)
-  [full stack developer] page 8: +18 (total 157)
-  [full stack developer] page 9: +20 (total 177)
-  [full stack developer] page 10: +19 (total 196)
-  [full stack developer] page 11: +16 (total 212)
-  [full stack developer] page 12: +20 (total 232)
-  [full stack developer] page 13: +20 (total 252)
-Collected 252 jobs. Beginning loop...
+  [full stack developer] page 2: +19 (total 39)
+  [full stack developer] page 3: +20 (total 59)
+  [full stack developer] page 4: +20 (total 79)
+  [full stack developer] page 5: +19 (total 98)
+  [full stack developer] page 6: +16 (total 114)
+  [full stack developer] page 7: +19 (total 133)
+  [full stack developer] page 8: +19 (total 152)
+  [full stack developer] page 9: +17 (total 169)
+  [full stack developer] page 10: +20 (total 189)
+  [full stack developer] page 11: +19 (total 208)
+  [full stack developer] page 12: +20 (total 228)
+  [full stack developer] page 13: +20 (total 248)
+  [full stack developer] page 14: +19 (total 267)
+Collected 267 jobs. Beginning loop...
 
-[1/252] Full Stack Developer @ Ahsan Solutions
+[1/267] Full Stack Developer @ Qapitol Qa
   -> company_site_skip
 
-[2/252] Full Stack Developer @ Ratnam Solutions
-  -> dedup_skip (already in external)
+[2/267] Angular/PHP Full Stack Developer @ Sune Solutions
+  -> dedup_skip (already in skipped)
 
-[3/252] Angular/PHP Full Stack Developer @ Sune Solutions
-  -> chatbot_unknown
-
-[4/252] Senior Associate-.NET Full Stack Develop @ Genpact
-  -> chatbot_unknown
-
-[5/252] Full Stack Developer - MEAN Stack @ Smartify Software Solutions
+[3/267] Dot Net full stack Developer @ Stack Digital
   -> company_site_skip
 
-[6/252] Java Full Stack Developer @ Service Industry
+[4/267] Net Full stack Developer - MDM custom ap @ Stack Digital
+  -> company_site_skip
+
+[5/267] Java Full Stack Developer/ Mern full sta @ Premier Solar Systems
   -> unknown
 
-[7/252] Java Full Stack Developer @ client of Anlage
-  -> unknown
-
-[8/252] Java Full Stack Developer @ Feuji Software Solutions
-  -> dedup_skip (already in skipped)
-
-[9/252] Java Full Stack Developer @ Feuji Software Solutions
-  -> dedup_skip (already in skipped)
-
-[10/252] Java Full Stack Developer @ Feuji Software Solutions
-  -> dedup_skip (already in skipped)
-
-[11/252] Custom Software Engineer @ Accenture
-  -> company_site_skip
-
-[12/252] Full Stack .NET Developer @ Everi India
-  -> dedup_skip (already in skipped)
-
-[13/252] Custom Software Engineer @ Accenture
-  -> company_site_skip
-
-[14/252] Software Engineer @ GE VERNOVA
-  -> unknown
-
-[15/252] Custom Software Engineer @ Accenture
-  -> company_site_skip
-
-[16/252] Custom Software Engineer @ Accenture
-  -> company_site_skip
-
-[17/252] Software Engineer @ Alter Domus
-  -> company_site_skip
-
-[18/252] Fullstack sfmc developer with Sql @ Omnicom Global Solutions
-  -> dedup_skip (already in applied)
-
-[19/252] Custom Software Engineer @ Accenture
-  -> company_site_skip
-
-[20/252] Full Stack Software Engineer @ Amgen Inc
-  -> dedup_skip (already in external)
-
-[21/252] Full Stack Developer @ Onebridge Infotech
-  -> dedup_skip (already in external)
-
-[22/252] Full Stack Developer @ SEDOTS Info Technologies (P) Ltd
-  -> dedup_skip (already in external)
-
-[23/252] Full Stack Developer @ Divami Design Labs
-  -> dedup_skip (already in external)
-
-[24/252] Full Stack Developer, eCommerce @ Prayag Health
-  -> dedup_skip (already in external)
-
-[25/252] Full Stack Developer - Ananta Labs @ Ananta Labs Rajkot
-  -> dedup_skip (already in external)
-
-[26/252] Full Stack Developer @ Aliqan Services
-  -> dedup_skip (already in external)
-
-[27/252] Full Stack Developer @ Vimerse Infotech
-  -> dedup_skip (already in external)
-
-[28/252] Full Stack Developer @ TM Systems
-  -> dedup_skip (already in external)
-
-[29/252] Full Stack Developer @ Pipra Solutions
-  -> dedup_skip (already in external)
-
-[30/252] Full Stack Developer @ Salientminds Technologies
-  -> dedup_skip (already in external)
-
-[31/252] Full Stack Developer @ Xmachines
-  -> dedup_skip (already in external)
-
-[32/252] Full Stack Developer @ Royal It Park Services
-  -> dedup_skip (already in external)
-
-[33/252] Full-Stack Developer @ THE Patterns Company
-  -> dedup_skip (already in external)
-
-[34/252] Full-Stack Developer @ Boxfinity
-  -> dedup_skip (already in external)
-
-[35/252] Full Stack Developer React + Node @ Quanteon Solutions
-  -> dedup_skip (already in external)
-
-[36/252] Full Stack Developer @ Xmachines
-  -> dedup_skip (already in external)
-
-[37/252] Full Stack Developer @ Ipropal
-  -> dedup_skip (already in external)
-
-[38/252] Full - Stack Developer @ Techefficio
-  -> dedup_skip (already in external)
-
-[39/252] Full Stack Developer @ Adtcore
-  -> dedup_skip (already in external)
-
-[40/252] Full Stack Developer @ Ekincare
-  -> dedup_skip (already in external)
-
-[41/252] Full Stack Developer Mid-Level @ Aerobotics7
-  -> dedup_skip (already in external)
-
-[42/252] Full Stack Developer @ Prodigit
-  -> dedup_skip (already in external)
-
-[43/252] Full Stack Developer @ Cognitus
-  -> dedup_skip (already in external)
-
-[44/252] React - Full Stack Developer @ Zippr
-  -> dedup_skip (already in external)
-
-[45/252] Full Stack Developer- Java8/Spring Boot/ @ Knowledge Capital Services
-  -> dedup_skip (already in external)
-
-[46/252] Azure AI Full Stack Developer @ CMM Level 5 IT Company
-  -> dedup_skip (already in skipped)
-
-[47/252] Full Stack Developer @ Mocktheta
-  -> dedup_skip (already in external)
-
-[48/252] Full Stack Developer @ Claim Genius
-  -> dedup_skip (already in external)
-
-[49/252] Backend - Full Stack Developer @ CA One Tech
-  -> dedup_skip (already in external)
-
-[50/252] Full stack developer @ Softobiz
-  -> dedup_skip (already in skipped)
-
-[51/252] Full Stack Nodejs Developer @ Tayseer Technologies
-  -> dedup_skip (already in external)
-
-[52/252] Full Stack Developer @ Triad Square Infosec
-  -> dedup_skip (already in external)
-
-[53/252] Full Stack Developer @ Political Engineer
-  -> dedup_skip (already in external)
-
-[54/252] Full Stack Developer @ Capital Info
-  -> dedup_skip (already in external)
-
-[55/252] Full Stack AI Developer @ Intellisavvy
-  -> dedup_skip (already in skipped)
-
-[56/252] Full Stack Developer (ReactJS/NodeJS) @ Next Leap Innovtions
-  -> dedup_skip (already in external)
-
-[57/252] Full Stack Developer @ Align Technology
-  -> dedup_skip (already in external)
-
-[58/252] Full Stack Developer @ Momentum Financial Services Group
-  -> dedup_skip (already in skipped)
-
-[59/252] Full Stack Developer @ Datamatics Business Solutions
-  -> dedup_skip (already in external)
-
-[60/252] Full Stack Developer/Lead || Looking For @ Valuelabs
-  -> dedup_skip (already in applied)
-
-[61/252] Full Stack Developer @ Persistent
-  -> dedup_skip (already in skipped)
-
-[62/252] Full stack Developer(Nodejs+Typescript+R @ Tata Consultancy Services
-  -> dedup_skip (already in skipped)
-
-[63/252] DES2 - Full Stack Developer @ Sutherland Global Services Inc
-  -> dedup_skip (already in external)
-
-[64/252] AWS Full Stack Developer @ Programming.Com
-  -> dedup_skip (already in external)
-
-[65/252] Full Stack Developer @ Paraminfo
-  -> dedup_skip (already in external)
-
-[66/252] Full stack Developers @ O2labs Solutions
-  -> dedup_skip (already in external)
-
-[67/252] Full Stack Developer @ Photon
-  -> dedup_skip (already in external)
-
-[68/252] SAP BTP Full-Stack Developers @ Logicmotive Consultant
-  -> dedup_skip (already in external)
-
-[69/252] Gen AI(Full Stack) Developer Opening wit @ Capco
-  -> dedup_skip (already in applied)
-
-[70/252] Full Stack Developer @ Proclink
-  -> dedup_skip (already in external)
-
-[71/252] full stack developer-Java+UI @ Squircle IT
-  -> dedup_skip (already in external)
-
-[72/252] Enabling Areas - IT - DM - Full Stack De @ Deloitte Consulting
-  -> dedup_skip (already in external)
-
-[73/252] Full Stack Developer - React & NodeJS @ Cerebra
-  -> dedup_skip (already in skipped)
-
-[74/252] Azure Full Stack Developer @ EY
-  -> dedup_skip (already in skipped)
-
-[75/252] Full Stack Developer @ Tquanta Technologies
-  -> dedup_skip (already in external)
-
-[76/252] Full Stack Developer - Nodejs ReactJS An @ Cerebra
+[6/267] Talent Acquisition Specialist - Product  @ Techolution
   -> applied
 
-[77/252] Full Stack Developer L2 @ Bharath Cloud
-  -> dedup_skip (already in external)
-
-[78/252] Full Stack Developer @ Godigi Infotech
-  -> dedup_skip (already in external)
-
-[79/252] Full Stack Developer (ReactJS + NodeJS) @ Religent Systems
-  -> dedup_skip (already in external)
-
-[80/252] Full Stack Developer @ Goviralll Media
-  -> dedup_skip (already in external)
-
-[81/252] Career opportunity For Full Stack Develo @ Tekskills india
-  -> dedup_skip (already in skipped)
-
-[82/252] Full Stack Developer (ReactJS+JAVA) @ Cognine Technologies
-  -> dedup_skip (already in external)
-
-[83/252] Full-Stack Developer @ Sais It Services
-  -> dedup_skip (already in external)
-
-[84/252] Full Stack Developer - Power Platform @ ECS ME
-  -> dedup_skip (already in external)
-
-[85/252] Full stack Developer / Architect @ Hire Bridge Consultancy
-  -> dedup_skip (already in external)
-
-[86/252] Full Stack Developer @ Prudent Megacorp
-  -> dedup_skip (already in external)
-
-[87/252] Full Stack Developer @ XTGlobal
-  -> dedup_skip (already in external)
-
-[88/252] Full stack developer @ Zuree Telecom
-  -> dedup_skip (already in external)
-
-[89/252] Full Stack Developer @ Akuntha Projects
-  -> dedup_skip (already in external)
-
-[90/252] Portal Full Stack Developer(Remote) @ Kiash Solution
-  -> dedup_skip (already in skipped)
-
-[91/252] Full Stack Developer @ Tekskills india
-  -> dedup_skip (already in skipped)
-
-[92/252] SAP BTP Full Stack Developer @ Momento Cybertech Solutions
-  -> dedup_skip (already in skipped)
-
-[93/252] Full Stack Developer @ Aspirant Soft Solutions
-  -> dedup_skip (already in external)
-
-[94/252] Full Stack Developer and Lead @ Avidall
-  -> dedup_skip (already in external)
-
-[95/252] Full Stack Developer @ Smartkatalyst Consulting
-  -> dedup_skip (already in external)
-
-[96/252] Full Stack Developer @ Connect Digitech
-  -> dedup_skip (already in external)
-
-[97/252] Full Stack Developer @ Tcpwave
-  -> dedup_skip (already in external)
-
-[98/252] Full Stack (NodeJS+ReactJS) Developer @ Tata Consultancy Services
-  -> dedup_skip (already in skipped)
-
-[99/252] Java Full Stack Developer(ERP & Enterpri @ Atenas Code
-  -> dedup_skip (already in skipped)
-
-[100/252] Java Full Stack Developer - Freelancer @ Visys Cloud Technologies
-  -> dedup_skip (already in skipped)
-
-[101/252] Senior .NET Full Stack Developer @ Independent Recruitment Consultant (freelancer)
-  -> dedup_skip (already in skipped)
-
-[102/252] Fullstack Developer - Nest JS @ Processq India
-  -> dedup_skip (already in skipped)
-
-[103/252] Senior Full Stack Developer @ Centific
-  -> dedup_skip (already in skipped)
-
-[104/252] Lead Software Engineer - Full Stack @ Simcorp
-  -> dedup_skip (already in skipped)
-
-[105/252] Full Stack Developer- MERN @ Voiceoc Innovations
-  -> dedup_skip (already in external)
-
-[106/252] Full Stack Developer (PHP, Laravel) @ Cupid Knot
-  -> dedup_skip (already in external)
-
-[107/252] Software Engineer - Java Full Stack Deve @ Dtcc
-  -> company_site_skip
-
-[108/252] Full Stack .Net Developer @ Elyot IT Solutionts Pvt ltd
-  -> dedup_skip (already in skipped)
-
-[109/252] Full Stack Developer (.Net, React JS, C# @ Convergepoint
-  -> dedup_skip (already in external)
-
-[110/252] Dot Net Full Stack Developer @ Kiebot
-  -> dedup_skip (already in external)
-
-[111/252] Dot Net Full Stack Developer @ LPL Financial
-  -> company_site_skip
-
-[112/252] Senior Full Stack Developer For Sora Uni @ Sora Union
-  -> dedup_skip (already in external)
-
-[113/252] Java Full Stack Developer @ IBM
-  -> dedup_skip (already in skipped)
-
-[114/252] SAP BTP Full Stack Developer (OR) SAP CA @ Aifa Labs
-  -> dedup_skip (already in external)
-
-[115/252] SAP BTP Full Stack Developer @ Cognitus
-  -> dedup_skip (already in skipped)
-
-[116/252] Java Full Stack Developer @ Orcapod Consulting Services Private Limited
-  -> dedup_skip (already in skipped)
-
-[117/252] Java Full Stack Developer @ Orcapod Consulting Services Private Limited
-  -> dedup_skip (already in applied)
-
-[118/252] Sr. Full Stack Developer / Full Stack De @ Digile Technologies
-  -> dedup_skip (already in external)
-
-[119/252] Full Stack .Net Developer @ Ray Business Technologies
-  -> chatbot_unknown
-
-[120/252] Full Stack Developer Intern @ Cerebrone
-  -> dedup_skip (already in external)
-
-[121/252] Java Full Stack Developer (React JS +Nod @ Tata Consultancy Services
-  -> chatbot_unknown
-
-[122/252] React JS Developer, 3-6 Yrs Exp, Hyd Hit @ EB Technologies
-  -> dedup_skip (already in skipped)
-
-[123/252] Full Stack Developer @ Martinet Technologies
-  -> dedup_skip (already in external)
-
-[124/252] Full Stack Developer NodeJS+Java @ Logic Planet
-  -> dedup_skip (already in external)
-
-[125/252] Full Stack Developer I @ FedEx
-  -> dedup_skip (already in external)
-
-[126/252] Full Stack Developer I @ FedEx
-  -> dedup_skip (already in external)
-
-[127/252] Full Stack Developer I @ FedEx
-  -> dedup_skip (already in external)
-
-[128/252] Full Stack Developer @ Sage It
-  -> dedup_skip (already in external)
-
-[129/252] Full Stack Developer @ Artify Talent Studio
-  -> dedup_skip (already in external)
-
-[130/252] Full Stack Developer @ Thriving Springs
-  -> dedup_skip (already in external)
-
-[131/252] Full Stack Developer - 2 @ Nxtwave Disruptive Technologies
-  -> dedup_skip (already in external)
-
-[132/252] Full Stack Developer @ IntouchCX
-  -> dedup_skip (already in external)
-
-[133/252] Full Stack Developer @ Oasys Cybernatics
-  -> dedup_skip (already in external)
-
-[134/252] Full Stack Developer @ Krazy Mantra It
-  -> dedup_skip (already in external)
-
-[135/252] Full Stack Developer @ RedandBlue
-  -> dedup_skip (already in external)
-
-[136/252] Full Stack Developer @ USHANKK ENTERRPRISES PRIVATE LIMITED
-  -> dedup_skip (already in external)
-
-[137/252] Full Stack Developer @ Indium Software
-  -> dedup_skip (already in external)
-
-[138/252] Full Stack Developer @ Diensten Tech
-  -> dedup_skip (already in external)
-
-[139/252] Full Stack Developer @ Grid Dynamics
-  -> dedup_skip (already in external)
-
-[140/252] Software Engineer 2 .Net Developer @ E-Ring
+[7/267] Talent Acquisition Specialist / IT Recru @ Techolution
   -> applied
 
-[141/252] Java Full Stack Developer @ Giant MNC
-  -> unknown
-
-[142/252] Sr Engineer - Python Full Stack Develope @ Embarkgcc Services
-  -> dedup_skip (already in skipped)
-
-[143/252] Senior Full Stack Developer @ Actlogica
-  -> dedup_skip (already in external)
-
-[144/252] Java Full Stack Developer @ Tata Consultancy Services
-  -> dedup_skip (already in skipped)
-
-[145/252] Full Stack Developer Intern @ Hawk Sense Business Solutions
-  -> dedup_skip (already in external)
-
-[146/252] Dotnet Full Stack Developer @ Alongx Software
-  -> dedup_skip (already in external)
-
-[147/252] Full-Stack Developer @ STP Web Hosting
-  -> dedup_skip (already in external)
-
-[148/252] Java Full Stack Developer @ Crescendo Global
-  -> dedup_skip (already in skipped)
-
-[149/252] Java Full Stack Developer @ MNC Group
-  -> dedup_skip (already in skipped)
-
-[150/252] SAP Full Stack Developer (AI Developer) @ CLIENT OF IT SCIENT
-  -> dedup_skip (already in skipped)
-
-[151/252] SAP Full Stack Developer (AI Developer) @ Tata Consultancy Services(TCS)
-  -> dedup_skip (already in skipped)
-
-[152/252] Dot Net Full-stack Developer @ People Tech
-  -> dedup_skip (already in external)
-
-[153/252] Senior Java Full Stack Developer (Java,  @ Conduent
-  -> chatbot_unknown
-
-[154/252] Full Stack Developer - Java @ Proounce
-  -> dedup_skip (already in external)
-
-[155/252] Java Full Stack Developer @ Annnetwork
-  -> dedup_skip (already in external)
-
-[156/252] .Net Full Stack Developer - Hyderabad @ Infosys
-  -> dedup_skip (already in skipped)
-
-[157/252] .Net Full stack Developer - Infosys @ Infosys
-  -> dedup_skip (already in skipped)
-
-[158/252] .Net Full Stack Developer - Hyderabad @ Infosys
-  -> dedup_skip (already in skipped)
-
-[159/252] Java Full Stack Developer @ MNC Group
-  -> chatbot_unknown
-
-[160/252] Java Full Stack Developer- B @ Infosys
-  -> dedup_skip (already in skipped)
-
-[161/252] Java Full Stack Developer @ MNC Group
-  -> dedup_skip (already in skipped)
-
-[162/252] Manager - Product Development (Python/No @ Embarkgcc Services
-  -> dedup_skip (already in skipped)
-
-[163/252] Java Full Stack Developer @ Leading IT Service and Consulting Organization
-  -> dedup_skip (already in skipped)
-
-[164/252] Java Full Stack Developer @ TechBlocks
-  -> dedup_skip (already in skipped)
-
-[165/252] Full Stack Developer React and Ruby on R @ Accellor Inc
-  -> dedup_skip (already in external)
-
-[166/252] Java Full Stack Developer Software Train @ Orchasp
-  -> dedup_skip (already in external)
-
-[167/252] Python Full stack Developer - Remote Opp @ Siro Clinpharm
-  -> chatbot_unknown
-
-[168/252] Python Full Stack Developer @ Indigrators
-  -> dedup_skip (already in external)
-
-[169/252] Senior Full Stack Developer @ Taffi
-  -> dedup_skip (already in external)
-
-[170/252] Dot NET Full Stack Developer @ Turing Systems Inc
-  -> dedup_skip (already in external)
-
-[171/252] Dot Net Full Stack Developer @ CloudStakes
-  -> dedup_skip (already in external)
-
-[172/252] Java Full Stack Developer - Hyderabad @ Infosys
-  -> dedup_skip (already in skipped)
-
-[173/252] Java Full Stack Developer- B @ Infosys
-  -> dedup_skip (already in skipped)
-
-[174/252] Java Full Stack Developer- B @ Infosys
-  -> dedup_skip (already in skipped)
-
-[175/252] Java Full Stack Developer - Hyderabad @ Infosys
-  -> dedup_skip (already in skipped)
-
-[176/252] Java Full Stack Developer @ Orcapod Consulting Services Private Limited
-  -> dedup_skip (already in applied)
-
-[177/252] Java Full Stack Developer @ Orcapod Consulting Services Private Limited
-  -> dedup_skip (already in applied)
-
-[178/252] Principal Full Stack Developer, PDS BI&T @ Bristol Myers Squibb
-  -> dedup_skip (already in external)
-
-[179/252] Java Full Stack Developer @ Cloudxtreme
-  -> dedup_skip (already in applied)
-
-[180/252] Java Full Stack Developer @ Quadrant Technologies
-  -> dedup_skip (already in skipped)
-
-[181/252] Java Full Stack Developer @ Infosys
-  -> dedup_skip (already in skipped)
-
-[182/252] Java Full Stack Developer-N @ Infosys
-  -> dedup_skip (already in skipped)
-
-[183/252] Java Full Stack Developer (React) - GDS  @ TekWissen
-  -> dedup_skip (already in skipped)
-
-[184/252] Java Full Stack Developer (React) - GDS  @ TekWissen
-  -> dedup_skip (already in skipped)
-
-[185/252] Java Full Stack Developer @ TechBlocks
-  -> dedup_skip (already in skipped)
-
-[186/252] Java Full Stack Developer- Infosys @ Infosys
-  -> dedup_skip (already in skipped)
-
-[187/252] Java Full Stack Developer @ Knowledgesprint Technologies
-  -> dedup_skip (already in external)
-
-[188/252] Junior Full Stack Developer ( ColdFusion @ Infoane
-  -> dedup_skip (already in external)
-
-[189/252] Java Full Stack Developer @ Cloudom Technologies
-  -> dedup_skip (already in external)
-
-[190/252] Mid-Level Full Stack Developer (Angular  @ ESN Technologies
-  -> dedup_skip (already in external)
-
-[191/252] Junior Full Stack Developer (Angular/.NE @ ESN Technologies
-  -> dedup_skip (already in external)
-
-[192/252] Full Stack Developer Intern @ Cerebrone
-  -> dedup_skip (already in external)
-
-[193/252] Full-Stack Developer (Python & React) @ Leokraft Technologies
-  -> dedup_skip (already in external)
-
-[194/252] Java Full Stack Developer (React.js is m @ Reveille Technologies
-  -> unknown
-
-[195/252] Java Full Stack Developer @ Tata Consultancy Services
-  -> unknown
-
-[196/252] Senior Full Stack Developer (Angular / R @ Columbus Global
-  -> dedup_skip (already in skipped)
-
-[197/252] JAVA FULL STACK Developer @ Diverse Lynx
-  -> dedup_skip (already in external)
-
-[198/252] Full Stack Developer (Angular + Node.js) @ Photon
-  -> dedup_skip (already in external)
-
-[199/252] Senior Java Full Stack Developer @ Vrize
-  -> dedup_skip (already in external)
-
-[200/252] Sr Full Stack Developer (Java API + Angu @ Photon
-  -> dedup_skip (already in external)
-
-[201/252] Java full stack developer @ CBL Solutions
-  -> dedup_skip (already in external)
-
-[202/252] Java Full Stack Developer @ YK Innosoft
-  -> dedup_skip (already in external)
-
-[203/252] Senior Full Stack Developer @ Agivant Technologies
-  -> dedup_skip (already in external)
-
-[204/252] Senior Full-Stack Developer @ Metricspace Technologies
-  -> dedup_skip (already in external)
-
-[205/252] Dot Net Full Stack Developer @ Techneplus Software India
-  -> dedup_skip (already in external)
-
-[206/252] Walk in For Software developer (Java) &  @ Al Ansari Financial Services
-  -> dedup_skip (already in skipped)
-
-[207/252] Java Full Stack Developer @ Godigi Infotech
-  -> dedup_skip (already in external)
-
-[208/252] Java Full Stack Developer -Hyderabad -g  @ Infosys
-  -> dedup_skip (already in skipped)
-
-[209/252] Java Full Stack Developer - Infosys @ Infosys
-  -> dedup_skip (already in skipped)
-
-[210/252] Java Full Stack Developer @ Infosys
-  -> dedup_skip (already in skipped)
-
-[211/252] Java Full Stack Developer @ Tekskills India
-  -> dedup_skip (already in skipped)
-
-[212/252] Full Stack Developer @ Fortune India 500 IT Services Firm
-  -> dedup_skip (already in skipped)
-
-[213/252] Full Stack Developer @ Sandhata Technologies
-  -> dedup_skip (already in skipped)
-
-[214/252] Java Full Stack Developer @ Infosys
-  -> dedup_skip (already in skipped)
-
-[215/252] Node JS | React | Typescript | AWS - Ful @ Firstsource
-  -> dedup_skip (already in skipped)
-
-[216/252] Lead Software Engineer - Java Full Stack @ Dtcc
-  -> dedup_skip (already in external)
-
-[217/252] Full Stack Developer @ Codiant
-  -> dedup_skip (already in external)
-
-[218/252] Full Stack Developer @ Align Technology
-  -> dedup_skip (already in external)
-
-[219/252] Full Stack Developer @ Align Technology
-  -> dedup_skip (already in external)
-
-[220/252] Full Stack Developer @ ILM 360
-  -> dedup_skip (already in external)
-
-[221/252] Full stack Developer @ Veniso Solutions
-  -> dedup_skip (already in external)
-
-[222/252] Full Stack Developer @ Diensten Tech
-  -> dedup_skip (already in external)
-
-[223/252] Associate Software Engineer @ Embarkgcc Services
-  -> dedup_skip (already in skipped)
-
-[224/252] Java Full Stack Developer @ Big 4 Accounting Firms
-  -> dedup_skip (already in skipped)
-
-[225/252] Java Full Stack Developer @ Infosys
-  -> chatbot_unknown
-
-[226/252] Senior .Net Full Stack Developer @ LPL Financial
+[8/267] Java Full Stack Developer @ Multicloud4u Technologies
   -> company_site_skip
 
-[227/252] Senior .Net Full Stack Developer Senior @ LPL Financial
-  -> company_site_skip
+[9/267] Java Full Stack Developer @ Feuji Software Solutions
+  -> dedup_skip (already in skipped)
 
-[228/252] Java Full Stack Developer @ Wipro
+[10/267] Java Full Stack Developer @ Feuji Software Solutions
+  -> dedup_skip (already in skipped)
+
+[11/267] Java Full Stack Developer @ Feuji Software Solutions
+  -> dedup_skip (already in skipped)
+
+[12/267] Senior Developer (Full Stack) @ Nxtwave Disruptive Technologies (Hiring for a client)
   -> chatbot_unknown
 
-[229/252] Java Full Stack Developer @ Tata Consultancy Services
+[13/267] Custom Software Engineer @ Accenture
+  -> company_site_skip
+
+[14/267] Full Stack .Net Developer @ Advintek
+  -> chatbot_unknown
+
+[15/267] Full Stack Software Engineer @ Amgen Inc
+  -> company_site_skip
+
+[16/267] Custom Software Engineer @ Accenture
+  -> company_site_skip
+
+[17/267] Software Development Engineer @ Accenture
+  -> company_site_skip
+
+[18/267] Software Engineer @ Soc Software
   -> unknown
 
-[230/252] Azure dot net full stack developer @ Tata Consultancy Services
+[19/267] .Net Fullstack developer(AI) @ Top MNC Company
   -> applied
 
-[231/252] Senior Full Stack Developer (Angular / R @ Columbus Global
+[20/267] Custom Software Engineer @ Accenture
   -> company_site_skip
 
-[232/252] Java Full Stack Developer @ Hexaware Technologies
+[21/267] Full Stack Developer (Mid-Level) @ Datamaze Solutions
+  -> dedup_skip (already in external)
+
+[22/267] Full Stack Developer (React & Node JD) @ Vertiscript Global It Services
+  -> dedup_skip (already in external)
+
+[23/267] Full Stack Developer @ Ghrian Technologies
+  -> dedup_skip (already in external)
+
+[24/267] Full stack developer @ Cognizant
   -> chatbot_unknown
 
-[233/252] Java Full Stack Developer @ CGI
-  -> chatbot_unknown
+[25/267] Full Stack Developer @ Hitachi Digital Services
+  -> company_site_skip
 
-[234/252] Java Full Stack Developer Hyderabad @ Infosys
-  -> dedup_skip (already in skipped)
+[26/267] Full Stack Developer @ Tech Stalwart Solution
+  -> company_site_skip
 
-[235/252] Java Full Stack Developer @ Tata Consultancy Services
-  -> dedup_skip (already in skipped)
+[27/267] Full Stack Developer @ Onebridge Infotech
+  -> dedup_skip (already in external)
 
-[236/252] Full Stack Developer (PHP, Laravel, MySQ @ Leading Client
-  -> dedup_skip (already in skipped)
+[28/267] Full Stack Developer @ SEDOTS Info Technologies (P) Ltd
+  -> dedup_skip (already in external)
 
-[237/252] Java Full Stack Developer @ Infosys
-  -> dedup_skip (already in applied)
+[29/267] Full Stack Developer @ Divami Design Labs
+  -> dedup_skip (already in external)
 
-[238/252] Java Full Stack Developer @ Teksystems
-  -> dedup_skip (already in skipped)
+[30/267] Full stack Developer - @ Tech Stalwart Solution
+  -> dedup_skip (already in external)
 
-[239/252] Walk-in | Azure Dot Net Full stack Devel @ Tata Consultancy Services
-  -> dedup_skip (already in skipped)
+[31/267] Full Stack Developer, eCommerce @ Prayag Health
+  -> dedup_skip (already in external)
 
-[240/252] Walk-in || Solution Architect @ Ahinjay Enterprises
+[32/267] Full Stack Developer - Ananta Labs @ Ananta Labs Rajkot
+  -> dedup_skip (already in external)
+
+[33/267] Full Stack Developer @ Aliqan Services
+  -> dedup_skip (already in external)
+
+[34/267] Full Stack Developer @ Vimerse Infotech
+  -> dedup_skip (already in external)
+
+[35/267] Full Stack Developer @ Pipra Solutions
+  -> dedup_skip (already in external)
+
+[36/267] Full Stack Developer @ Salientminds Technologies
+  -> dedup_skip (already in external)
+
+[37/267] Full Stack Developer @ Xmachines
+  -> dedup_skip (already in external)
+
+[38/267] Full Stack Developer @ Pronix It Solutions
+  -> dedup_skip (already in external)
+
+[39/267] Full Stack Developer @ Royal It Park Services
+  -> dedup_skip (already in external)
+
+[40/267] Full-Stack Developer @ THE Patterns Company
+  -> dedup_skip (already in external)
+
+[41/267] Full-Stack Developer @ Boxfinity
+  -> dedup_skip (already in external)
+
+[42/267] Full Stack Developer React + Node @ Quanteon Solutions
+  -> dedup_skip (already in external)
+
+[43/267] Full Stack Developer @ Xmachines
+  -> dedup_skip (already in external)
+
+[44/267] Full Stack Developer @ IDESLABS
+  -> company_site_skip
+
+[45/267] Walk-in || Azure +.Net Full Stack Develo @ Tata Consultancy Services
   -> no_apply_button
 
-[241/252] Walk-in || UX and UI Designer @ Tekreant
-  -> no_apply_button
-
-[242/252] Java Full Stack Developer @ Wipro
-  -> dedup_skip (already in applied)
-
-[243/252] Java Full Stack Developer @ Tata Consultancy Services
-  -> chatbot_unknown
-
-[244/252] Job Opening For Sr Software Engg(React/N @ Globaldata
-  -> dedup_skip (already in skipped)
-
-[245/252] Java Full Stack Developer @ Tata Consultancy Services
-  -> dedup_skip (already in applied)
-
-[246/252] Full Stack Developer (Node.js + React na @ Kapston Home Services Pvt Ltd
-  -> dedup_skip (already in skipped)
-
-[247/252] Java Full Stack Developer @ TekWissen
-  -> dedup_skip (already in skipped)
-
-[248/252] Java Full Stack Developer @ S&P Global Market Intelligence
-  -> dedup_skip (already in skipped)
-
-[249/252] Java Full Stack Developer with Reactjs @ Tata Consultancy Services
-  -> dedup_skip (already in skipped)
-
-[250/252] Java Full Stack Developer @ Saransh Software Solutions
-  -> chatbot_unknown
-
-[251/252] .NET Full Stack Developer with Azure Ope @ EY
-  -> dedup_skip (already in skipped)
-
-[252/252] Full Stack Developer Node js + Angular R @ Cognine Technologies
+[46/267] Full Stack Developer @ Ipropal
   -> dedup_skip (already in external)
+
+[47/267] Full - Stack Developer @ Techefficio
+  -> dedup_skip (already in external)
+
+[48/267] Full Stack Developer @ Adtcore
+  -> dedup_skip (already in external)
+
+[49/267] Full Stack Developer @ Ekincare
+  -> dedup_skip (already in external)
+
+[50/267] Full Stack Developer Mid-Level @ Aerobotics7
+  -> dedup_skip (already in external)
+
+[51/267] Full Stack Developer @ Prodigit
+  -> dedup_skip (already in external)
+
+[52/267] Full Stack Developer @ Cognitus
+  -> dedup_skip (already in external)
+
+[53/267] Full Stack Developer @ Victrix Systems And Labs
+  -> unknown
+
+[54/267] Full Stack Developer @ Acme Services
+  -> company_site_skip
+
+[55/267] React - Full Stack Developer @ Zippr
+  -> dedup_skip (already in external)
+
+[56/267] Full Stack Developer- Java8/Spring Boot/ @ Knowledge Capital Services
+  -> dedup_skip (already in external)
+
+[57/267] Azure AI Full Stack Developer @ CMM Level 5 IT Company
+  -> dedup_skip (already in skipped)
+
+[58/267] Full Stack Developer @ Mocktheta
+  -> dedup_skip (already in external)
+
+[59/267] Full Stack Developer @ Persistent
+  -> dedup_skip (already in skipped)
+
+[60/267] Full Stack Developer-AI @ INTERNAL
+  -> unknown
+
+[61/267] AWS Full stack developer @ Coforge
+  -> unknown
+
+[62/267] Full Stack Nodejs Developer @ Tayseer Technologies
+  -> dedup_skip (already in external)
+
+[63/267] Full Stack Developer @ Triad Square Infosec
+  -> company_site_skip
+
+[64/267] GenAI Full Stack Developer @ PwC Service Delivery Center
+  -> unknown
+
+[65/267] Full Stack Developer @ Capital Info
+  -> dedup_skip (already in external)
+
+[66/267] Full Stack with AI Developer Opening wit @ Capco
+  -> applied
+
+[67/267] Full Stack Developer (ReactJS/NodeJS) @ Next Leap Innovtions
+  -> dedup_skip (already in external)
+
+[68/267] Full Stack Developer @ Align Technology
+  -> dedup_skip (already in external)
+
+[69/267] Full Stack Developer @ Momentum Financial Services Group
+  -> dedup_skip (already in skipped)
+
+[70/267] Full Stack Developer @ Datamatics Business Solutions
+  -> dedup_skip (already in external)
+
+[71/267] Full Stack Developer/Lead || Looking For @ Valuelabs
+  -> dedup_skip (already in applied)
+
+[72/267] Full stack Developer(Nodejs+Typescript+R @ Tata Consultancy Services
+  -> dedup_skip (already in skipped)
+
+[73/267] Full Stack Developer @ Paraminfo
+  -> dedup_skip (already in external)
+
+[74/267] AI Full Stack Developer @ Pronix It Solutions
+  -> dedup_skip (already in external)
+
+[75/267] Full stack Developers @ O2labs Solutions
+  -> dedup_skip (already in external)
+
+[76/267] Full Stack Developer @ Photon
+  -> dedup_skip (already in external)
+
+[77/267] SAP BTP Full-Stack Developers @ Logicmotive Consultant
+  -> dedup_skip (already in external)
+
+[78/267] Full Stack Developer @ Proclink
+  -> dedup_skip (already in external)
+
+[79/267] full stack developer-Java+UI @ Squircle IT
+  -> dedup_skip (already in external)
+
+[80/267] Full Stack Developer - React & NodeJS @ Cerebra
+  -> dedup_skip (already in skipped)
+
+[81/267] Full Stack Developer @ Tquanta Technologies
+  -> dedup_skip (already in external)
+
+[82/267] Enabling Areas - IT - DM - Full Stack De @ Deloitte US-India Offices
+  -> dedup_skip (already in external)
+
+[83/267] Full Stack Developer L2 @ Bharath Cloud
+  -> dedup_skip (already in external)
+
+[84/267] Full Stack Developer (ReactJS + NodeJS) @ Religent Systems
+  -> dedup_skip (already in external)
+
+[85/267] Full Stack Developer @ Goviralll Media
+  -> dedup_skip (already in external)
+
+[86/267] Career opportunity For Full Stack Develo @ Tekskills india
+  -> dedup_skip (already in skipped)
+
+[87/267] Full stack developer @ Softobiz
+  -> dedup_skip (already in skipped)
+
+[88/267] Full Stack Developer (ReactJS+JAVA) @ Cognine Technologies
+  -> dedup_skip (already in external)
+
+[89/267] Full-Stack Developer @ Sais It Services
+  -> dedup_skip (already in external)
+
+[90/267] Full Stack Developer - Power Platform @ ECS ME
+  -> dedup_skip (already in external)
+
+[91/267] Full stack Developer / Architect @ Hire Bridge Consultancy
+  -> dedup_skip (already in external)
+
+[92/267] Full Stack Developer @ Prudent Megacorp
+  -> dedup_skip (already in external)
+
+[93/267] Full Stack Developer @ XTGlobal
+  -> dedup_skip (already in external)
+
+[94/267] Full Stack Developer @ Tech Stalwart Solution
+  -> company_site_skip
+
+[95/267] Full Stack Developer @ Political Engineer
+  -> dedup_skip (already in external)
+
+[96/267] Full Stack Developer @ Akuntha Projects
+  -> dedup_skip (already in external)
+
+[97/267] Full Stack Developer @ LLP S3bglobal Technologies
+  -> company_site_skip
+
+[98/267] Full Stack Developer @ Tekskills india
+  -> dedup_skip (already in skipped)
+
+[99/267] Java Full Stack Developer @ Yash Technologies
+  -> chatbot_unknown
+
+[100/267] Hiring For .NET Full stack React JS Deve @ Tech Mahindra
+  -> unknown
+
+[101/267] Java Full Stack Developer with React Js @ Tata Consultancy Services
+  -> chatbot_unknown
+
+[102/267] Java Full Stack Developer @ Tata Consultancy Services
+  -> unknown
+
+[103/267] Net Full Stack Developer @ Infosys
+  -> dedup_skip (already in skipped)
+
+[104/267] Senior Java Full Stack Developer @ Whopper Technologies
+  -> company_site_skip
+
+[105/267] Senior NET Full Stack Developer Digital @ Feuji Inc
+  -> company_site_skip
+
+[106/267] Lead Net Full Stack Developer @ Feuji Inc
+  -> company_site_skip
+
+[107/267] Net Full Stack Developer @ Feuji Inc
+  -> company_site_skip
+
+[108/267] Full Stack Web Developer @ Nfosoft Innovation
+  -> company_site_skip
+
+[109/267] Senior Full Stack Developer @ Ice.com
+  -> company_site_skip
+
+[110/267] Java full stack Developer @ Unison Group Com
+  -> company_site_skip
+
+[111/267] Tech Lead - .Net Full Stack + Azure Inte @ Vlaunchu
+  -> company_site_skip
+
+[112/267] Dot Net Full stack Developer @ Stack Digital
+  -> company_site_skip
+
+[113/267] LBG -Full Stack Developer- Core Java @ Krazymantra It Solutions
+  -> company_site_skip
+
+[114/267] Java Full Stack Developer @ Randomtrees
+  -> chatbot_unknown
+
+[115/267] Senior Full Stack Developer For Sora Uni @ Sora Union
+  -> dedup_skip (already in external)
+
+[116/267] Java Full Stack Developer @ Crescendo Global
+  -> dedup_skip (already in skipped)
+
+[117/267] Java Full Stack Developer @ Trackmind Solutions
+  -> unknown
+
+[118/267] Java Full Stack Developer @ Trackmind Solutions
+  -> chatbot_unknown
+
+[119/267] Sr. Full Stack Developer / Full Stack De @ Digile Technologies
+  -> dedup_skip (already in external)
+
+[120/267] Full Stack Developer Intern @ Cerebrone
+  -> dedup_skip (already in external)
+
+[121/267] SAP BTP Full Stack Developer @ Cognitus
+  -> dedup_skip (already in skipped)
+
+[122/267] Full Stack Developer @ Artify Talent Studio
+  -> dedup_skip (already in external)
+
+[123/267] Full Stack Developer @ Oasys Cybernatics
+  -> dedup_skip (already in external)
+
+[124/267] Full Stack Developer NodeJS+Java @ Logic Planet
+  -> dedup_skip (already in external)
+
+[125/267] Java Full Stack Developer @ IBM
+  -> dedup_skip (already in skipped)
+
+[126/267] Full Stack Developer @ Martinet Technologies
+  -> dedup_skip (already in external)
+
+[127/267] Full Stack Developer I @ FedEx
+  -> dedup_skip (already in external)
+
+[128/267] Full Stack Developer I @ FedEx
+  -> dedup_skip (already in external)
+
+[129/267] Full Stack Developer I @ FedEx
+  -> dedup_skip (already in external)
+
+[130/267] Full Stack Developer @ Sage It
+  -> dedup_skip (already in external)
+
+[131/267] SAP BTP Full Stack Developer (OR) SAP CA @ Aifa Labs
+  -> dedup_skip (already in external)
+
+[132/267] Java Full Stack Developer @ Orcapod Consulting Services Private Limited
+  -> dedup_skip (already in skipped)
+
+[133/267] Java Full Stack Developer @ Orcapod Consulting Services Private Limited
+  -> dedup_skip (already in applied)
+
+[134/267] Full Stack Developer @ Thriving Springs
+  -> dedup_skip (already in external)
+
+[135/267] Full Stack Developer - 2 @ Nxtwave Disruptive Technologies
+  -> dedup_skip (already in external)
+
+[136/267] Full Stack Developer @ IntouchCX
+  -> dedup_skip (already in external)
+
+[137/267] Full Stack Developer @ Krazy Mantra It
+  -> dedup_skip (already in external)
+
+[138/267] Full Stack Developer @ RedandBlue
+  -> dedup_skip (already in external)
+
+[139/267] Full Stack Developer @ Indium Software
+  -> dedup_skip (already in external)
+
+[140/267] Full Stack Developer @ Diensten Tech
+  -> dedup_skip (already in external)
+
+[141/267] Full Stack Developer @ Grid Dynamics
+  -> company_site_skip
+
+[142/267] Java Full Stack Developer (Angular/React @ Infosys
+  -> chatbot_unknown
+
+[143/267] Java Full Stack Developer- B @ Infosys
+  -> dedup_skip (already in skipped)
+
+[144/267] Sr Engineer - Python Full Stack Develope @ Embarkgcc Services
+  -> dedup_skip (already in skipped)
+
+[145/267] Dot NET Full Stack developer @ Ztek Consulting
+  -> company_site_skip
+
+[146/267] Senior Full Stack Developer @ Actlogica
+  -> dedup_skip (already in external)
+
+[147/267] Full Stack Developer Intern @ Hawk Sense Business Solutions
+  -> dedup_skip (already in external)
+
+[148/267] Dotnet Full Stack Developer @ Alongx Software
+  -> dedup_skip (already in external)
+
+[149/267] Full-Stack Developer @ STP Web Hosting
+  -> dedup_skip (already in external)
+
+[150/267] Full Stack .Net Developer @ Ray Business Technologies
+  -> dedup_skip (already in skipped)
+
+[151/267] Java Full Stack Developer (React JS +Nod @ Tata Consultancy Services
+  -> dedup_skip (already in skipped)
+
+[152/267] Fullstack AI Developer @ Intellisavvy
+  -> chatbot_unknown
+
+[153/267] React JS Developer, 3-6 Yrs Exp, Hyd Hit @ EB Technologies
+  -> dedup_skip (already in skipped)
+
+[154/267] Virtusa actively looking For Full Stack  @ Virtusa
+  -> unknown
+
+[155/267] AI Full Stack Developer @ Tata Consultancy Services(TCS)
+  -> applied
+
+[156/267] AI Full Stack Developer @ Tata Consultancy Services(TCS)
+  -> applied
+
+[157/267] Software Developer (Full Stack Developer @ Qualcomm
+  -> company_site_skip
+
+[158/267] Java Full Stack Developer- B @ Infosys
+  -> dedup_skip (already in skipped)
+
+[159/267] Azure .NET Full Stack Developer @ ti Steps
+  -> unknown
+
+[160/267] Java Full Stack Developer @ with one of our Level 5 Client
+  -> unknown
+
+[161/267] Full Stack Developer - Java @ Proounce
+  -> dedup_skip (already in external)
+
+[162/267] Dot Net Full-stack Developer @ People Tech
+  -> dedup_skip (already in external)
+
+[163/267] Java Full Stack Developer @ Annnetwork
+  -> dedup_skip (already in external)
+
+[164/267] .NET Core full stack developer @ Infosys
+  -> unknown
+
+[165/267] Full Stack Developer - .Net @ Leading Client
+  -> unknown
+
+[166/267] Walk-in || Job Opening For Sr Software E @ Globaldata
+  -> dedup_skip (already in skipped)
+
+[167/267] Sr Java with Vue.js Full Stack Developer @ Deloitte US-India Offices
+  -> unknown
+
+[168/267] Sr. Full Stack Developer (Python) & Gene @ Programmers io
+  -> applied
+
+[169/267] Java Full Stack Developer @ Tata Consultancy Services
+  -> unknown
+
+[170/267] Senior Full Stack Developer @ Taffi
+  -> dedup_skip (already in external)
+
+[171/267] Java Full Stack Developer @ Leading IT Service and Consulting Organization
+  -> dedup_skip (already in skipped)
+
+[172/267] Full Stack Developer React and Ruby on R @ Accellor Inc
+  -> dedup_skip (already in external)
+
+[173/267] Java Full Stack Developer Software Train @ Orchasp
+  -> dedup_skip (already in external)
+
+[174/267] Python Full Stack Developer @ Indigrators
+  -> dedup_skip (already in external)
+
+[175/267] Dot NET Full Stack Developer @ Turing Systems Inc
+  -> dedup_skip (already in external)
+
+[176/267] SAP Full Stack Developer (AI Developer) @ CLIENT OF IT SCIENT
+  -> dedup_skip (already in skipped)
+
+[177/267] SAP Full Stack Developer (AI Developer) @ Tata Consultancy Services(TCS)
+  -> dedup_skip (already in skipped)
+
+[178/267] Java Full Stack Developer -Hyderabad -g  @ Infosys
+  -> dedup_skip (already in skipped)
+
+[179/267] Java Full stack developer @ Infosys
+  -> unknown
+
+[180/267] Java Full Stack Developer @ MNC Group
+  -> dedup_skip (already in skipped)
+
+[181/267] Java Full Stack Developer @ Cloudxtreme
+  -> dedup_skip (already in applied)
+
+[182/267] Senior Full Stack Developer @ Careernet
+  -> unknown
+
+[183/267] Senior Java Full Stack Developer @ CGI
+  -> unknown
+
+[184/267] Vue JS Full-Stack Developer @ Tata Consultancy Services
+  -> unknown
+
+[185/267] Java Full Stack Developer @ Tata Consultancy Services
+  -> unknown
+
+[186/267] Java Full stack Developer with Angular/R @ Crisil
+  -> unknown
+
+[187/267] Senior Full-Stack Developer (Immediate J @ Straive
+  -> unknown
+
+[188/267] Java Full Stack Developer @ Infosys
+  -> dedup_skip (already in skipped)
+
+[189/267] Java Full Stack Developer @ Trackmind Solutions
+  -> unknown
+
+[190/267] .Net Full Stack Developer - Hyderabad @ Infosys
+  -> dedup_skip (already in skipped)
+
+[191/267] .Net Full stack Developer - Infosys @ Infosys
+  -> dedup_skip (already in skipped)
+
+[192/267] .Net Full Stack Developer - Hyderabad @ Infosys
+  -> dedup_skip (already in skipped)
+
+[193/267] Java Full Stack Developer @ Tata Consultancy Services
+  -> dedup_skip (already in skipped)
+
+[194/267] Java Full Stack Developer @ MNC Group
+  -> dedup_skip (already in skipped)
+
+[195/267] Senior Full Stack Developer @ Tredence
+  -> unknown
+
+[196/267] Java Full Stack Developer @ People Prime Worldwide
+  -> unknown
+
+[197/267] Angular Full Stack Developer @ Tata Consultancy Services
+  -> unknown
+
+[198/267] Senior .NET Full-stack Developer @ Cirruslabs
+  -> unknown
+
+[199/267] .NET Full Stack Developer @ Leading Client
+  -> unknown
+
+[200/267] .Net Full Stack Developer- C2H Role @ Leading Client
+  -> unknown
+
+[201/267] Java Full Stack Developer @ with one of our client
+  -> unknown
+
+[202/267] Java Full Stack developer(React JS) @ Infosys
+  -> unknown
+
+[203/267] Full-Stack Developer (Python & React) @ Leokraft Technologies
+  -> dedup_skip (already in external)
+
+[204/267] Full Stack Developer (Angular + Node.js) @ Photon
+  -> dedup_skip (already in external)
+
+[205/267] Senior Java Full Stack Developer @ Vrize
+  -> dedup_skip (already in external)
+
+[206/267] Sr Full Stack Developer (Java API + Angu @ Photon
+  -> dedup_skip (already in external)
+
+[207/267] Dot Net Full Stack Developer @ Techneplus Software India
+  -> dedup_skip (already in external)
+
+[208/267] Java Full Stack Developer- Infosys @ Infosys
+  -> dedup_skip (already in skipped)
+
+[209/267] Java Full Stack Developer @ Knowledgesprint Technologies
+  -> dedup_skip (already in external)
+
+[210/267] Junior Full Stack Developer ( ColdFusion @ Infoane
+  -> company_site_skip
+
+[211/267] Java Full Stack Developer @ Cloudom Technologies
+  -> dedup_skip (already in external)
+
+[212/267] Mid-Level Full Stack Developer (Angular  @ ESN Technologies
+  -> dedup_skip (already in external)
+
+[213/267] Junior Full Stack Developer (Angular/.NE @ ESN Technologies
+  -> dedup_skip (already in external)
+
+[214/267] Full Stack Developer Intern @ Cerebrone
+  -> dedup_skip (already in external)
+
+[215/267] Python Full Stack Developer @ Mushroom Solutions
+  -> dedup_skip (already in external)
+
+[216/267] JAVA FULL STACK Developer @ Diverse Lynx
+  -> dedup_skip (already in external)
+
+[217/267] Java full stack developer @ CBL Solutions
+  -> dedup_skip (already in external)
+
+[218/267] Java Full Stack Developer @ YK Innosoft
+  -> dedup_skip (already in external)
+
+[219/267] Senior Full Stack Developer @ Agivant Technologies
+  -> dedup_skip (already in external)
+
+[220/267] Senior Full-Stack Developer @ Metricspace Technologies
+  -> dedup_skip (already in external)
+
+[221/267] Senior Java Full Stack Developer @ Luxoft
+  -> unknown
+
+[222/267] Senior Full Stack Developer (iOS + React @ iSpatial Techno
+  -> unknown
+
+[223/267] Dotnet Full Stack Developer @ Covalense Global
+  -> company_site_skip
+
+[224/267] Dot Net Full Stack Developer @ CloudStakes
+  -> company_site_skip
+
+[225/267] Vue JS Full-Stack Developer @ Tata Consultancy Services
+  -> unknown
+
+[226/267] Senior Full Stack Developer @ Soothsayer Analytics
+  -> unknown
+
+[227/267] Senior Full Stack Developer @ Careernet
+  -> unknown
+
+[228/267] Java Full Stack Developer @ Tata Consultancy Services
+  -> unknown
+
+[229/267] Java Full Stack Developer/Lead @ Hexaware Technologies
+  -> unknown
+
+[230/267] Java Full Stack Developer @ Orcapod Consulting Services Private Limited
+  -> dedup_skip (already in applied)
+
+[231/267] Java Full Stack Developer @ Orcapod Consulting Services Private Limited
+  -> dedup_skip (already in applied)
+
+[232/267] Full Stack Developer @ Fortune India 500 IT Services Firm
+  -> dedup_skip (already in skipped)
+
+[233/267] Principal Full Stack Developer, PDS BI&T @ Bristol Myers Squibb
+  -> dedup_skip (already in external)
+
+[234/267] Full Stack Developer @ Sandhata Technologies
+  -> dedup_skip (already in skipped)
+
+[235/267] Full Stack Developer @ TAO Digital
+  -> company_site_skip
+
+[236/267] Full Stack Developer @ Align Technology
+  -> dedup_skip (already in external)
+
+[237/267] Full Stack Developer @ Align Technology
+  -> dedup_skip (already in external)
+
+[238/267] Full Stack Developer @ ILM 360
+  -> dedup_skip (already in external)
+
+[239/267] Full stack Developer @ Veniso Solutions
+  -> dedup_skip (already in external)
+
+[240/267] Java Full Stack Developer - Hyderabad @ Infosys
+  -> dedup_skip (already in skipped)
+
+[241/267] Java Full Stack Developer - Infosys @ Infosys
+  -> dedup_skip (already in skipped)
+
+[242/267] Java Full Stack Developer - Hyderabad @ Infosys
+  -> dedup_skip (already in skipped)
+
+[243/267] Java Full Stack Developer @ Quadrant Technologies
+  -> dedup_skip (already in skipped)
+
+[244/267] Senior Java Full Stack Developer (Java,  @ Conduent
+  -> dedup_skip (already in skipped)
+
+[245/267] Java Full Stack Developer @ MNC Group
+  -> dedup_skip (already in skipped)
+
+[246/267] Java Full Stack Developer-N @ Infosys
+  -> dedup_skip (already in skipped)
+
+[247/267] Java Full Stack Developer @ Wipro
+  -> unknown
+
+[248/267] Java Full Stack Developer @ Tata Consultancy Services
+  -> unknown
+
+[249/267] react -java full stack developer @ Cloudxtreme
+  -> unknown
+
+[250/267] Java Full Stack Developer @ IT Industry
+  -> unknown
+
+[251/267] Java Full Stack Developer @ Leading Client
+  -> unknown
+
+[252/267] Java Full Stack Developer @ BCForward
+  -> unknown
+
+[253/267] Java Full Stack Developer @ Tata Consultancy Services
+  -> unknown
+
+[254/267] Java Full Stack Developer - Angular @ Tata Consultancy Services
+  -> unknown
+
+[255/267] Python React Full Stack Developer @ Ascendion Engineering
+  -> unknown
+
+[256/267] Senior .NET Full Stack Developer (Angula @ Cirruslabs
+  -> unknown
+
+[257/267] Java Full Stack developer(Angular JS) -  @ Infosys
+  -> unknown
+
+[258/267] Lead Dot net full stack developer @ Tech Stalwart Solution
+  -> company_site_skip
+
+[259/267] Java Full Stack Developer @ Big 4 Accounting Firms
+  -> dedup_skip (already in skipped)
+
+[260/267] Java Full Stack Developer @ Infosys
+  -> dedup_skip (already in skipped)
+
+[261/267] Dot Net Full Stack Developer @ Criticalriver
+  -> company_site_skip
+
+[262/267] Full Stack Developer (PHP, Laravel, MySQ @ Leading Client
+  -> dedup_skip (already in skipped)
+
+[263/267] Java Full Stack Developer (React) - GDS  @ TekWissen
+  -> dedup_skip (already in skipped)
+
+[264/267] Java Full Stack Developer (React) - GDS  @ TekWissen
+  -> dedup_skip (already in skipped)
+
+[265/267] PLSQL Developer @ Solix Technologies
+  -> unknown
+
+[266/267] Postgresql Database Administrator @ Solix Technologies
+  -> unknown
+
+[267/267] Data Architect - SQL Server @ Processq India
+  -> unknown
 Tracker saved → /home/voltuswave/projects/playwright-mcp/job-applications.xlsx & /home/voltuswave/projects/playwright-mcp/job-tracker.json
 
-External jobs file → /home/voltuswave/projects/playwright-mcp/naukri-external-jobs.json (387 entries)
+External jobs file → /home/voltuswave/projects/playwright-mcp/naukri-external-jobs.json (157 entries)
 Summary: {
-  applied: 3,
-  external: 13,
-  dedup_skip: 214,
-  chatbot_unknown: 13,
-  unknown: 7,
-  no_apply_button: 2,
+  applied: 7,
+  external: 35,
+  dedup_skip: 162,
+  chatbot_unknown: 9,
+  unknown: 53,
+  no_apply_button: 1,
   already_applied: 0,
   error: 0
 }
-Applied: 84  External: 387  Failed: 0  Skipped: 274
+Applied: 91  External: 422  Failed: 0  Skipped: 337
