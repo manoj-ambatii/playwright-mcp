@@ -691,6 +691,14 @@
       "location": "Remote",
       "externalUrl": "",
       "notes": "Naukri quick-apply (auto)"
+    },
+    "https://www.naukri.com/job-listings-full-stack-developer-onebridge-infotech-pvt-ltd-hyderabad-2-to-5-years-170426501442": {
+      "date": "2026-05-27T18:52:27.948Z",
+      "notes": "",
+      "source": "naukri",
+      "title": "Full Stack Developer",
+      "company": "Onebridge Infotech",
+      "location": ""
     }
   },
   "skipped": {
@@ -3483,6 +3491,70 @@
       "location": "Hyderabad(HITEC City)",
       "externalUrl": "",
       "notes": "unknown_state"
+    },
+    "https://www.naukri.com/job-listings-full-stack-developer-ratnam-solutions-private-limited-hyderabad-2-to-7-years-220426501349": {
+      "date": "2026-05-27T18:52:20.866Z",
+      "notes": "",
+      "source": "naukri",
+      "title": "Full Stack Developer",
+      "company": "Ratnam Solutions",
+      "location": ""
+    },
+    "https://www.naukri.com/job-listings-full-stack-developer-ipropal-allps-hyderabad-2-to-6-years-150426501799": {
+      "date": "2026-05-27T19:12:04.189Z",
+      "notes": "",
+      "source": "naukri",
+      "title": "Full Stack Developer",
+      "company": "Ipropal",
+      "location": ""
+    },
+    "https://www.naukri.com/job-listings-custom-software-engineer-accenture-solutions-pvt-ltd-hyderabad-2-to-5-years-180526920820": {
+      "date": "2026-05-27T19:12:06.086Z",
+      "notes": "",
+      "source": "naukri",
+      "title": "Custom Software Engineer",
+      "company": "Accenture",
+      "location": "Hyderabad"
+    },
+    "https://www.naukri.com/job-listings-full-stack-software-engineer-amgen-inc-hyderabad-2-to-6-years-210426927427": {
+      "date": "2026-05-27T19:12:18.208Z",
+      "notes": "",
+      "source": "naukri",
+      "title": "Full Stack Software Engineer",
+      "company": "Amgen Inc",
+      "location": ""
+    },
+    "https://www.naukri.com/job-listings-software-development-engineer-accenture-solutions-pvt-ltd-hyderabad-1-to-4-years-040526924039": {
+      "date": "2026-05-27T19:12:30.450Z",
+      "notes": "",
+      "source": "naukri",
+      "title": "Software Development Engineer",
+      "company": "Accenture",
+      "location": "Hyderabad"
+    },
+    "https://www.naukri.com/job-listings-application-developer-accenture-solutions-pvt-ltd-hyderabad-2-to-5-years-110526918469": {
+      "date": "2026-05-27T19:12:43.837Z",
+      "notes": "",
+      "source": "naukri",
+      "title": "Application Developer",
+      "company": "Accenture",
+      "location": "Hyderabad"
+    },
+    "https://careers.mastercard.com/us/en/job/MASRUSR278885EXTERNALENUS/Software-Engineer-II-Java-Full-stack-Developer?utm_source=linkedin&utm_medium=phenom-feeds&source=LINKEDIN": {
+      "date": "2026-05-27T19:17:47.602Z",
+      "notes": "",
+      "source": "linkedin",
+      "title": "Software Engineer II (Java Full stack Developer)",
+      "company": "Mastercard",
+      "location": "Pune/Pimpri-Chinchwad Area"
+    },
+    "https://www.virtusa.com/careers/in/chennai/core-tech-java/java-full-stack-developer/creq252922?source=taleo": {
+      "date": "2026-05-27T19:19:14.875Z",
+      "notes": "",
+      "source": "linkedin",
+      "title": "Java Full Stack Developer",
+      "company": "Virtusa",
+      "location": "Chennai, Tamil Nadu, India"
     }
   },
   "external": {

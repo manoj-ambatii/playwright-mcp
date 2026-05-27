@@ -36,7 +36,8 @@
       "mcp__notion__notion-update-page",
       "mcp__claude_ai_Notion__notion-create-pages",
       "mcp__claude_ai_Notion__notion-search",
-      "mcp__claude_ai_Notion__notion-fetch"
+      "mcp__claude_ai_Notion__notion-fetch",
+      "PowerShell(Invoke-RestMethod -Uri \"http://localhost:4000/api/stats\" -Method GET)"
     ],
     "defaultMode": "auto"
   }
