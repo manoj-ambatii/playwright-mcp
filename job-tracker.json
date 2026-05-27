@@ -601,6 +601,33 @@
       "location": "Hyderabad, Bhubaneswar, Pune",
       "externalUrl": "",
       "notes": "Naukri quick-apply (auto)"
+    },
+    "https://www.naukri.com/job-listings-full-stack-developer-nodejs-reactjs-angularjs-cerebra-hyderabad-chennai-bengaluru-4-to-8-years-170426010247": {
+      "date": "2026-05-19T12:35:20.480Z",
+      "source": "naukri",
+      "title": "Full Stack Developer - Nodejs ReactJS AngularJS",
+      "company": "Cerebra",
+      "location": "Hyderabad, Chennai, Bengaluru",
+      "externalUrl": "",
+      "notes": "Naukri quick-apply (auto)"
+    },
+    "https://www.naukri.com/job-listings-software-engineer-2-net-developer-e-ring-hyderabad-3-to-6-years-180526024209": {
+      "date": "2026-05-19T12:36:17.553Z",
+      "source": "naukri",
+      "title": "Software Engineer 2 .Net Developer",
+      "company": "E-Ring",
+      "location": "Hyderabad(Madhapur)",
+      "externalUrl": "",
+      "notes": "Naukri quick-apply (auto)"
+    },
+    "https://www.naukri.com/job-listings-azure-dot-net-full-stack-developer-tata-consultancy-services-hyderabad-pune-bengaluru-4-to-9-years-190526010797": {
+      "date": "2026-05-19T12:39:04.177Z",
+      "source": "naukri",
+      "title": "Azure dot net full stack developer",
+      "company": "Tata Consultancy Services",
+      "location": "Hyderabad, Pune, Bengaluru",
+      "externalUrl": "",
+      "notes": "Naukri quick-apply (auto)"
     }
   },
   "skipped": {
@@ -2628,6 +2655,204 @@
       "location": "Hyderabad, Ahmedabad",
       "externalUrl": "",
       "notes": "unknown_state"
+    },
+    "https://www.naukri.com/job-listings-angular-php-full-stack-developer-sune-solutions-hyderabad-2-to-5-years-180526011392": {
+      "date": "2026-05-19T12:33:41.206Z",
+      "source": "naukri",
+      "title": "Angular/PHP Full Stack Developer",
+      "company": "Sune Solutions",
+      "location": "Hyderabad(HITEC City)",
+      "externalUrl": "",
+      "notes": "chatbot_unknown"
+    },
+    "https://www.naukri.com/job-listings-senior-associate-net-full-stack-developer-genpact-hyderabad-1-to-3-years-190526018151": {
+      "date": "2026-05-19T12:34:08.129Z",
+      "source": "naukri",
+      "title": "Senior Associate-.NET Full Stack Developer",
+      "company": "Genpact",
+      "location": "Hyderabad",
+      "externalUrl": "",
+      "notes": "chatbot_unknown"
+    },
+    "https://www.naukri.com/job-listings-java-full-stack-developer-anlage-infotech-hyderabad-pune-bengaluru-2-to-7-years-180526029445": {
+      "date": "2026-05-19T12:34:21.520Z",
+      "source": "naukri",
+      "title": "Java Full Stack Developer",
+      "company": "Service Industry",
+      "location": "Hybrid - Hyderabad, Pune, Bengaluru",
+      "externalUrl": "",
+      "notes": "unknown_state"
+    },
+    "https://www.naukri.com/job-listings-java-full-stack-developer-anlage-infotech-hyderabad-chennai-bengaluru-2-to-5-years-180526024360": {
+      "date": "2026-05-19T12:34:29.443Z",
+      "source": "naukri",
+      "title": "Java Full Stack Developer",
+      "company": "client of Anlage",
+      "location": "Hybrid - Hyderabad, Chennai, Bengaluru",
+      "externalUrl": "",
+      "notes": "unknown_state"
+    },
+    "https://www.naukri.com/job-listings-software-engineer-ge-renewable-energy-technologies-private-limited-hyderabad-2-to-5-years-190526925986": {
+      "date": "2026-05-19T12:34:46.815Z",
+      "source": "naukri",
+      "title": "Software Engineer",
+      "company": "GE VERNOVA",
+      "location": "Hyderabad",
+      "externalUrl": "",
+      "notes": "unknown_state"
+    },
+    "https://www.naukri.com/job-listings-full-stack-net-developer-ray-business-technologies-indore-hyderabad-6-to-10-years-110526034545": {
+      "date": "2026-05-19T12:35:40.775Z",
+      "source": "naukri",
+      "title": "Full Stack .Net Developer",
+      "company": "Ray Business Technologies",
+      "location": "Hyderabad(Madhapur), Indore",
+      "externalUrl": "",
+      "notes": "chatbot_unknown"
+    },
+    "https://www.naukri.com/job-listings-java-full-stack-developer-react-js-node-js-tata-consultancy-services-kolkata-hyderabad-mumbai-all-areas-5-to-10-years-150526030700": {
+      "date": "2026-05-19T12:36:07.887Z",
+      "source": "naukri",
+      "title": "Java Full Stack Developer (React JS +Node jS)",
+      "company": "Tata Consultancy Services",
+      "location": "Hyderabad, Mumbai (All Areas), Kolkata",
+      "externalUrl": "",
+      "notes": "chatbot_unknown"
+    },
+    "https://www.naukri.com/job-listings-java-full-stack-developer-anlage-infotech-hyderabad-pune-bengaluru-3-to-7-years-180526028678": {
+      "date": "2026-05-19T12:36:25.413Z",
+      "source": "naukri",
+      "title": "Java Full Stack Developer",
+      "company": "Giant MNC",
+      "location": "Hybrid - Hyderabad, Pune, Bengaluru",
+      "externalUrl": "",
+      "notes": "unknown_state"
+    },
+    "https://www.naukri.com/job-listings-senior-java-full-stack-developer-java-react-azure-conduent-noida-hyderabad-bengaluru-7-to-10-years-190526017756": {
+      "date": "2026-05-19T12:36:52.514Z",
+      "source": "naukri",
+      "title": "Senior Java Full Stack Developer (Java, React, Azure)",
+      "company": "Conduent",
+      "location": "Hybrid - Hyderabad, Noida, Bengaluru",
+      "externalUrl": "",
+      "notes": "chatbot_unknown"
+    },
+    "https://www.naukri.com/job-listings-java-full-stack-developer-professional-connect-hyderabad-bengaluru-mumbai-all-areas-6-to-11-years-190526013340": {
+      "date": "2026-05-19T12:37:19.793Z",
+      "source": "naukri",
+      "title": "Java Full Stack Developer",
+      "company": "MNC Group",
+      "location": "Hybrid - Hyderabad, Mumbai (All Areas), Bengaluru",
+      "externalUrl": "",
+      "notes": "chatbot_unknown"
+    },
+    "https://www.naukri.com/job-listings-python-full-stack-developer-remote-opportunity-siro-clinpharm-noida-hyderabad-bengaluru-7-to-12-years-180526013108": {
+      "date": "2026-05-19T12:37:46.688Z",
+      "source": "naukri",
+      "title": "Python Full stack Developer - Remote Opportunity",
+      "company": "Siro Clinpharm",
+      "location": "Hyderabad, Noida, Bengaluru",
+      "externalUrl": "",
+      "notes": "chatbot_unknown"
+    },
+    "https://www.naukri.com/job-listings-java-full-stack-developer-react-js-is-must-reveille-technologies-hyderabad-chennai-bengaluru-7-to-11-years-190526023099": {
+      "date": "2026-05-19T12:37:54.594Z",
+      "source": "naukri",
+      "title": "Java Full Stack Developer (React.js is must)",
+      "company": "Reveille Technologies",
+      "location": "Hyderabad, Chennai, Bengaluru",
+      "externalUrl": "",
+      "notes": "unknown_state"
+    },
+    "https://www.naukri.com/job-listings-java-full-stack-developer-tata-consultancy-services-hyderabad-chennai-bengaluru-6-to-11-years-180526023600": {
+      "date": "2026-05-19T12:38:02.479Z",
+      "source": "naukri",
+      "title": "Java Full Stack Developer",
+      "company": "Tata Consultancy Services",
+      "location": "Hyderabad, Chennai, Bengaluru",
+      "externalUrl": "",
+      "notes": "unknown_state"
+    },
+    "https://www.naukri.com/job-listings-java-full-stack-developer-infosys-hyderabad-chennai-bengaluru-5-to-10-years-200326026193": {
+      "date": "2026-05-19T12:38:10.124Z",
+      "source": "naukri",
+      "title": "Java Full Stack Developer",
+      "company": "Infosys",
+      "location": "Hybrid - Hyderabad, Chennai, Bengaluru",
+      "externalUrl": "",
+      "notes": "chatbot_unknown"
+    },
+    "https://www.naukri.com/job-listings-java-full-stack-developer-wipro-kochi-hyderabad-chennai-5-to-8-years-190526030182": {
+      "date": "2026-05-19T12:38:46.770Z",
+      "source": "naukri",
+      "title": "Java Full Stack Developer",
+      "company": "Wipro",
+      "location": "Hyderabad, Kochi, Chennai",
+      "externalUrl": "",
+      "notes": "chatbot_unknown"
+    },
+    "https://www.naukri.com/job-listings-java-full-stack-developer-tata-consultancy-services-hyderabad-chennai-bengaluru-5-to-10-years-190526025840": {
+      "date": "2026-05-19T12:38:54.622Z",
+      "source": "naukri",
+      "title": "Java Full Stack Developer",
+      "company": "Tata Consultancy Services",
+      "location": "Hyderabad, Chennai, Bengaluru",
+      "externalUrl": "",
+      "notes": "unknown_state"
+    },
+    "https://www.naukri.com/job-listings-java-full-stack-developer-hexaware-technologies-hyderabad-chennai-bengaluru-6-to-10-years-180526027670": {
+      "date": "2026-05-19T12:39:39.154Z",
+      "source": "naukri",
+      "title": "Java Full Stack Developer",
+      "company": "Hexaware Technologies",
+      "location": "Hybrid - Hyderabad, Chennai, Bengaluru",
+      "externalUrl": "",
+      "notes": "chatbot_unknown"
+    },
+    "https://www.naukri.com/job-listings-java-full-stack-developer-cgi-hyderabad-chennai-bengaluru-5-to-9-years-180526012613": {
+      "date": "2026-05-19T12:39:46.686Z",
+      "source": "naukri",
+      "title": "Java Full Stack Developer",
+      "company": "CGI",
+      "location": "Hybrid - Hyderabad, Chennai, Bengaluru",
+      "externalUrl": "",
+      "notes": "chatbot_unknown"
+    },
+    "https://www.naukri.com/job-listings-solution-architect-ahinjay-enterprises-hyderabad-10-to-15-years-180526001217": {
+      "date": "2026-05-19T12:39:50.621Z",
+      "source": "naukri",
+      "title": "Walk-in || Solution Architect",
+      "company": "Ahinjay Enterprises",
+      "location": "Hyderabad(HITEC City)",
+      "externalUrl": "",
+      "notes": "no_apply_button"
+    },
+    "https://www.naukri.com/job-listings-ux-and-ui-designer-tekreant-hyderabad-3-to-6-years-190526020618": {
+      "date": "2026-05-19T12:39:54.447Z",
+      "source": "naukri",
+      "title": "Walk-in || UX and UI Designer",
+      "company": "Tekreant",
+      "location": "Hyderabad(HITEC City)",
+      "externalUrl": "",
+      "notes": "no_apply_button"
+    },
+    "https://www.naukri.com/job-listings-java-full-stack-developer-tata-consultancy-services-hyderabad-bengaluru-mumbai-all-areas-5-to-10-years-180526025203": {
+      "date": "2026-05-19T12:40:21.414Z",
+      "source": "naukri",
+      "title": "Java Full Stack Developer",
+      "company": "Tata Consultancy Services",
+      "location": "Hyderabad, Mumbai (All Areas), Bengaluru",
+      "externalUrl": "",
+      "notes": "chatbot_unknown"
+    },
+    "https://www.naukri.com/job-listings-java-full-stack-developer-saransh-software-solutions-hyderabad-6-to-11-years-300326014395": {
+      "date": "2026-05-19T12:40:48.546Z",
+      "source": "naukri",
+      "title": "Java Full Stack Developer",
+      "company": "Saransh Software Solutions",
+      "location": "Hybrid - Hyderabad",
+      "externalUrl": "",
+      "notes": "chatbot_unknown"
     }
   },
   "external": {
@@ -5995,6 +6220,123 @@
       "company": "BTS Infotech",
       "location": "Hyderabad",
       "externalUrl": "https://btsinfotech.com/career.php",
+      "notes": "External — apply manually"
+    },
+    "https://www.naukri.com/job-listings-full-stack-developer-ahsan-solutions-hyderabad-2-to-3-years-130526500581": {
+      "date": "2026-05-19T12:33:13.989Z",
+      "source": "naukri",
+      "title": "Full Stack Developer",
+      "company": "Ahsan Solutions",
+      "location": "Hyderabad",
+      "externalUrl": "https://ahsansolutions.com/careers",
+      "notes": "External — apply manually"
+    },
+    "https://www.naukri.com/job-listings-full-stack-developer-mean-stack-smartify-software-solutions-llp-hyderabad-2-to-4-years-180526506889": {
+      "date": "2026-05-19T12:34:13.244Z",
+      "source": "naukri",
+      "title": "Full Stack Developer - MEAN Stack",
+      "company": "Smartify Software Solutions",
+      "location": "Hyderabad",
+      "externalUrl": "https://smartifysol.com/jobs/full-stack-developer-mean-stack-job/",
+      "notes": "External — apply manually"
+    },
+    "https://www.naukri.com/job-listings-custom-software-engineer-accenture-solutions-pvt-ltd-hyderabad-2-to-5-years-190526921402": {
+      "date": "2026-05-19T12:34:34.067Z",
+      "source": "naukri",
+      "title": "Custom Software Engineer",
+      "company": "Accenture",
+      "location": "Hyderabad",
+      "externalUrl": "https://www.accenture.com/in-en/careers/jobdetails?id=ATCI-5500971-S2014336_en&title=Custom+Software+Engineer&SRC=RECNau",
+      "notes": "External — apply manually"
+    },
+    "https://www.naukri.com/job-listings-custom-software-engineer-accenture-solutions-pvt-ltd-hyderabad-2-to-5-years-180526920532": {
+      "date": "2026-05-19T12:34:38.362Z",
+      "source": "naukri",
+      "title": "Custom Software Engineer",
+      "company": "Accenture",
+      "location": "Hyderabad",
+      "externalUrl": "https://www.accenture.com/in-en/careers/jobdetails?id=ATCI-5307647-S1937329_en&title=Custom+Software+Engineer&SRC=RECNau",
+      "notes": "External — apply manually"
+    },
+    "https://www.naukri.com/job-listings-custom-software-engineer-accenture-solutions-pvt-ltd-hyderabad-2-to-5-years-190526922483": {
+      "date": "2026-05-19T12:34:53.346Z",
+      "source": "naukri",
+      "title": "Custom Software Engineer",
+      "company": "Accenture",
+      "location": "Hyderabad",
+      "externalUrl": "https://www.accenture.com/in-en/careers/jobdetails?id=ATCI-5500995-S2014322_en&title=Custom+Software+Engineer&SRC=RECNau",
+      "notes": "External — apply manually"
+    },
+    "https://www.naukri.com/job-listings-custom-software-engineer-accenture-solutions-pvt-ltd-hyderabad-2-to-5-years-180526921255": {
+      "date": "2026-05-19T12:34:59.503Z",
+      "source": "naukri",
+      "title": "Custom Software Engineer",
+      "company": "Accenture",
+      "location": "Hyderabad",
+      "externalUrl": "https://www.accenture.com/in-en/careers/jobdetails?id=ATCI-4913986-S1933573_en&title=Custom+Software+Engineer&SRC=RECNau",
+      "notes": "External — apply manually"
+    },
+    "https://www.naukri.com/job-listings-software-engineer-alter-domus-hyderabad-2-to-5-years-180526506453": {
+      "date": "2026-05-19T12:35:06.726Z",
+      "source": "naukri",
+      "title": "Software Engineer",
+      "company": "Alter Domus",
+      "location": "Hyderabad",
+      "externalUrl": "https://careers.alterdomus.com/en/job/hyderabad/software-engineer/38735/38486868032",
+      "notes": "External — apply manually"
+    },
+    "https://www.naukri.com/job-listings-custom-software-engineer-accenture-solutions-pvt-ltd-hyderabad-2-to-5-years-180526920820": {
+      "date": "2026-05-19T12:35:10.988Z",
+      "source": "naukri",
+      "title": "Custom Software Engineer",
+      "company": "Accenture",
+      "location": "Hyderabad",
+      "externalUrl": "https://www.accenture.com/in-en/careers/jobsearch",
+      "notes": "External — apply manually"
+    },
+    "https://www.naukri.com/job-listings-software-engineer-java-full-stack-developer-dtcc-hyderabad-chennai-3-to-5-years-180526918084": {
+      "date": "2026-05-19T12:35:25.961Z",
+      "source": "naukri",
+      "title": "Software Engineer - Java Full Stack Developer",
+      "company": "Dtcc",
+      "location": "Hyderabad, Chennai",
+      "externalUrl": "https://ebxr.fa.us2.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1/job/213583/",
+      "notes": "External — apply manually"
+    },
+    "https://www.naukri.com/job-listings-dot-net-full-stack-developer-lpl-financial-hyderabad-3-to-8-years-190526501144": {
+      "date": "2026-05-19T12:35:31.280Z",
+      "source": "naukri",
+      "title": "Dot Net Full Stack Developer",
+      "company": "LPL Financial",
+      "location": "Hyderabad",
+      "externalUrl": "https://lplfinancial.wd1.myworkdayjobs.com/en-US/India_Ext/job/Hyderabad/XMLNAME-Net-Full-Stack-Developer_R-048972",
+      "notes": "External — apply manually"
+    },
+    "https://www.naukri.com/job-listings-senior-net-full-stack-developer-lpl-financial-hyderabad-6-to-11-years-190526500583": {
+      "date": "2026-05-19T12:38:14.889Z",
+      "source": "naukri",
+      "title": "Senior .Net Full Stack Developer",
+      "company": "LPL Financial",
+      "location": "Hyderabad",
+      "externalUrl": "https://lplfinancial.wd1.myworkdayjobs.com/en-US/India_Ext/job/Hyderabad/Senior-Net-Full-Stack-Developer_R-048971",
+      "notes": "External — apply manually"
+    },
+    "https://www.naukri.com/job-listings-senior-net-full-stack-developer-senior-lpl-financial-hyderabad-6-to-11-years-190526500582": {
+      "date": "2026-05-19T12:38:19.818Z",
+      "source": "naukri",
+      "title": "Senior .Net Full Stack Developer Senior",
+      "company": "LPL Financial",
+      "location": "Hyderabad",
+      "externalUrl": "https://lplfinancial.wd1.myworkdayjobs.com/en-US/India_Ext/job/Hyderabad/Senior-Net-Full-Stack-DeveloperSenior_R-050123",
+      "notes": "External — apply manually"
+    },
+    "https://www.naukri.com/job-listings-senior-full-stack-developer-angular-react-java-columbus-global-services-india-pvt-ltd-hyderabad-5-to-10-years-180526504104": {
+      "date": "2026-05-19T12:39:09.743Z",
+      "source": "naukri",
+      "title": "Senior Full Stack Developer (Angular / React & Java)",
+      "company": "Columbus Global",
+      "location": "Hyderabad",
+      "externalUrl": "https://careers-india.columbusglobal.com/jobs/7739227-senior-full-stack-developer-angular-react-java",
       "notes": "External — apply manually"
     }
   },
