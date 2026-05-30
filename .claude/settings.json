@@ -37,7 +37,11 @@
       "mcp__claude_ai_Notion__notion-create-pages",
       "mcp__claude_ai_Notion__notion-search",
       "mcp__claude_ai_Notion__notion-fetch",
-      "PowerShell(Invoke-RestMethod -Uri \"http://localhost:4000/api/stats\" -Method GET)"
+      "PowerShell(Invoke-RestMethod -Uri \"http://localhost:4000/api/stats\" -Method GET)",
+      "PowerShell(Get-ChildItem -Path \"C:\\\\Users\\\\Manoj Ambati\" -MaxDepth 3 -Recurse -ErrorAction SilentlyContinue | Where-Object { $_.Name -match \"resume|cv|CV|Resume\" } | Select-Object FullName | Format-List)",
+      "PowerShell(Start-Process \"C:\\\\Users\\\\Manoj Ambati\\\\Desktop\\\\Manoj_Ambati_Resume_2026_Improved.html\")",
+      "PowerShell(Start-Process \"C:\\\\Users\\\\Manoj Ambati\\\\Desktop\\\\Ambati Manoj - Resume 2026 latest.pdf\")",
+      "PowerShell(Copy-Item -Path \"C:\\\\Users\\\\Manoj Ambati\\\\Desktop\\\\Ambati Manoj - Resume 2026 latest.pdf\" -Destination \"C:\\\\Users\\\\Manoj Ambati\\\\Desktop\\\\playwright-mcp\\\\playwright-mcp\\\\Ambati Manoj - Resume 2026 latest.pdf\")"
     ],
     "defaultMode": "auto"
   }
