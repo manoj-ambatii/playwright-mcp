@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Manoj Ambati — Resume 2026</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      font-size: 9.6pt;
+      color: #1a1a1a;
+      background: #fff;
+      line-height: 1.4;
+    }
+
+    .page {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 28px 32px 24px 32px;
+    }
+
+    /* ── HEADER ── */
+    .header { text-align: center; margin-bottom: 10px; }
+    .header h1 {
+      font-size: 22pt;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #111;
+      margin-bottom: 4px;
+    }
+    .contact {
+      font-size: 9pt;
+      color: #333;
+    }
+    .contact a { color: #1a56b0; text-decoration: none; }
+    .contact span { margin: 0 5px; color: #888; }
+
+    /* ── SECTIONS ── */
+    .section { margin-bottom: 10px; }
+
+    .section-title {
+      font-size: 9.5pt;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #1a56b0;
+      border-bottom: 1.5px solid #1a56b0;
+      padding-bottom: 2px;
+      margin-bottom: 6px;
+    }
+
+    /* ── SUMMARY ── */
+    .summary p {
+      font-size: 9.5pt;
+      color: #222;
+      line-height: 1.5;
+      text-align: justify;
+    }
+
+    /* ── CORE COMPETENCIES ── */
+    .competencies-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 3px 12px;
+    }
+    .competency-item {
+      font-size: 9pt;
+      color: #222;
+      padding: 2px 0 2px 10px;
+      position: relative;
+    }
+    .competency-item::before {
+      content: '▸';
+      position: absolute;
+      left: 0;
+      color: #1a56b0;
+      font-size: 8pt;
+    }
+
+    /* ── TECHNICAL SKILLS ── */
+    .skills-table { width: 100%; border-collapse: collapse; }
+    .skills-table tr td {
+      padding: 2px 4px;
+      vertical-align: top;
+      font-size: 9pt;
+    }
+    .skills-table tr td:first-child {
+      font-weight: 700;
+      white-space: nowrap;
+      width: 130px;
+      color: #1a1a1a;
+    }
+    .skills-table tr td:last-child { color: #333; }
+
+    /* ── EXPERIENCE ── */
+    .job-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 3px;
+    }
+    .job-title {
+      font-weight: 700;
+      font-size: 10pt;
+      color: #111;
+    }
+    .job-meta {
+      font-size: 8.8pt;
+      color: #555;
+      font-style: italic;
+    }
+    ul.bullets {
+      padding-left: 14px;
+      margin-top: 2px;
+    }
+    ul.bullets li {
+      font-size: 9.4pt;
+      color: #222;
+      margin-bottom: 3px;
+      line-height: 1.45;
+    }
+    ul.bullets li strong { color: #111; }
+
+    /* ── PROJECTS ── */
+    .project-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 3px;
+    }
+    .project-name {
+      font-weight: 700;
+      font-size: 10pt;
+      color: #111;
+    }
+    .project-stack {
+      font-size: 8.5pt;
+      color: #1a56b0;
+      font-style: italic;
+    }
+
+    /* ── EDUCATION ── */
+    .edu-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 2px;
+    }
+    .edu-degree { font-weight: 700; font-size: 9.5pt; color: #111; }
+    .edu-meta { font-size: 8.8pt; color: #555; font-style: italic; }
+
+    /* ── PRINT ── */
+    @media print {
+      @page { margin: 0.38in 0.45in; size: A4; }
+      body { font-size: 9pt; line-height: 1.42; }
+      .page { padding: 0; max-width: 100%; }
+      a { color: #1a56b0 !important; }
+      .section { margin-bottom: 9px; }
+      .section-title { font-size: 9pt; margin-bottom: 4px; padding-bottom: 2px; }
+      .header { margin-bottom: 8px; }
+      .header h1 { font-size: 20pt; margin-bottom: 3px; }
+      .contact { font-size: 9pt; }
+      .summary p { font-size: 9pt; line-height: 1.5; }
+      .competencies-grid { gap: 3px 10px; }
+      .competency-item { font-size: 8.8pt; padding: 2px 0 2px 10px; }
+      .skills-table tr td { font-size: 8.8pt; padding: 2px 4px; }
+      ul.bullets { padding-left: 13px; margin-top: 2px; }
+      ul.bullets li { font-size: 9pt; margin-bottom: 2.5px; line-height: 1.4; }
+      .job-title, .project-name { font-size: 9.8pt; }
+      .job-meta, .project-stack { font-size: 8.5pt; }
+      .edu-degree { font-size: 9pt; }
+      .edu-meta { font-size: 8.5pt; }
+      .edu-row { margin-bottom: 2px; }
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="header">
+    <h1>Manoj Ambati</h1>
+    <div class="contact">
+      <a href="mailto:ambatimanoj2469@gmail.com">ambatimanoj2469@gmail.com</a>
+      <span>|</span>+91 9347946872
+      <span>|</span>Hyderabad, India
+      <span>|</span><a href="https://www.linkedin.com/in/manojambati2469/" target="_blank">LinkedIn</a>
+      <span>|</span><a href="https://github.com/manoj-ambatii" target="_blank">GitHub</a>
+    </div>
+  </div>
+
+  <!-- SUMMARY -->
+  <div class="section summary">
+    <div class="section-title">Professional Summary</div>
+    <p>
+      Full Stack Engineer with 2+ years of experience building scalable, production-grade web applications using
+      React, TypeScript, Node.js, Express, and MySQL. Experienced in designing secure REST APIs, authentication
+      systems (JWT/OAuth, AWS Cognito), cloud deployments, CI/CD automation, and performance optimization.
+      Proven ability to own complete features end-to-end — from system architecture and API design to
+      Dockerized deployment and production support. Strong engineering mindset with a focus on scalability,
+      modularity, and code quality in Agile environments.
+    </p>
+  </div>
+
+  <!-- CORE COMPETENCIES -->
+  <div class="section">
+    <div class="section-title">Core Competencies</div>
+    <div class="competencies-grid">
+      <div class="competency-item">Full Stack Development</div>
+      <div class="competency-item">REST API Design &amp; Security</div>
+      <div class="competency-item">Authentication &amp; Authorization</div>
+      <div class="competency-item">Cloud Deployment (AWS)</div>
+      <div class="competency-item">CI/CD Automation</div>
+      <div class="competency-item">Performance Optimization</div>
+      <div class="competency-item">Database Design &amp; Indexing</div>
+      <div class="competency-item">Scalable Application Architecture</div>
+      <div class="competency-item">Agile / SDLC Ownership</div>
+    </div>
+  </div>
+
+  <!-- TECHNICAL SKILLS -->
+  <div class="section">
+    <div class="section-title">Technical Skills</div>
+    <table class="skills-table">
+      <tr>
+        <td>Languages:</td>
+        <td>TypeScript, JavaScript (ES6+), Python (Basics), SQL, HTML5, CSS3</td>
+      </tr>
+      <tr>
+        <td>Frontend:</td>
+        <td>React.js, React Router, Redux Toolkit, React Hook Form, Zod,
+            Tailwind CSS, Shadcn UI, Vite, Code Splitting, Lazy Loading, Responsive Design</td>
+      </tr>
+      <tr>
+        <td>Backend:</td>
+        <td>Node.js, Express.js, REST APIs, JWT Authentication, OAuth2, Role-Based Access Control (RBAC),
+            WebSockets, API Rate Limiting, Event-Driven Architecture, Microservices</td>
+      </tr>
+      <tr>
+        <td>Database:</td>
+        <td>MySQL, PostgreSQL, Database Design, Query Optimization, Database Indexing, Redis (Caching)</td>
+      </tr>
+      <tr>
+        <td>Cloud &amp; DevOps:</td>
+        <td>AWS, GCP (Authentication, Virtual Machines, Object Storage, Container Services, Managed Database, Messaging/Pub-Sub), Docker, Nginx, GitHub Actions, CI/CD, Linux</td>
+      </tr>
+      <tr>
+        <td>Engineering:</td>
+        <td>SOLID Principles, Design Patterns, Data Structures &amp; Algorithms, Modular Architecture, Async Processing</td>
+      </tr>
+      <tr>
+        <td>APIs &amp; AI:</td>
+        <td>Google Gemini API, Model Context Protocol (MCP), Third-Party API Integration</td>
+      </tr>
+      <tr>
+        <td>Tools &amp; Practices:</td>
+        <td>Git, GitHub, Jira, Postman, VS Code, Agile, Code Reviews, Debugging, Production Support</td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- WORK EXPERIENCE -->
+  <div class="section">
+    <div class="section-title">Work Experience</div>
+    <div class="job-header">
+      <span class="job-title">Full Stack Developer &mdash; Voltuswave Technologies India Pvt. Ltd.</span>
+      <span class="job-meta">Feb 2024 – Present &nbsp;|&nbsp; Hyderabad, India</span>
+    </div>
+    <ul class="bullets">
+      <li>
+        Developed and maintained <strong>scalable full-stack applications</strong> using React (TypeScript),
+        Node.js, Express, and MySQL, supporting multi-tenant business workflows across the complete SDLC —
+        from architecture and API design to deployment and production support.
+      </li>
+      <li>
+        Designed <strong>secure RESTful APIs</strong> with JWT/OAuth-based authentication, RBAC authorization,
+        input validation, and tenant-level access control, ensuring enterprise-grade API security and data isolation.
+      </li>
+      <li>
+        Reduced deployment errors and release cycle time by automating <strong>CI/CD pipelines</strong> using
+        GitHub Actions with Dockerized workflows, eliminating manual release steps and ensuring environment parity.
+      </li>
+      <li>
+        Improved frontend performance by <strong>~40%</strong> through lazy loading, code splitting, caching strategies,
+        and optimized API request handling — significantly reducing page load times and improving user experience.
+      </li>
+      <li>
+        Containerized services with <strong>Docker</strong> and deployed to <strong>AWS/GCP</strong>, achieving
+        high availability, zero-downtime releases, and reliable production deployments.
+      </li>
+      <li>
+        Collaborated in <strong>Agile sprints</strong> with cross-functional teams, participated in code reviews,
+        debugged production incidents, and consistently delivered production-ready features aligned with business requirements.
+      </li>
+    </ul>
+  </div>
+
+  <!-- PROJECTS -->
+  <div class="section">
+    <div class="section-title">Projects</div>
+
+    <!-- Voltusfreight -->
+    <div class="project-header">
+      <span class="project-name">Voltusfreight &mdash; Multi-Tenant Freight Forwarding Platform</span>
+      <span class="project-stack">React, TypeScript, Node.js, MySQL, AWS Cognito, Docker, GitHub Actions</span>
+    </div>
+    <ul class="bullets">
+      <li>
+        Architected end-to-end authentication and authorization (signup, login, RBAC) using
+        <strong>AWS Cognito</strong>, enabling secure token management, session control, and strict
+        tenant-isolated data access across multi-tenant workflows.
+      </li>
+      <li>
+        Implemented <strong>real-time user activity tracking</strong> and analytics dashboards capturing
+        post-login actions, session duration, and behavioral patterns — providing administrators with
+        operational visibility and business insights.
+      </li>
+      <li>
+        Designed and developed a responsive, <strong>component-driven UI</strong> with React, TypeScript,
+        Tailwind CSS, and Shadcn UI, accelerating delivery of tenant-facing modules and ensuring consistent
+        design system adoption.
+      </li>
+      <li>
+        Built RESTful APIs with Node.js and Express for shipment, quote, and document workflows;
+        modeled <strong>MySQL schemas with tenant-scoped queries and database indexing</strong>
+        to enforce data isolation and optimize query performance.
+      </li>
+      <li>
+        Containerized microservices with <strong>Docker</strong> and deployed to <strong>AWS</strong>,
+        automating builds, tests, and zero-downtime releases via GitHub Actions CI/CD pipelines.
+      </li>
+    </ul>
+
+    <div style="margin-top:8px;"></div>
+
+    <!-- StockPuls -->
+    <div class="project-header">
+      <span class="project-name">StockPuls &mdash; AI-Powered Investment Tracker (NSE/BSE)</span>
+      <span class="project-stack">React, TypeScript, Node.js, Express, MySQL, Tailwind CSS, Gemini API</span>
+    </div>
+    <div style="font-size:8.8pt; color:#555; font-style:italic; margin-bottom:3px;">Personal Project</div>
+    <ul class="bullets">
+      <li>
+        Built an <strong>AI-powered investment tracker</strong> for Indian equities (NSE/BSE) with portfolio
+        watchlists, real-time stock price tracking, interactive charts, and AI-generated
+        BUY/HOLD/SELL recommendations with confidence scores.
+      </li>
+      <li>
+        Integrated <strong>Google Gemini API</strong> for per-stock and portfolio-level AI analyses;
+        implemented <strong>intelligent result caching in MySQL</strong> to eliminate redundant API calls,
+        reduce API spend, and improve response times.
+      </li>
+      <li>
+        Designed a centralized <strong>React Context with multi-dimensional per-symbol caching</strong>,
+        preserving user state across navigation, eliminating duplicate API calls, and improving
+        application responsiveness.
+      </li>
+      <li>
+        Implemented <strong>JWT authentication</strong> with React Hook Form + Zod validation, protected
+        routes, and Axios interceptors for 401 handling and seamless token refresh.
+      </li>
+      <li>
+        Optimized bundle size using <strong>React.lazy and Suspense (code splitting)</strong> across pages
+        and heavy components, reducing initial load time significantly.
+      </li>
+    </ul>
+  </div>
+
+  <!-- EDUCATION -->
+  <div class="section">
+    <div class="section-title">Education</div>
+    <div class="edu-row">
+      <span class="edu-degree">Full Stack Development &mdash; Nxtwave Disruptive Technologies</span>
+      <span class="edu-meta">Hyderabad &nbsp;|&nbsp; Jan 2024</span>
+    </div>
+    <div class="edu-row">
+      <span class="edu-degree">B.E. Civil Engineering &mdash; Chaitanya Bharathi Institute of Technology (CBIT)</span>
+      <span class="edu-meta">Hyderabad &nbsp;|&nbsp; May 2023</span>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
