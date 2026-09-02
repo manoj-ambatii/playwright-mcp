@@ -447,7 +447,7 @@
     </div>
 
     <div class="filter-bar">
-      <input type="text" class="search-input" id="search-naukri" placeholder="Search title, company, location..." oninput="renderNaukri()" />
+      <input type="text" class="search-input" id="search-naukri" placeholder="Search title, company, location..." autocomplete="off" name="search_naukri_no_autofill" oninput="renderNaukri()" />
       <select class="filter-select" id="filter-naukri-status" onchange="renderNaukri()">
         <option value="all">All Statuses</option>
         <option value="pending">Pending</option>
@@ -472,7 +472,7 @@
     </div>
 
     <div class="filter-bar">
-      <input type="text" class="search-input" id="search-external" placeholder="Search company name, job title, location..." oninput="renderExternal()" />
+      <input type="text" class="search-input" id="search-external" placeholder="Search company name, job title, location..." autocomplete="off" name="search_company_no_autofill" oninput="renderExternal()" />
       <select class="filter-select" id="filter-external-status" onchange="renderExternal()">
         <option value="all">All Company Statuses</option>
         <option value="pending">⏳ Pending / Saved</option>
@@ -618,7 +618,11 @@ function renderNaukri() {
 }
 
 function renderExternal() {
-  const q = (document.getElementById('search-external').value || '').toLowerCase().trim();
+  let q = (document.getElementById('search-external').value || '').toLowerCase().trim();
+  if (q.includes('@')) {
+    document.getElementById('search-external').value = '';
+    q = '';
+  }
   const st = document.getElementById('filter-external-status').value;
   const body = document.getElementById('external-table-body');
 
