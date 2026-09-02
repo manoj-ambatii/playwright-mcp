@@ -261,6 +261,7 @@
     font-size: 0.85rem;
     color: #ffffff;
     outline: none;
+    color-scheme: dark;
   }
 
   .btn {
@@ -410,12 +411,16 @@
 
     <div class="filter-bar">
       <input type="text" class="search-input" id="search-naukri" placeholder="Search company name, title, location..." autocomplete="off" name="search_naukri_clean" oninput="renderNaukri()" />
-      <select class="filter-select" id="date-naukri" onchange="renderNaukri()">
-        <option value="all">📅 All Dates</option>
+      <select class="filter-select" id="date-naukri" onchange="document.getElementById('exact-date-naukri').value=''; renderNaukri();">
+        <option value="all">📅 All Preset Dates</option>
         <option value="today">Today</option>
         <option value="7days">Last 7 Days</option>
         <option value="30days">Last 30 Days</option>
       </select>
+      <div style="display:flex; align-items:center; gap:8px;">
+        <span style="font-size:0.82rem; color:var(--text-muted); font-weight:600;">Exact Date:</span>
+        <input type="date" class="filter-select" id="exact-date-naukri" onchange="renderNaukri()" />
+      </div>
     </div>
 
     <div class="table-wrapper">
@@ -446,12 +451,16 @@
 
     <div class="filter-bar">
       <input type="text" class="search-input" id="search-external" placeholder="Search company name, job title, location..." autocomplete="off" name="search_external_clean" oninput="renderExternal()" />
-      <select class="filter-select" id="date-external" onchange="renderExternal()">
-        <option value="all">📅 All Dates</option>
+      <select class="filter-select" id="date-external" onchange="document.getElementById('exact-date-external').value=''; renderExternal();">
+        <option value="all">📅 All Preset Dates</option>
         <option value="today">Today</option>
         <option value="7days">Last 7 Days</option>
         <option value="30days">Last 30 Days</option>
       </select>
+      <div style="display:flex; align-items:center; gap:8px;">
+        <span style="font-size:0.82rem; color:var(--text-muted); font-weight:600;">Exact Date:</span>
+        <input type="date" class="filter-select" id="exact-date-external" onchange="renderExternal()" />
+      </div>
     </div>
 
     <div class="table-wrapper">
@@ -482,12 +491,16 @@
 
     <div class="filter-bar">
       <input type="text" class="search-input" id="search-failed" placeholder="Search company name, title, reason..." autocomplete="off" name="search_failed_clean" oninput="renderFailed()" />
-      <select class="filter-select" id="date-failed" onchange="renderFailed()">
-        <option value="all">📅 All Dates</option>
+      <select class="filter-select" id="date-failed" onchange="document.getElementById('exact-date-failed').value=''; renderFailed();">
+        <option value="all">📅 All Preset Dates</option>
         <option value="today">Today</option>
         <option value="7days">Last 7 Days</option>
         <option value="30days">Last 30 Days</option>
       </select>
+      <div style="display:flex; align-items:center; gap:8px;">
+        <span style="font-size:0.82rem; color:var(--text-muted); font-weight:600;">Exact Date:</span>
+        <input type="date" class="filter-select" id="exact-date-failed" onchange="renderFailed()" />
+      </div>
     </div>
 
     <div class="table-wrapper">
@@ -593,8 +606,24 @@ function updateStats() {
   document.getElementById('nb-failed').textContent = failedJobs.length;
 }
 
-function filterByDate(jobs, dateVal) {
-  if (!dateVal || dateVal === 'all') return jobs;
+function filterByDate(jobs, datePreset, exactDateVal) {
+  if (exactDateVal) {
+    return jobs.filter(j => {
+      const rawDate = j.appliedAt || j.postedAt || j.capturedAt;
+      if (!rawDate) return false;
+      const d = new Date(rawDate);
+      if (isNaN(d.getTime())) return false;
+
+      const year = d.getFullYear();
+      const month = String(d.getMonth() + 1).padStart(2, '0');
+      const day = String(d.getDate()).padStart(2, '0');
+      const jobDateStr = `${year}-${month}-${day}`;
+
+      return jobDateStr === exactDateVal;
+    });
+  }
+
+  if (!datePreset || datePreset === 'all') return jobs;
   const now = new Date();
   const todayStart = new Date(now.getFullYear(), now.getMonth(), now.getDate()).getTime();
 
@@ -605,11 +634,11 @@ function filterByDate(jobs, dateVal) {
     const jobTime = new Date(rawDate).getTime();
     if (isNaN(jobTime)) return true;
 
-    if (dateVal === 'today') {
+    if (datePreset === 'today') {
       return jobTime >= todayStart;
-    } else if (dateVal === '7days') {
+    } else if (datePreset === '7days') {
       return jobTime >= (todayStart - 7 * 24 * 60 * 60 * 1000);
-    } else if (dateVal === '30days') {
+    } else if (datePreset === '30days') {
       return jobTime >= (todayStart - 30 * 24 * 60 * 60 * 1000);
     }
     return true;
@@ -622,14 +651,15 @@ function renderDashboard() {}
 function renderNaukri() {
   let q = (document.getElementById('search-naukri').value || '').toLowerCase().trim();
   if (q.includes('@')) { document.getElementById('search-naukri').value = ''; q = ''; }
-  const dateVal = document.getElementById('date-naukri').value;
+  const datePreset = document.getElementById('date-naukri').value;
+  const exactDateVal = document.getElementById('exact-date-naukri').value;
   const body = document.getElementById('naukri-table-body');
 
   let jobs = allJobs
     .filter(j => j.status === 'applied')
     .sort((a, b) => new Date(b.appliedAt || 0) - new Date(a.appliedAt || 0));
 
-  jobs = filterByDate(jobs, dateVal);
+  jobs = filterByDate(jobs, datePreset, exactDateVal);
 
   if (q) jobs = jobs.filter(j => (j.company + ' ' + j.title + ' ' + j.location).toLowerCase().includes(q));
 
@@ -657,11 +687,12 @@ function renderNaukri() {
 function renderExternal() {
   let q = (document.getElementById('search-external').value || '').toLowerCase().trim();
   if (q.includes('@')) { document.getElementById('search-external').value = ''; q = ''; }
-  const dateVal = document.getElementById('date-external').value;
+  const datePreset = document.getElementById('date-external').value;
+  const exactDateVal = document.getElementById('exact-date-external').value;
   const body = document.getElementById('external-table-body');
 
   let jobs = allJobs.filter(j => j.source === 'external' || j.source === 'manual_external');
-  jobs = filterByDate(jobs, dateVal);
+  jobs = filterByDate(jobs, datePreset, exactDateVal);
 
   if (q) jobs = jobs.filter(j => (j.company + ' ' + j.title + ' ' + j.location).toLowerCase().includes(q));
 
@@ -686,11 +717,12 @@ function renderExternal() {
 function renderFailed() {
   let q = (document.getElementById('search-failed') ? document.getElementById('search-failed').value : '').toLowerCase().trim();
   if (q.includes('@')) { if(document.getElementById('search-failed')) document.getElementById('search-failed').value = ''; q = ''; }
-  const dateVal = document.getElementById('date-failed') ? document.getElementById('date-failed').value : 'all';
+  const datePreset = document.getElementById('date-failed') ? document.getElementById('date-failed').value : 'all';
+  const exactDateVal = document.getElementById('exact-date-failed') ? document.getElementById('exact-date-failed').value : '';
   const body = document.getElementById('failed-table-body');
 
   let failed = allJobs.filter(j => j.status === 'failed');
-  failed = filterByDate(failed, dateVal);
+  failed = filterByDate(failed, datePreset, exactDateVal);
 
   if (q) failed = failed.filter(j => (j.company + ' ' + j.title + ' ' + j.location + ' ' + (j.failedReason||'')).toLowerCase().includes(q));
 
