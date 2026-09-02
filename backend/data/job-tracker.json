@@ -117,13 +117,13 @@
       "externalUrl": "",
       "notes": "Naukri quick-apply (auto)"
     },
-    "https://careers.google.com/jobs/123": {
+    "https://www.google.com/about/careers/applications/jobs/results/?q=Java": {
       "date": "2026-09-02T11:42:38.815Z",
       "source": "manual_external",
       "title": "Java Full Stack Developer",
       "company": "Google",
       "location": "Hyderabad",
-      "externalUrl": "https://careers.google.com/jobs/123",
+      "externalUrl": "https://www.google.com/about/careers/applications/jobs/results/?q=Java",
       "notes": "Applied via Google Careers"
     }
   },
