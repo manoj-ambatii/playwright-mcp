@@ -567,7 +567,7 @@ async function loadData() {
 }
 
 function updateStats() {
-  const naukriApplied = allJobs.filter(j => j.source === 'naukri' && j.status === 'applied');
+  const naukriApplied = allJobs.filter(j => j.status === 'applied' && (j.source === 'naukri' || (j.notes && j.notes.includes('quick-apply'))));
   const externalJobs  = allJobs.filter(j => j.source === 'external' || j.source === 'manual_external');
   const failedJobs    = allJobs.filter(j => j.status === 'failed');
 
@@ -584,7 +584,9 @@ function updateStats() {
 // ── Screen 1: Dashboard Overview Table ──
 function renderDashboard() {
   const body = document.getElementById('dash-table-body');
-  const activeJobs = allJobs.filter(j => j.status === 'applied' || j.status === 'failed');
+  const activeJobs = allJobs
+    .filter(j => j.status === 'applied' || j.status === 'failed')
+    .sort((a, b) => new Date(b.appliedAt || 0) - new Date(a.appliedAt || 0));
   const displayList = activeJobs.length ? activeJobs : allJobs.slice(0, 30);
 
   if (!displayList.length) {
@@ -615,7 +617,10 @@ function renderNaukri() {
   if (q.includes('@')) { document.getElementById('search-naukri').value = ''; q = ''; }
   const body = document.getElementById('naukri-table-body');
 
-  let jobs = allJobs.filter(j => j.source === 'naukri' && j.status === 'applied');
+  let jobs = allJobs
+    .filter(j => j.status === 'applied' && (j.source === 'naukri' || (j.notes && j.notes.includes('quick-apply'))))
+    .sort((a, b) => new Date(b.appliedAt || 0) - new Date(a.appliedAt || 0));
+
   if (q) jobs = jobs.filter(j => (j.company + ' ' + j.title + ' ' + j.location).toLowerCase().includes(q));
 
   if (!jobs.length) {
