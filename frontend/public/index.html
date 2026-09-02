@@ -560,9 +560,6 @@
       <i class="fa-solid fa-circle-xmark"></i> Failed Jobs
       <span class="nav-badge" id="nb-failed">0</span>
     </li>
-    <li class="nav-item" data-screen="screen-manual" onclick="showScreen('screen-manual', this)">
-      <i class="fa-solid fa-square-plus"></i> Add Manual Job
-    </li>
   </ul>
 
   <div class="sidebar-footer">
@@ -746,41 +743,7 @@
     </div>
   </section>
 
-  <!-- SCREEN 5: ADD MANUAL EXTERNAL JOB -->
-  <section id="screen-manual" class="screen">
-    <div class="page-header">
-      <div>
-        <h1 class="page-title">➕ Add Manual External Job</h1>
-        <div class="page-subtitle">Record a job application applied manually or via terminal script</div>
-      </div>
-    </div>
 
-    <div class="form-card">
-      <form onsubmit="submitManualJob(event)">
-        <div class="form-group">
-          <label class="form-label">Job Title *</label>
-          <input type="text" id="m-title" class="form-control" placeholder="e.g. Senior Java Backend Developer" required />
-        </div>
-        <div class="form-group">
-          <label class="form-label">Company Name *</label>
-          <input type="text" id="m-company" class="form-control" placeholder="e.g. Google / Microsoft / Oracle" required />
-        </div>
-        <div class="form-group">
-          <label class="form-label">Location</label>
-          <input type="text" id="m-location" class="form-control" placeholder="e.g. Hyderabad / Remote" value="Hyderabad" />
-        </div>
-        <div class="form-group">
-          <label class="form-label">External Career Site URL</label>
-          <input type="url" id="m-url" class="form-control" placeholder="https://company.com/careers/job/123" />
-        </div>
-        <div class="form-group">
-          <label class="form-label">Notes</label>
-          <input type="text" id="m-notes" class="form-control" placeholder="e.g. Applied manually via company career page" />
-        </div>
-        <button type="submit" class="btn btn-primary" style="margin-top:10px;"><i class="fa-solid fa-floppy-disk"></i> Record Application</button>
-      </form>
-    </div>
-  </section>
 
 </main>
 
