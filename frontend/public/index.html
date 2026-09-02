@@ -475,9 +475,10 @@
       <input type="text" class="search-input" id="search-external" placeholder="Search company name, job title, location..." oninput="renderExternal()" />
       <select class="filter-select" id="filter-external-status" onchange="renderExternal()">
         <option value="all">All Company Statuses</option>
-        <option value="external">External Saved</option>
-        <option value="applied">Auto-Applied</option>
-        <option value="failed">Failed Attempt</option>
+        <option value="pending">⏳ Pending / Saved</option>
+        <option value="external">🌐 External Status</option>
+        <option value="applied">✅ Auto-Applied</option>
+        <option value="failed">❌ Failed Attempt</option>
       </select>
     </div>
 
@@ -547,6 +548,12 @@ function showScreen(screenId, navEl) {
   document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
   document.getElementById(screenId).classList.add('active');
   if (navEl) navEl.classList.add('active');
+
+  // Trigger reactive re-rendering when switching tabs
+  if (screenId === 'screen-dashboard') renderDashboard();
+  else if (screenId === 'screen-naukri') renderNaukri();
+  else if (screenId === 'screen-external') renderExternal();
+  else if (screenId === 'screen-failed') renderFailed();
 }
 
 async function loadData() {
@@ -573,7 +580,7 @@ async function updateStats() {
     document.getElementById('st-skipped').textContent = s.skipped || 0;
 
     const naukriJobs = allJobs.filter(j => j.source === 'naukri');
-    const externalJobs = allJobs.filter(j => j.source === 'external' || j.status === 'external');
+    const externalJobs = allJobs.filter(j => j.source === 'external' || j.status === 'external' || j.externalUrl);
     const failedJobs = allJobs.filter(j => j.status === 'failed');
 
     document.getElementById('nb-naukri').textContent = naukriJobs.length;
@@ -584,9 +591,8 @@ async function updateStats() {
 
 function renderDashboard() {
   const container = document.getElementById('dash-recent-list');
-  // Show active applications first, followed by pending
   const activeJobs = allJobs.filter(j => j.status === 'applied' || j.status === 'external' || j.status === 'failed');
-  const displayList = activeJobs.length ? activeJobs : allJobs.slice(0, 20);
+  const displayList = activeJobs.length ? activeJobs : allJobs.slice(0, 25);
 
   if (!displayList.length) {
     container.innerHTML = '<div style="padding:40px; text-align:center; color:var(--text-muted);">No jobs tracked yet.</div>';
@@ -621,7 +627,7 @@ function renderExternal() {
   if (q) jobs = jobs.filter(j => (j.company + ' ' + j.title + ' ' + j.location).toLowerCase().includes(q));
 
   if (!jobs.length) {
-    body.innerHTML = '<tr><td colspan="7" style="text-align:center; padding:30px; color:var(--text-muted);">No external company listings found.</td></tr>';
+    body.innerHTML = '<tr><td colspan="7" style="text-align:center; padding:30px; color:var(--text-muted);">No external company listings match the filter.</td></tr>';
     return;
   }
 
@@ -629,7 +635,7 @@ function renderExternal() {
     <tr>
       <td style="font-weight:700; color:#ffffff;">${esc(j.company)}</td>
       <td style="font-weight:600;">${esc(j.title)}</td>
-      <td style="color:var(--text-muted);">${esc(j.location || 'India')}</td>
+      <td style="color:var(--text-muted);">${esc(j.location || 'Hyderabad / India')}</td>
       <td style="color:var(--text-muted);">${esc(j.experience || '2+ Yrs')}</td>
       <td><span class="badge badge-${j.status}">${j.status.toUpperCase()}</span></td>
       <td><a href="${esc(j.externalUrl || j.applyUrl)}" target="_blank" style="color:#ffffff; font-weight:600;">🔗 Career Link</a></td>
