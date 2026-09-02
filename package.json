@@ -1,9 +1,14 @@
 {
   "name": "playwright-mcp",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "backend/server.js",
   "scripts": {
-    "start": "node server.js",
+    "start": "node backend/server.js",
+    "fetch-jobs": "node backend/scripts/fetch-linkedin-jobs.js",
+    "naukri-apply": "node backend/scripts/naukri-auto-apply.js",
+    "sync-excel": "node backend/scripts/sync-excel.js",
+    "cleanup": "node backend/scripts/cleanup-jobs.js",
+    "generate-pdf": "node backend/scripts/generate-resume-pdf.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],

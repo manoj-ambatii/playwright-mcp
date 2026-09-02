@@ -10,9 +10,9 @@
 const fs = require('fs');
 const path = require('path');
 
-const JSON_FILE = path.join(__dirname, 'job-tracker.json');
-const NAUKRI_RESULTS = path.join(__dirname, 'naukri-apply-results.json');
-const EXTERNAL_FILE = path.join(__dirname, 'naukri-external-jobs.json');
+const JSON_FILE = path.join(__dirname, '../data', 'job-tracker.json');
+const NAUKRI_RESULTS = path.join(__dirname, '../data', 'naukri-apply-results.json');
+const EXTERNAL_FILE = path.join(__dirname, '../data', 'naukri-external-jobs.json');
 
 const store = fs.existsSync(JSON_FILE) ? JSON.parse(fs.readFileSync(JSON_FILE, 'utf8')) : {};
 for (const k of ['applied', 'external', 'failed', 'skipped']) if (!store[k]) store[k] = {};

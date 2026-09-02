@@ -2,17 +2,17 @@ const express = require('express');
 const fs = require('fs');
 const path = require('path');
 
-try { require('dotenv').config(); } catch {}
+try { require('dotenv').config({ path: path.join(__dirname, '../.env') }); } catch {}
 
 const { ApifyClient } = require('apify-client');
 
 const app = express();
 app.use(express.json());
 
-const JOBS_FILE       = path.join(__dirname, 'linkedin-jobs.json');
-const NAUKRI_EXT_FILE = path.join(__dirname, 'naukri-external-jobs.json');
-const TRACKER_FILE    = path.join(__dirname, 'job-tracker.json');
-const CONFIG_FILE     = path.join(__dirname, 'config.json');
+const JOBS_FILE       = path.join(__dirname, 'data', 'linkedin-jobs.json');
+const NAUKRI_EXT_FILE = path.join(__dirname, 'data', 'naukri-external-jobs.json');
+const TRACKER_FILE    = path.join(__dirname, 'data', 'job-tracker.json');
+const CONFIG_FILE     = path.join(__dirname, 'data', 'config.json');
 
 const SEARCH_URLS = [
   'https://www.linkedin.com/jobs/search/?keywords=Full%20Stack%20Developer&location=India&f_TPR=r86400&sortBy=DD',
@@ -210,7 +210,7 @@ app.delete('/api/jobs', (_req, res) => {
 });
 
 // ── Serve UI (AFTER all API routes) ──────────────────────────────────────────
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, '../frontend/public')));
 
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => console.log(`\n✅  LinkedIn Job Tracker → http://localhost:${PORT}\n`));

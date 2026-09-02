@@ -1,4 +1,6 @@
 .env
 node_modules/
 .playwright-mcp/
-config.json
+*.log
+page-*.yml
+backend/data/config.json

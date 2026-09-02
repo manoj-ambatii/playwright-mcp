@@ -10,47 +10,64 @@
  * Usage: node naukri-auto-apply.js          # default 50
  *        TARGET=30 node naukri-auto-apply.js
  */
-require('dotenv').config();
-const { chromium } = require('playwright');
 const fs = require('fs');
 const path = require('path');
+require('dotenv').config({ path: path.join(__dirname, '../../.env') });
+const { chromium } = require('playwright');
 const tracker = require('./track-jobs');
+
+const os = require('os');
 
 const EMAIL = process.env.NAUKRI_EMAIL;
 const PASSWORD = process.env.NAUKRI_PASSWORD;
 const TARGET = parseInt(process.env.TARGET || '50', 10);
 const SOURCE = 'naukri';
-// Multiple searches so we get fresh jobs beyond the first 15-day window
+// Multiple searches tailored for Java Full Stack Developer across top locations & experience ranges
 const SEARCH_URLS_LIST = [
+  'https://www.naukri.com/java-full-stack-developer-jobs-in-hyderabad?k=java+full+stack+developer&l=hyderabad&experience=2&jobAge=30',
+  'https://www.naukri.com/spring-boot-developer-jobs-in-hyderabad?k=spring+boot+developer&l=hyderabad&experience=2&jobAge=30',
+  'https://www.naukri.com/java-developer-jobs-in-hyderabad?k=java+developer&l=hyderabad&experience=2&jobAge=30',
   'https://www.naukri.com/full-stack-developer-jobs-in-hyderabad?k=full+stack+developer&l=hyderabad&experience=2&jobAge=30',
   'https://www.naukri.com/react-developer-jobs-in-hyderabad?k=react+developer&l=hyderabad&experience=2&jobAge=30',
-  'https://www.naukri.com/nodejs-developer-jobs-in-hyderabad?k=node+js+developer&l=hyderabad&experience=2&jobAge=30',
-  'https://www.naukri.com/mern-stack-developer-jobs-in-hyderabad?k=mern+stack+developer&l=hyderabad&experience=2&jobAge=30',
+  'https://www.naukri.com/java-react-developer-jobs-in-hyderabad?k=java+react&l=hyderabad&experience=2&jobAge=30',
+  'https://www.naukri.com/spring-boot-microservices-jobs-in-hyderabad?k=spring+boot+microservices&l=hyderabad&experience=2&jobAge=30',
+  'https://www.naukri.com/java-fullstack-jobs-in-hyderabad?k=java+fullstack&l=hyderabad&experience=2&jobAge=30',
+  'https://www.naukri.com/java-full-stack-developer-jobs-in-bengaluru?k=java+full+stack+developer&l=bengaluru&experience=2&jobAge=30',
+  'https://www.naukri.com/spring-boot-developer-jobs-in-bengaluru?k=spring+boot+developer&l=bengaluru&experience=2&jobAge=30',
+  'https://www.naukri.com/java-developer-jobs-in-bengaluru?k=java+developer&l=bengaluru&experience=2&jobAge=30',
+  'https://www.naukri.com/java-full-stack-developer-jobs-in-pune?k=java+full+stack+developer&l=pune&experience=2&jobAge=30',
+  'https://www.naukri.com/java-full-stack-developer-jobs-in-chennai?k=java+full+stack+developer&l=chennai&experience=2&jobAge=30',
+  'https://www.naukri.com/java-full-stack-developer-jobs?k=java+full+stack+developer&experience=2&jobAge=30',
+  'https://www.naukri.com/full-stack-engineer-jobs?k=full+stack+engineer&experience=2&jobAge=30',
+  'https://www.naukri.com/java-spring-boot-react-jobs?k=java+spring+boot+react&experience=2&jobAge=30',
+  'https://www.naukri.com/java-full-stack-developer-jobs?k=java+full+stack+developer&experience=1&jobAge=30',
+  'https://www.naukri.com/java-developer-jobs?k=java+developer&experience=1&jobAge=30',
+  'https://www.naukri.com/full-stack-developer-jobs?k=full+stack+developer&experience=1&jobAge=30',
 ];
 // Kept for backward compat inside collectJobs
 const SEARCH_URL = SEARCH_URLS_LIST[0];
-const EXTERNAL_FILE = path.join(__dirname, 'naukri-external-jobs.json');
+const EXTERNAL_FILE = path.join(__dirname, '../data', 'naukri-external-jobs.json');
 
 const PROFILE = {
   name: 'Manoj Ambati', email: 'ambatimanoj2469@gmail.com', phone: '9347946872',
   location: 'Hyderabad', currentCtc: '6', expectedCtc: '12', noticePeriod: '30',
-  totalExp: '2', reactExp: '2', nodeExp: '2', jsExp: '2', tsExp: '2',
-  reactNativeExp: '1', pythonExp: '1', awsExp: '1', dockerExp: '1',
-  mysqlExp: '2', mongoExp: '1', defaultYears: '2',
+  totalExp: '2.5', javaExp: '2.5', springExp: '2.5', springBootExp: '2.5',
+  reactExp: '2.5', nodeExp: '2.5', jsExp: '2.5', tsExp: '2.5',
+  mysqlExp: '2.5', awsExp: '2.5', dockerExp: '2.5', defaultYears: '2.5',
 };
 
 function answerForQuestion(q) {
   const t = q.toLowerCase();
-  if (/years?.*(experience|exp).*(react native|reactnative)/.test(t)) return PROFILE.reactNativeExp;
+  if (/years?.*(experience|exp).*(java)/.test(t)) return PROFILE.javaExp;
+  if (/years?.*(experience|exp).*(spring|spring boot)/.test(t)) return PROFILE.springBootExp;
+  if (/years?.*(experience|exp).*(react native|reactnative)/.test(t)) return PROFILE.defaultYears;
   if (/years?.*(experience|exp).*react/.test(t)) return PROFILE.reactExp;
   if (/years?.*(experience|exp).*(node|nodejs|node\.js)/.test(t)) return PROFILE.nodeExp;
   if (/years?.*(experience|exp).*(typescript|ts)/.test(t)) return PROFILE.tsExp;
   if (/years?.*(experience|exp).*(javascript|js)/.test(t)) return PROFILE.jsExp;
-  if (/years?.*(experience|exp).*python/.test(t)) return PROFILE.pythonExp;
   if (/years?.*(experience|exp).*aws/.test(t)) return PROFILE.awsExp;
   if (/years?.*(experience|exp).*docker/.test(t)) return PROFILE.dockerExp;
   if (/years?.*(experience|exp).*(mysql|sql)/.test(t)) return PROFILE.mysqlExp;
-  if (/years?.*(experience|exp).*(mongo)/.test(t)) return PROFILE.mongoExp;
   if (/years?.*(experience|exp)/.test(t)) return PROFILE.totalExp;
   if (/(current|present).*(ctc|salary|package)/.test(t)) return PROFILE.currentCtc;
   if (/(expected|expecting).*(ctc|salary|package)/.test(t)) return PROFILE.expectedCtc;
@@ -61,7 +78,7 @@ function answerForQuestion(q) {
   if (/name/.test(t)) return PROFILE.name;
   if (/^(are you|do you|can you|will you|have you|is it|would you)/.test(t)) return 'Yes';
   if (/how many|number of|years|months/.test(t)) return PROFILE.defaultYears;
-  return null;
+  return 'Yes';
 }
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
@@ -81,9 +98,10 @@ async function login(page) {
 
 async function collectJobs(page, target) {
   const jobs = new Map(); // url -> job object
+  const maxCollection = Math.max(target * 15, 300);
   for (const baseUrl of SEARCH_URLS_LIST) {
-    if (jobs.size >= target * 5) break;
-    for (let p = 1; p <= 15 && jobs.size < target * 5; p++) {
+    if (jobs.size >= maxCollection) break;
+    for (let p = 1; p <= 15 && jobs.size < maxCollection; p++) {
       const url = baseUrl + `&pageNo=${p}`;
       await page.goto(url, { waitUntil: 'domcontentloaded' }).catch(() => {});
       await sleep(2200);
@@ -184,7 +202,10 @@ async function processJob(context, page, job) {
 
   const info = await page.evaluate(() => {
     const apply = document.getElementById('apply-button');
-    const company = document.getElementById('company-site-button');
+    const company = document.getElementById('company-site-button') ||
+      Array.from(document.querySelectorAll('button, a, div')).find(el =>
+        /apply on company site|apply on website|company site|external site/i.test(el.innerText || el.getAttribute('title') || '')
+      );
     const alreadyApplied = !!document.querySelector('[class*="already-applied"]') ||
       /you have already applied/i.test(document.body.innerText);
     return { hasApply: !!apply, hasCompany: !!company, alreadyApplied };
@@ -193,10 +214,16 @@ async function processJob(context, page, job) {
   if (info.alreadyApplied) return { status: 'already_applied' };
 
   if (!info.hasApply && info.hasCompany) {
-    // External "Apply on company site". Click and capture the popup URL.
+    // External "Apply on company site" / "Apply from website". Click and capture the popup URL.
     let externalUrl = '';
     const popupPromise = context.waitForEvent('page', { timeout: 8000 }).catch(() => null);
-    await page.evaluate(() => document.getElementById('company-site-button').click());
+    await page.evaluate(() => {
+      const btn = document.getElementById('company-site-button') ||
+        Array.from(document.querySelectorAll('button, a, div')).find(el =>
+          /apply on company site|apply on website|company site|external site/i.test(el.innerText || el.getAttribute('title') || '')
+        );
+      btn?.click();
+    });
     const popup = await popupPromise;
     if (popup) {
       try {
@@ -245,13 +272,14 @@ function saveExternalStore(arr) {
 
 (async () => {
   if (!EMAIL || !PASSWORD) { console.error('Missing NAUKRI_EMAIL/NAUKRI_PASSWORD in .env'); process.exit(1); }
-  const userDataDir = '/home/voltuswave/.cache/ms-playwright/mcp-chrome-27e9049';
+  const userDataDir = path.join(os.tmpdir(), 'naukri-chrome-profile');
+  const isHeadless = process.env.HEADLESS !== 'false';
   const context = await chromium.launchPersistentContext(userDataDir, {
-    headless: true,
+    headless: isHeadless,
     channel: 'chrome',
     args: ['--no-sandbox', '--disable-blink-features=AutomationControlled'],
     viewport: { width: 1366, height: 900 },
-    userAgent: 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36',
+    userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36',
   });
   await context.addInitScript(() => {
     Object.defineProperty(navigator, 'webdriver', { get: () => undefined });

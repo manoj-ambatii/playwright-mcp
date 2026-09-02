@@ -38,7 +38,7 @@ function daysAgo(date) {
 }
 
 // ── LinkedIn ──────────────────────────────────────────────────────────────────
-const LI_FILE = path.join(__dirname, 'linkedin-jobs.json');
+const LI_FILE = path.join(__dirname, '../data', 'linkedin-jobs.json');
 let li = fs.existsSync(LI_FILE) ? JSON.parse(fs.readFileSync(LI_FILE)) : [];
 const liBefore = li.length;
 
@@ -61,7 +61,7 @@ fs.writeFileSync(LI_FILE, JSON.stringify(li, null, 2));
 console.log(`linkedin-jobs.json: ${liBefore} → ${li.length} (removed ${liBefore - li.length})`);
 
 // ── Naukri External ───────────────────────────────────────────────────────────
-const EXT_FILE = path.join(__dirname, 'naukri-external-jobs.json');
+const EXT_FILE = path.join(__dirname, '../data', 'naukri-external-jobs.json');
 let ext = fs.existsSync(EXT_FILE) ? JSON.parse(fs.readFileSync(EXT_FILE)) : [];
 const extBefore = ext.length;
 
@@ -93,8 +93,8 @@ fs.writeFileSync(EXT_FILE, JSON.stringify(ext, null, 2));
 console.log(`naukri-external-jobs.json: ${extBefore} → ${afterDedup} (dedup) → ${ext.length} (after age filter, removed ${extBefore - ext.length})`);
 
 // ── Rebuild Excel from tracker (unchanged) ─────────────────────────────────
-const JSON_FILE = path.join(__dirname, 'job-tracker.json');
-const EXCEL_FILE = path.join(__dirname, 'job-applications.xlsx');
+const JSON_FILE = path.join(__dirname, '../data', 'job-tracker.json');
+const EXCEL_FILE = path.join(__dirname, '../data', 'job-applications.xlsx');
 const store = JSON.parse(fs.readFileSync(JSON_FILE));
 const HEADERS = ['#', 'Date', 'Source', 'Job Title', 'Company', 'Location', 'Apply URL', 'External URL', 'Notes / Reason'];
 const SHEETS = { applied: 'Applied', external: 'External', failed: 'Failed', skipped: 'Skipped' };

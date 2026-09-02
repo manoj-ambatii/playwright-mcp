@@ -6,8 +6,8 @@ const XLSX = require('xlsx');
 const fs = require('fs');
 const path = require('path');
 
-const FILE = path.join(__dirname, 'job-applications.xlsx');
-const JSON_FILE = path.join(__dirname, 'job-tracker.json');
+const FILE = path.join(__dirname, '../data', 'job-applications.xlsx');
+const JSON_FILE = path.join(__dirname, '../data', 'job-tracker.json');
 
 if (!fs.existsSync(JSON_FILE)) { console.error('No job-tracker.json'); process.exit(1); }
 const store = JSON.parse(fs.readFileSync(JSON_FILE, 'utf8'));

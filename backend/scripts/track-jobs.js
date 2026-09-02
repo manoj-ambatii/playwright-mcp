@@ -15,8 +15,8 @@ const XLSX = require('xlsx');
 const fs = require('fs');
 const path = require('path');
 
-const FILE = path.join(__dirname, 'job-applications.xlsx');
-const JSON_FILE = path.join(__dirname, 'job-tracker.json');
+const FILE = path.join(__dirname, '../data', 'job-applications.xlsx');
+const JSON_FILE = path.join(__dirname, '../data', 'job-tracker.json');
 
 const SHEETS = {
   applied:  { name: 'Applied',  rows: [] },

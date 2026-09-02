@@ -5,8 +5,9 @@ const path = require('path');
   const browser = await chromium.launch();
   const page = await browser.newPage();
 
-  const htmlPath = 'file:///C:/Users/Manoj%20Ambati/Desktop/playwright-mcp/playwright-mcp/Manoj_Ambati_Resume_2026_Improved.html';
-  const pdfPath = 'C:\\Users\\Manoj Ambati\\Desktop\\Ambati Manoj — Resume 2026 latest.pdf';
+  const htmlFile = path.join(__dirname, '../../frontend/resume/resume.html');
+  const pdfPath  = path.join(__dirname, '../../frontend/resume/Manoj_Ambati_Java_Full_Stack_Resume.pdf');
+  const htmlPath = 'file:///' + htmlFile.replace(/\\/g, '/');
 
   await page.goto(htmlPath, { waitUntil: 'networkidle' });
 

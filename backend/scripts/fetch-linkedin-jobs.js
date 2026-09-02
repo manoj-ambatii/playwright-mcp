@@ -5,9 +5,12 @@
  * Requires: APIFY_API_KEY in .env
  */
 
-require('dotenv').config();
-const { ApifyClient } = require('apify-client');
+const path = require('path');
 const fs = require('fs');
+require('dotenv').config({ path: path.join(__dirname, '../../.env') });
+const { ApifyClient } = require('apify-client');
+
+const JOBS_FILE = path.join(__dirname, '../data', 'linkedin-jobs.json');
 
 const APIFY_API_KEY = process.env.APIFY_API_KEY;
 if (!APIFY_API_KEY) {
@@ -69,8 +72,8 @@ async function fetchJobs() {
     return true;
   });
 
-  fs.writeFileSync('linkedin-jobs.json', JSON.stringify(unique, null, 2));
-  console.log(`\nSaved ${unique.length} unique jobs to linkedin-jobs.json`);
+  fs.writeFileSync(JOBS_FILE, JSON.stringify(unique, null, 2));
+  console.log(`\nSaved ${unique.length} unique jobs to ${JOBS_FILE}`);
   return unique;
 }
 
