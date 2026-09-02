@@ -89,16 +89,25 @@ app.get('/api/jobs', (_req, res) => {
   const tracker = loadTracker();
   res.json(jobs.map((j) => {
     const key = j._key;
-    // A Naukri job may also be in tracker.applied or .external by the same URL.
     const inApplied  = tracker.applied[key];
+    const inExternal = tracker.external[key];
+    const inFailed   = tracker.failed[key];
     const inSkipped  = tracker.skipped[key];
+    
+    let status = 'pending';
+    if (inApplied) status = 'applied';
+    else if (inFailed) status = 'failed';
+    else if (inExternal) status = 'external';
+    else if (inSkipped) status = 'skipped';
+
     return {
       ...j,
-      id:        key,
-      status:    inApplied ? 'applied' : inSkipped ? 'skipped' : 'pending',
-      appliedAt: inApplied?.date || null,
-      skippedAt: inSkipped?.date || null,
-      notes:     inApplied?.notes || inSkipped?.notes || '',
+      id:          key,
+      status,
+      appliedAt:   inApplied?.date || null,
+      failedReason: inFailed?.notes || inFailed?.reason || null,
+      skippedAt:   inSkipped?.date || null,
+      notes:       inApplied?.notes || inExternal?.notes || inFailed?.notes || inSkipped?.notes || '',
     };
   }));
 });
@@ -107,13 +116,14 @@ app.get('/api/jobs', (_req, res) => {
 app.get('/api/stats', (_req, res) => {
   const jobs    = loadAllJobs();
   const tracker = loadTracker();
-  // Count tracker totals across BOTH sources (full picture, including past
-  // Naukri quick-applies that have no entry in linkedin-jobs.json or naukri-external-jobs.json).
-  const applied = Object.keys(tracker.applied).length;
-  const skipped = Object.keys(tracker.skipped).length;
+  const applied  = Object.keys(tracker.applied).length;
+  const external = Object.keys(tracker.external).length;
+  const failed   = Object.keys(tracker.failed).length;
+  const skipped  = Object.keys(tracker.skipped).length;
   const bySource = { linkedin: 0, naukri: 0 };
   for (const j of jobs) bySource[j.source] = (bySource[j.source] || 0) + 1;
-  res.json({ total: jobs.length, applied, skipped, pending: jobs.length - applied - skipped, bySource });
+  const pending = Math.max(0, jobs.length - applied - external - failed - skipped);
+  res.json({ total: jobs.length, applied, external, failed, skipped, pending, bySource });
 });
 
 // ── POST /api/fetch-jobs ──────────────────────────────────────────────────────

@@ -29,8 +29,8 @@ This file is the single source of truth for screening-question answers used by b
 ## Compensation & notice
 
 - **Current CTC:** 4.2 LPA
-- **Expected CTC:** 7 – 8 LPA (use `7.5` if a single number is required)
-- **Notice period:** 60 days (2 months)
+- **Expected CTC:** 10 LPA
+- **Notice period:** Immediate joiner (0 days) / No notice period
 - **Reason for change:** *"Looking for better growth and exposure to large-scale systems."*
 
 ## Location & work mode

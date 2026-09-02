@@ -21,6 +21,8 @@
   .stat.total .stat-num { color: #e2e8f0; }
   .stat.pending .stat-num { color: #f59e0b; }
   .stat.applied .stat-num { color: #22c55e; }
+  .stat.external .stat-num { color: #38bdf8; }
+  .stat.failed .stat-num { color: #f87171; }
   .stat.skipped .stat-num { color: #64748b; }
 
   /* ── Controls ── */
@@ -65,6 +67,8 @@
   .badge { font-size: 0.7rem; font-weight: 600; padding: 2px 8px; border-radius: 10px; }
   .badge-easy { background: #164e63; color: #67e8f9; }
   .badge-applied { background: #14532d; color: #86efac; }
+  .badge-external { background: #075985; color: #7dd3fc; }
+  .badge-failed { background: #7f1d1d; color: #fca5a5; }
   .badge-skipped { background: #1e293b; color: #64748b; border: 1px solid #475569; }
   .badge-pending { background: #78350f; color: #fcd34d; }
   .badge-source-linkedin { background: #0a66c2; color: #fff; }
@@ -111,6 +115,8 @@
   <div class="stat total"><div class="stat-num" id="s-total">–</div><div class="stat-label">Total</div></div>
   <div class="stat pending"><div class="stat-num" id="s-pending">–</div><div class="stat-label">Pending</div></div>
   <div class="stat applied"><div class="stat-num" id="s-applied">–</div><div class="stat-label">Applied</div></div>
+  <div class="stat external"><div class="stat-num" id="s-external">–</div><div class="stat-label">External</div></div>
+  <div class="stat failed"><div class="stat-num" id="s-failed">–</div><div class="stat-label">Failed</div></div>
   <div class="stat skipped"><div class="stat-num" id="s-skipped">–</div><div class="stat-label">Skipped</div></div>
 </div>
 
@@ -128,6 +134,8 @@
   <button class="tab active" data-filter="all" onclick="setFilter('all')">All</button>
   <button class="tab" data-filter="pending" onclick="setFilter('pending')">⏳ Pending</button>
   <button class="tab" data-filter="applied" onclick="setFilter('applied')">✅ Applied</button>
+  <button class="tab" data-filter="external" onclick="setFilter('external')">🌐 External</button>
+  <button class="tab" data-filter="failed" onclick="setFilter('failed')">❌ Failed</button>
   <button class="tab" data-filter="skipped" onclick="setFilter('skipped')">⏭ Skipped</button>
   <span style="width: 1px; height: 22px; background: #475569; margin: 0 6px;"></span>
   <button class="tab active" data-source="all" onclick="setSourceFilter('all')">All Sources</button>
@@ -200,6 +208,8 @@ async function loadStats() {
     document.getElementById('s-total').textContent = s.total;
     document.getElementById('s-pending').textContent = s.pending;
     document.getElementById('s-applied').textContent = s.applied;
+    document.getElementById('s-external').textContent = s.external || 0;
+    document.getElementById('s-failed').textContent = s.failed || 0;
     document.getElementById('s-skipped').textContent = s.skipped;
   } catch {}
 }
@@ -241,7 +251,7 @@ async function setStatus(id, status) {
   if (job) job.status = status;
   if (status === 'applied') { job.appliedAt = new Date().toISOString(); toast('Marked as Applied ✅', 'success'); }
   else if (status === 'skipped') { toast('Marked as Skipped ⏭', 'info'); }
-  else { toast('Moved back to Pending', 'info'); }
+  else { toast('Moved status to ' + status, 'info'); }
   await loadStats();
   render();
 }
@@ -268,12 +278,12 @@ function render() {
   );
 
   if (!jobs.length) {
-    list.innerHTML = `<div class="empty"><h3>${allJobs.length === 0 ? 'No jobs yet' : 'No jobs match'}</h3><p>${allJobs.length === 0 ? 'Enter your Apify key and click "Fetch Jobs" to load LinkedIn jobs.' : 'Try a different filter or search term.'}</p></div>`;
+    list.innerHTML = `<div class="empty"><h3>${allJobs.length === 0 ? 'No jobs yet' : 'No jobs match'}</h3><p>${allJobs.length === 0 ? 'Click Auto-Apply to run automation or enter your Apify key.' : 'Try a different filter or search term.'}</p></div>`;
     return;
   }
 
   list.innerHTML = jobs.map(j => {
-    const url = j.applyUrl || j.linkedinUrl || '#';
+    const url = j.externalUrl || j.applyUrl || j.linkedinUrl || '#';
     const postedDate = j.postedAt ? new Date(j.postedAt).toLocaleDateString('en-IN', { day:'numeric', month:'short' }) : '';
     const appliedDate = j.appliedAt ? new Date(j.appliedAt).toLocaleDateString('en-IN', { day:'numeric', month:'short', year:'numeric' }) : '';
 
@@ -284,14 +294,20 @@ function render() {
     ` : j.status === 'applied' ? `
       <a class="btn-apply" href="${escHtml(url)}" target="_blank" rel="noopener">🔗 Open</a>
       <button class="btn-sm undo" onclick="setStatus('${escId(j.id)}', 'pending')">↩ Undo</button>
+    ` : j.status === 'failed' ? `
+      <a class="btn-apply" href="${escHtml(url)}" target="_blank" rel="noopener">🔗 Retry URL</a>
+      <button class="btn-sm mark-applied" onclick="setStatus('${escId(j.id)}', 'applied')">✅ Applied</button>
+      <button class="btn-sm undo" onclick="setStatus('${escId(j.id)}', 'pending')">↩ Retry</button>
     ` : `
-      <a class="btn-apply" href="${escHtml(url)}" target="_blank" rel="noopener">🔗 Open</a>
+      <a class="btn-apply" href="${escHtml(url)}" target="_blank" rel="noopener">🔗 Open Site</a>
       <button class="btn-sm mark-applied" onclick="setStatus('${escId(j.id)}', 'applied')">✅ Applied</button>
       <button class="btn-sm undo" onclick="setStatus('${escId(j.id)}', 'pending')">↩ Pending</button>
     `;
 
-    const statusDate = j.status === 'applied'
+    const statusDetails = j.status === 'applied'
       ? `<div class="applied-date">Applied: ${appliedDate}</div>`
+      : j.status === 'failed'
+      ? `<div class="skipped-date" style="color:#f87171;">Reason: ${escHtml(j.failedReason || 'Failed to submit form')}</div>`
       : j.status === 'skipped'
       ? `<div class="skipped-date">Skipped</div>`
       : '';
@@ -313,7 +329,7 @@ function render() {
           ${j.experience ? `<span class="badge">${escHtml(j.experience)}</span>` : ''}
           ${j.salary ? `<span class="badge">${escHtml(j.salary)}</span>` : ''}
         </div>
-        ${statusDate}
+        ${statusDetails}
       </div>
       <div class="job-actions">${actionBtns}</div>
     </div>`;

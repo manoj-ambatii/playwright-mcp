@@ -9,6 +9,7 @@
     "sync-excel": "node backend/scripts/sync-excel.js",
     "cleanup": "node backend/scripts/cleanup-jobs.js",
     "generate-pdf": "node backend/scripts/generate-resume-pdf.js",
+    "apply-external": "node backend/scripts/apply-external-jobs.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -20,6 +21,7 @@
     "apify-client": "^2.23.0",
     "dotenv": "^17.4.2",
     "express": "^5.2.1",
+    "googleapis": "^178.0.0",
     "xlsx": "^0.18.5"
   }
 }
