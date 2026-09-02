@@ -37,6 +37,7 @@ const loadConfig     = () => fs.existsSync(CONFIG_FILE)     ? readJson(CONFIG_FI
 function loadAllJobs() {
   const tracker = loadTracker();
   const allMap = new Map();
+  const extSet = new Set();
 
   // Load LinkedIn jobs
   loadJobs().forEach((j, idx) => {
@@ -59,6 +60,10 @@ function loadAllJobs() {
   // Load Naukri External jobs
   loadNaukriExt().forEach((j, idx) => {
     const key = j.applyUrl || j.externalUrl || `naukri-${idx}`;
+    extSet.add(key);
+    if (j.externalUrl) extSet.add(j.externalUrl);
+    if (j.applyUrl) extSet.add(j.applyUrl);
+
     allMap.set(key, {
       id: key,
       title: j.title || '',
@@ -77,22 +82,25 @@ function loadAllJobs() {
 
   // Include any extra entries present in tracker categories
   const categories = [
-    { cat: 'applied', defaultSource: 'naukri' },
-    { cat: 'external', defaultSource: 'external' },
-    { cat: 'failed', defaultSource: 'external' },
-    { cat: 'skipped', defaultSource: 'naukri' },
+    { cat: 'applied' },
+    { cat: 'external' },
+    { cat: 'failed' },
+    { cat: 'skipped' },
   ];
 
-  categories.forEach(({ cat, defaultSource }) => {
+  categories.forEach(({ cat }) => {
     const obj = tracker[cat] || {};
     Object.entries(obj).forEach(([url, item]) => {
+      const isExt = extSet.has(url) || (item.source && String(item.source).includes('external')) || cat === 'external' || cat === 'failed';
+      const source = isExt ? 'external' : (item.source || 'naukri');
+
       const existing = allMap.get(url);
       if (existing) {
         if (item.title && item.title !== 'Job Posting') existing.title = item.title;
         if (item.company && item.company !== 'Company') existing.company = item.company;
         if (item.location) existing.location = item.location;
         if (item.externalUrl) existing.externalUrl = item.externalUrl;
-        if (cat === 'external') existing.source = 'external';
+        existing.source = source;
       } else {
         allMap.set(url, {
           id: url,
@@ -103,7 +111,7 @@ function loadAllJobs() {
           postedAt: item.date || '',
           applyUrl: url,
           externalUrl: item.externalUrl || url,
-          source: item.source || defaultSource,
+          source: source,
           _key: url,
         });
       }
