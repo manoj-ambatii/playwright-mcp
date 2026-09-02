@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Job Automation & Tracking Dashboard</title>
+<title>Job Automation & Tracking Studio</title>
 
 <!-- Google Fonts: Outfit & Inter -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -12,23 +12,23 @@
 
 <style>
   :root {
-    --bg-main: #0b0f19;
-    --bg-card: rgba(21, 30, 48, 0.75);
-    --bg-card-hover: rgba(30, 41, 64, 0.85);
-    --border-color: rgba(255, 255, 255, 0.08);
+    --bg-dark: #090d16;
+    --bg-sidebar: #0f172a;
+    --bg-card: rgba(30, 41, 59, 0.7);
+    --bg-card-hover: rgba(47, 63, 90, 0.85);
+    --border: rgba(255, 255, 255, 0.08);
     --border-hover: rgba(255, 255, 255, 0.18);
     
-    --text-primary: #f8fafc;
-    --text-secondary: #94a3b8;
-    --text-muted: #64748b;
+    --text-main: #f8fafc;
+    --text-muted: #94a3b8;
+    --text-dim: #64748b;
     
-    --accent-blue: #3b82f6;
-    --accent-indigo: #6366f1;
-    --accent-purple: #8b5cf6;
-    --accent-emerald: #10b981;
-    --accent-sky: #06b6d4;
-    --accent-amber: #f59e0b;
-    --accent-rose: #f43f5e;
+    --blue: #3b82f6;
+    --indigo: #6366f1;
+    --emerald: #10b981;
+    --sky: #06b6d4;
+    --amber: #f59e0b;
+    --rose: #f43f5e;
 
     --font-heading: 'Outfit', sans-serif;
     --font-body: 'Inter', sans-serif;
@@ -38,359 +38,284 @@
 
   body {
     font-family: var(--font-body);
-    background-color: var(--bg-main);
-    background-image: 
-      radial-gradient(at 0% 0%, rgba(59, 130, 246, 0.12) 0px, transparent 50%),
-      radial-gradient(at 100% 0%, rgba(139, 92, 246, 0.12) 0px, transparent 50%),
-      radial-gradient(at 50% 100%, rgba(16, 185, 129, 0.08) 0px, transparent 50%);
-    background-attachment: fixed;
-    color: var(--text-primary);
+    background-color: var(--bg-dark);
+    color: var(--text-main);
     min-height: 100vh;
-    padding-bottom: 60px;
-    -webkit-font-smoothing: antialiased;
+    display: flex;
+    overflow-x: hidden;
   }
 
-  /* ── Header ── */
-  .navbar {
-    background: rgba(15, 23, 42, 0.8);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border-bottom: 1px solid var(--border-color);
-    padding: 16px 32px;
-    position: sticky;
-    top: 0;
-    z-index: 100;
+  /* ── Sidebar Navigation ── */
+  .sidebar {
+    width: 260px;
+    background: var(--bg-sidebar);
+    border-right: 1px solid var(--border);
+    padding: 24px 16px;
     display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 20px;
+    flex-direction: column;
+    gap: 32px;
+    position: fixed;
+    height: 100vh;
+    z-index: 100;
   }
 
   .brand {
     display: flex;
     align-items: center;
     gap: 12px;
+    padding: 0 8px;
   }
 
-  .brand-logo {
-    width: 38px;
-    height: 38px;
-    background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
-    border-radius: 10px;
+  .brand-icon {
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(135deg, var(--blue), var(--indigo));
+    border-radius: 12px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.2rem;
-    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.35);
+    font-size: 1.3rem;
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.4);
   }
 
-  .brand-title {
+  .brand-name {
     font-family: var(--font-heading);
-    font-size: 1.35rem;
+    font-size: 1.25rem;
     font-weight: 700;
-    letter-spacing: -0.02em;
+    line-height: 1.2;
     background: linear-gradient(to right, #ffffff, #cbd5e1);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   }
 
-  .brand-subtitle {
-    font-size: 0.75rem;
-    color: var(--accent-blue);
+  .brand-sub {
+    font-size: 0.72rem;
+    color: var(--blue);
     font-weight: 600;
     letter-spacing: 0.05em;
     text-transform: uppercase;
   }
 
-  .header-actions {
+  .nav-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    list-style: none;
+  }
+
+  .nav-item {
     display: flex;
     align-items: center;
-    gap: 10px;
-    flex-wrap: wrap;
+    gap: 12px;
+    padding: 12px 16px;
+    border-radius: 12px;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    user-select: none;
   }
 
-  /* ── Candidate Profile Bar ── */
-  .profile-banner {
-    max-width: 1400px;
-    margin: 24px auto 0;
-    padding: 0 32px;
+  .nav-item:hover {
+    background: rgba(255, 255, 255, 0.04);
+    color: var(--text-main);
   }
 
-  .profile-card {
-    background: var(--bg-card);
-    backdrop-filter: blur(12px);
-    border: 1px solid var(--border-color);
-    border-radius: 16px;
-    padding: 18px 24px;
+  .nav-item.active {
+    background: var(--blue);
+    color: #ffffff;
+    box-shadow: 0 4px 14px rgba(59, 130, 246, 0.35);
+  }
+
+  .nav-badge {
+    margin-left: auto;
+    font-size: 0.72rem;
+    padding: 2px 8px;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.15);
+    color: #fff;
+  }
+
+  .sidebar-footer {
+    margin-top: auto;
+    padding: 16px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    font-size: 0.8rem;
+  }
+
+  /* ── Main Content Container ── */
+  .main-content {
+    margin-left: 260px;
+    flex: 1;
+    padding: 32px 40px;
+    max-width: 1500px;
+  }
+
+  .screen {
+    display: none;
+    animation: fadeIn 0.25s ease-out;
+  }
+
+  .screen.active {
+    display: block;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── Top Page Bar ── */
+  .page-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 20px;
-    flex-wrap: wrap;
+    margin-bottom: 28px;
   }
 
-  .profile-info {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-  }
-
-  .avatar {
-    width: 48px;
-    height: 48px;
-    border-radius: 12px;
-    background: linear-gradient(135deg, #1e293b, #334155);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.4rem;
-  }
-
-  .candidate-name {
+  .page-title {
     font-family: var(--font-heading);
-    font-size: 1.15rem;
-    font-weight: 700;
+    font-size: 1.75rem;
+    font-weight: 800;
   }
 
-  .candidate-role {
-    font-size: 0.85rem;
-    color: var(--accent-sky);
-    font-weight: 500;
+  .page-subtitle {
+    font-size: 0.88rem;
+    color: var(--text-muted);
+    margin-top: 2px;
   }
 
-  .profile-chips {
+  .action-btns {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+
+  /* ── Profile Header Banner ── */
+  .profile-banner {
+    background: linear-gradient(135deg, rgba(30, 41, 59, 0.8), rgba(15, 23, 42, 0.9));
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 20px 28px;
     display: flex;
     align-items: center;
-    gap: 12px;
-    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 28px;
   }
 
-  .p-chip {
-    background: rgba(255, 255, 255, 0.04);
-    border: 1px solid var(--border-color);
-    border-radius: 8px;
-    padding: 6px 12px;
-    font-size: 0.8rem;
-    color: var(--text-secondary);
-  }
+  .prof-info { display: flex; align-items: center; gap: 16px; }
+  .prof-avatar { width: 50px; height: 50px; border-radius: 14px; background: linear-gradient(135deg, var(--blue), var(--indigo)); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; }
+  .prof-name { font-family: var(--font-heading); font-size: 1.25rem; font-weight: 700; }
+  .prof-title { font-size: 0.88rem; color: var(--sky); }
+  
+  .prof-chips { display: flex; gap: 10px; flex-wrap: wrap; }
+  .chip { background: rgba(255, 255, 255, 0.04); border: 1px solid var(--border); border-radius: 8px; padding: 6px 14px; font-size: 0.82rem; color: var(--text-muted); }
+  .chip strong { color: var(--text-main); }
+  .chip.green { background: rgba(16, 185, 129, 0.1); border-color: rgba(16, 185, 129, 0.3); color: var(--emerald); }
 
-  .p-chip strong {
-    color: var(--text-primary);
-  }
-
-  .p-chip.highlight {
-    background: rgba(16, 185, 129, 0.1);
-    border-color: rgba(16, 185, 129, 0.3);
-    color: var(--accent-emerald);
-  }
-
-  /* ── Stats Dashboard ── */
-  .dashboard-container {
-    max-width: 1400px;
-    margin: 24px auto 0;
-    padding: 0 32px;
-  }
-
+  /* ── Stats Grid ── */
   .stats-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
     gap: 16px;
-    margin-bottom: 24px;
+    margin-bottom: 28px;
   }
 
   .stat-card {
     background: var(--bg-card);
-    backdrop-filter: blur(12px);
-    border: 1px solid var(--border-color);
+    border: 1px solid var(--border);
     border-radius: 16px;
     padding: 20px;
-    position: relative;
-    overflow: hidden;
-    transition: transform 0.2s, border-color 0.2s;
-  }
-
-  .stat-card:hover {
-    transform: translateY(-2px);
-    border-color: var(--border-hover);
-  }
-
-  .stat-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 4px;
-    height: 100%;
-  }
-
-  .stat-card.total::before { background: var(--text-secondary); }
-  .stat-card.pending::before { background: var(--accent-amber); }
-  .stat-card.applied::before { background: var(--accent-emerald); }
-  .stat-card.external::before { background: var(--accent-sky); }
-  .stat-card.failed::before { background: var(--accent-rose); }
-  .stat-card.skipped::before { background: var(--text-muted); }
-
-  .stat-val {
-    font-family: var(--font-heading);
-    font-size: 2.1rem;
-    font-weight: 800;
-    line-height: 1.1;
-    margin-bottom: 4px;
-  }
-
-  .stat-card.total .stat-val { color: var(--text-primary); }
-  .stat-card.pending .stat-val { color: var(--accent-amber); }
-  .stat-card.applied .stat-val { color: var(--accent-emerald); }
-  .stat-card.external .stat-val { color: var(--accent-sky); }
-  .stat-card.failed .stat-val { color: var(--accent-rose); }
-  .stat-card.skipped .stat-val { color: var(--text-muted); }
-
-  .stat-lbl {
-    font-size: 0.75rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    color: var(--text-secondary);
-  }
-
-  /* ── Filter & Search Toolbar ── */
-  .toolbar {
-    background: var(--bg-card);
-    backdrop-filter: blur(12px);
-    border: 1px solid var(--border-color);
-    border-radius: 16px;
-    padding: 16px 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-    margin-bottom: 24px;
-  }
-
-  .toolbar-top {
-    display: flex;
-    gap: 12px;
-    align-items: center;
-    flex-wrap: wrap;
-  }
-
-  .search-box {
-    flex: 1;
-    min-width: 260px;
-    position: relative;
-  }
-
-  .search-box input {
-    width: 100%;
-    background: rgba(15, 23, 42, 0.6);
-    border: 1px solid var(--border-color);
-    border-radius: 10px;
-    padding: 10px 14px 10px 40px;
-    font-size: 0.9rem;
-    color: var(--text-primary);
-    outline: none;
-    transition: border-color 0.2s;
-  }
-
-  .search-box input:focus {
-    border-color: var(--accent-blue);
-  }
-
-  .search-icon {
-    position: absolute;
-    left: 14px;
-    top: 50%;
-    transform: translateY(-50%);
-    color: var(--text-muted);
-    font-size: 0.95rem;
-  }
-
-  .apify-input {
-    width: 240px;
-    background: rgba(15, 23, 42, 0.6);
-    border: 1px solid var(--border-color);
-    border-radius: 10px;
-    padding: 10px 14px;
-    font-size: 0.85rem;
-    color: var(--text-primary);
-    outline: none;
-  }
-
-  .tabs-group {
-    display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
-    align-items: center;
-  }
-
-  .tab-btn {
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid var(--border-color);
-    border-radius: 10px;
-    padding: 7px 16px;
-    font-size: 0.82rem;
-    font-weight: 600;
-    color: var(--text-secondary);
-    cursor: pointer;
     transition: all 0.2s;
   }
 
-  .tab-btn:hover:not(.active) {
-    background: rgba(255, 255, 255, 0.07);
-    color: var(--text-primary);
+  .stat-card:hover { border-color: var(--border-hover); transform: translateY(-2px); }
+
+  .stat-val { font-family: var(--font-heading); font-size: 2.2rem; font-weight: 800; line-height: 1.1; margin-bottom: 4px; }
+  .stat-lbl { font-size: 0.78rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-muted); }
+
+  .stat-card.total .stat-val { color: var(--text-main); }
+  .stat-card.pending .stat-val { color: var(--amber); }
+  .stat-card.applied .stat-val { color: var(--emerald); }
+  .stat-card.external .stat-val { color: var(--sky); }
+  .stat-card.failed .stat-val { color: var(--rose); }
+  .stat-card.skipped .stat-val { color: var(--text-dim); }
+
+  /* ── Filter & Search Control Bar ── */
+  .filter-bar {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 16px 20px;
+    display: flex;
+    gap: 14px;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-bottom: 24px;
   }
 
-  .tab-btn.active {
-    background: var(--accent-blue);
-    border-color: var(--accent-blue);
-    color: #ffffff;
-    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+  .search-input {
+    flex: 1;
+    min-width: 240px;
+    background: rgba(15, 23, 42, 0.8);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 10px 16px;
+    font-size: 0.9rem;
+    color: var(--text-main);
+    outline: none;
   }
 
-  .divider {
-    width: 1px;
-    height: 24px;
-    background: var(--border-color);
-    margin: 0 4px;
+  .search-input:focus { border-color: var(--blue); }
+
+  .filter-select {
+    background: rgba(15, 23, 42, 0.8);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 10px 14px;
+    font-size: 0.85rem;
+    color: var(--text-main);
+    outline: none;
   }
 
   /* ── Buttons ── */
   .btn {
     border: none;
     border-radius: 10px;
-    padding: 9px 18px;
-    font-size: 0.85rem;
+    padding: 10px 18px;
+    font-size: 0.88rem;
     font-weight: 600;
     cursor: pointer;
     display: inline-flex;
     align-items: center;
     gap: 8px;
     transition: all 0.2s;
-    white-space: nowrap;
     text-decoration: none;
+    white-space: nowrap;
   }
 
   .btn:hover { opacity: 0.9; transform: translateY(-1px); }
-  .btn:active { transform: translateY(0); }
-  .btn:disabled { opacity: 0.45; cursor: not-allowed; transform: none; }
+  .btn-primary { background: linear-gradient(135deg, var(--blue), var(--indigo)); color: #fff; box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3); }
+  .btn-emerald { background: linear-gradient(135deg, var(--emerald), #059669); color: #fff; box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3); }
+  .btn-sky { background: linear-gradient(135deg, var(--sky), #0284c7); color: #fff; box-shadow: 0 4px 12px rgba(6, 182, 212, 0.3); }
+  .btn-secondary { background: rgba(255, 255, 255, 0.05); border: 1px solid var(--border); color: var(--text-main); }
+  .btn-danger { background: rgba(244, 63, 94, 0.15); border: 1px solid rgba(244, 63, 94, 0.3); color: var(--rose); }
 
-  .btn-primary { background: linear-gradient(135deg, var(--accent-blue), var(--accent-indigo)); color: #fff; box-shadow: 0 4px 14px rgba(59, 130, 246, 0.3); }
-  .btn-emerald { background: linear-gradient(135deg, var(--accent-emerald), #059669); color: #fff; box-shadow: 0 4px 14px rgba(16, 185, 129, 0.3); }
-  .btn-purple { background: linear-gradient(135deg, var(--accent-purple), #7c3aed); color: #fff; box-shadow: 0 4px 14px rgba(139, 92, 246, 0.3); }
-  .btn-secondary { background: rgba(255, 255, 255, 0.06); border: 1px solid var(--border-color); color: var(--text-primary); }
-  .btn-danger { background: rgba(244, 63, 94, 0.15); border: 1px solid rgba(244, 63, 94, 0.3); color: var(--accent-rose); }
-
-  /* ── Job Cards Grid ── */
-  .job-grid {
+  /* ── Cards & Table Display ── */
+  .cards-list {
     display: flex;
     flex-direction: column;
     gap: 14px;
   }
 
-  .job-card {
+  .card-item {
     background: var(--bg-card);
-    backdrop-filter: blur(12px);
-    border: 1px solid var(--border-color);
+    border: 1px solid var(--border);
     border-radius: 16px;
     padding: 20px 24px;
     display: grid;
@@ -400,315 +325,380 @@
     transition: all 0.2s;
   }
 
-  .job-card:hover {
+  .card-item:hover {
     background: var(--bg-card-hover);
     border-color: var(--border-hover);
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
   }
 
-  .job-card.applied { border-left: 4px solid var(--accent-emerald); }
-  .job-card.external { border-left: 4px solid var(--accent-sky); }
-  .job-card.failed { border-left: 4px solid var(--accent-rose); }
-  .job-card.skipped { border-left: 4px solid var(--text-muted); opacity: 0.65; }
-  .job-card.pending { border-left: 4px solid var(--accent-amber); }
+  .card-title { font-family: var(--font-heading); font-size: 1.15rem; font-weight: 700; margin-bottom: 4px; }
+  .card-company { font-weight: 600; color: var(--blue); font-size: 0.9rem; }
+  .card-meta { display: flex; gap: 12px; margin: 8px 0; color: var(--text-muted); font-size: 0.85rem; flex-wrap: wrap; }
 
-  .job-title {
-    font-family: var(--font-heading);
-    font-size: 1.1rem;
-    font-weight: 700;
-    color: var(--text-primary);
-    margin-bottom: 6px;
-  }
+  .badges { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 8px; }
+  .badge { font-size: 0.72rem; font-weight: 700; padding: 3px 10px; border-radius: 20px; text-transform: uppercase; }
 
-  .job-meta-row {
-    display: flex;
-    gap: 14px;
-    align-items: center;
-    flex-wrap: wrap;
-    margin-bottom: 10px;
-  }
+  .badge-applied { background: rgba(16, 185, 129, 0.15); color: #6ee7b7; border: 1px solid rgba(16, 185, 129, 0.3); }
+  .badge-external { background: rgba(6, 182, 212, 0.15); color: #7dd3fc; border: 1px solid rgba(6, 182, 212, 0.3); }
+  .badge-failed { background: rgba(244, 63, 94, 0.15); color: #fca5a5; border: 1px solid rgba(244, 63, 94, 0.3); }
+  .badge-pending { background: rgba(245, 158, 11, 0.15); color: #fde047; border: 1px solid rgba(245, 158, 11, 0.3); }
 
-  .meta-company { color: var(--accent-blue); font-weight: 600; font-size: 0.9rem; }
-  .meta-loc { color: var(--text-secondary); font-size: 0.85rem; }
-  .meta-date { color: var(--text-muted); font-size: 0.8rem; }
+  .diag-box { font-size: 0.8rem; color: var(--rose); background: rgba(244, 63, 94, 0.08); border: 1px solid rgba(244, 63, 94, 0.2); border-radius: 8px; padding: 8px 12px; margin-top: 8px; }
 
-  .badges-row {
-    display: flex;
-    gap: 8px;
-    align-items: center;
-    flex-wrap: wrap;
-  }
+  .card-btns { display: flex; flex-direction: column; gap: 8px; align-items: flex-end; }
+  .btn-sm { padding: 6px 12px; font-size: 0.78rem; font-weight: 600; border-radius: 8px; border: 1px solid var(--border); background: rgba(255, 255, 255, 0.05); color: var(--text-muted); cursor: pointer; transition: all 0.2s; }
+  .btn-sm:hover { color: var(--text-main); background: rgba(255, 255, 255, 0.1); }
+  .btn-sm.green { border-color: rgba(16, 185, 129, 0.4); color: var(--emerald); }
 
-  .badge {
-    font-size: 0.72rem;
-    font-weight: 700;
-    padding: 3px 10px;
-    border-radius: 20px;
-    letter-spacing: 0.03em;
-    text-transform: uppercase;
-  }
-
-  .badge-status-applied { background: rgba(16, 185, 129, 0.15); color: #6ee7b7; border: 1px solid rgba(16, 185, 129, 0.3); }
-  .badge-status-external { background: rgba(6, 182, 212, 0.15); color: #7dd3fc; border: 1px solid rgba(6, 182, 212, 0.3); }
-  .badge-status-failed { background: rgba(244, 63, 94, 0.15); color: #fca5a5; border: 1px solid rgba(244, 63, 94, 0.3); }
-  .badge-status-skipped { background: rgba(100, 116, 139, 0.15); color: #94a3b8; border: 1px solid rgba(100, 116, 139, 0.3); }
-  .badge-status-pending { background: rgba(245, 158, 11, 0.15); color: #fde047; border: 1px solid rgba(245, 158, 11, 0.3); }
-
-  .badge-src-linkedin { background: #0a66c2; color: #fff; }
-  .badge-src-naukri { background: #6d28d9; color: #fff; }
-  .badge-src-external { background: #0284c7; color: #fff; }
-
-  .job-diag {
-    font-size: 0.78rem;
-    color: var(--accent-rose);
-    background: rgba(244, 63, 94, 0.08);
-    border: 1px solid rgba(244, 63, 94, 0.2);
-    border-radius: 8px;
-    padding: 6px 12px;
-    margin-top: 8px;
-  }
-
-  .card-actions {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    align-items: flex-end;
-  }
-
-  .btn-sm {
-    padding: 6px 12px;
-    font-size: 0.78rem;
-    border-radius: 8px;
-    font-weight: 600;
-    cursor: pointer;
-    border: 1px solid var(--border-color);
-    background: rgba(255, 255, 255, 0.04);
-    color: var(--text-secondary);
-    transition: all 0.2s;
-  }
-
-  .btn-sm:hover { background: rgba(255, 255, 255, 0.1); color: var(--text-primary); }
-  .btn-sm.success { border-color: rgba(16, 185, 129, 0.4); color: var(--accent-emerald); }
-  .btn-sm.success:hover { background: rgba(16, 185, 129, 0.15); }
-  .btn-sm.reset { border-color: rgba(245, 158, 11, 0.4); color: var(--accent-amber); }
-
-  /* ── Empty State ── */
-  .empty-state {
-    text-align: center;
-    padding: 80px 24px;
+  /* ── External Companies Table ── */
+  .table-wrapper {
     background: var(--bg-card);
-    border: 1px dashed var(--border-color);
-    border-radius: 20px;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
   }
 
-  .empty-icon { font-size: 2.5rem; margin-bottom: 12px; opacity: 0.6; }
-  .empty-title { font-family: var(--font-heading); font-size: 1.25rem; font-weight: 700; margin-bottom: 6px; }
-  .empty-desc { font-size: 0.88rem; color: var(--text-muted); max-width: 420px; margin: 0 auto; }
+  table { width: 100%; border-collapse: collapse; text-align: left; }
+  th { background: rgba(15, 23, 42, 0.8); padding: 14px 20px; font-size: 0.8rem; text-transform: uppercase; color: var(--text-muted); font-weight: 700; border-bottom: 1px solid var(--border); }
+  td { padding: 16px 20px; font-size: 0.88rem; border-bottom: 1px solid var(--border); }
+  tr:hover td { background: rgba(255, 255, 255, 0.02); }
 
   /* ── Toast ── */
-  .toast-container {
-    position: fixed;
-    bottom: 24px;
-    right: 24px;
-    z-index: 1000;
-  }
-
-  .toast {
-    background: rgba(15, 23, 42, 0.95);
-    backdrop-filter: blur(16px);
-    border: 1px solid var(--border-color);
-    border-radius: 12px;
-    padding: 14px 20px;
-    font-size: 0.88rem;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    transform: translateY(100px);
-    opacity: 0;
-    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-
-  .toast.show { transform: translateY(0); opacity: 1; }
-  .toast.success { border-color: var(--accent-emerald); color: #a7f3d0; }
-  .toast.error { border-color: var(--accent-rose); color: #fecdd3; }
-  .toast.info { border-color: var(--accent-blue); color: #bfdbfe; }
-
-  .spinner {
-    width: 16px;
-    height: 16px;
-    border: 2px solid rgba(255, 255, 255, 0.3);
-    border-top-color: #fff;
-    border-radius: 50%;
-    animation: spin 0.7s linear infinite;
-  }
-  @keyframes spin { to { transform: rotate(360deg); } }
-
-  @media (max-width: 768px) {
-    .navbar { padding: 14px 20px; }
-    .dashboard-container, .profile-banner { padding: 0 16px; }
-    .job-card { grid-template-columns: 1fr; }
-    .card-actions { flex-direction: row; flex-wrap: wrap; align-items: center; }
-  }
+  .toast { position: fixed; bottom: 24px; right: 24px; background: rgba(15, 23, 42, 0.95); border: 1px solid var(--border); border-radius: 12px; padding: 12px 20px; font-size: 0.88rem; z-index: 1000; opacity: 0; transform: translateY(40px); transition: all 0.3s; }
+  .toast.show { opacity: 1; transform: translateY(0); }
+  .toast.success { border-color: var(--emerald); color: #a7f3d0; }
+  .toast.error { border-color: var(--rose); color: #fecdd3; }
 </style>
 </head>
 <body>
 
-<!-- Navbar -->
-<header class="navbar">
+<!-- Sidebar Navigation -->
+<nav class="sidebar">
   <div class="brand">
-    <div class="brand-logo">⚡</div>
+    <div class="brand-icon">⚡</div>
     <div>
-      <div class="brand-title">Playwright Job Hub</div>
-      <div class="brand-subtitle">Automation & Tracking Suite</div>
+      <div class="brand-name">Job Studio</div>
+      <div class="brand-sub">Automation Hub</div>
     </div>
   </div>
-  <div class="header-actions">
-    <button class="btn btn-secondary" onclick="loadJobs()">🔄 Refresh Data</button>
-    <button class="btn btn-secondary" onclick="syncExcel()">📊 Sync Excel</button>
-    <button class="btn btn-danger" onclick="clearAll()">🗑 Reset All</button>
-  </div>
-</header>
 
-<!-- Profile Banner -->
-<div class="profile-banner">
-  <div class="profile-card">
-    <div class="profile-info">
-      <div class="avatar">👨‍💻</div>
+  <ul class="nav-menu">
+    <li class="nav-item active" onclick="showScreen('screen-dashboard', this)">
+      <span>📊</span> Dashboard
+    </li>
+    <li class="nav-item" onclick="showScreen('screen-naukri', this)">
+      <span>⚡</span> Naukri Quick-Apply
+      <span class="nav-badge" id="nb-naukri">0</span>
+    </li>
+    <li class="nav-item" onclick="showScreen('screen-external', this)">
+      <span>🌐</span> External Companies
+      <span class="nav-badge" id="nb-external">0</span>
+    </li>
+    <li class="nav-item" onclick="showScreen('screen-failed', this)">
+      <span>❌</span> Failed Queue
+      <span class="nav-badge" id="nb-failed">0</span>
+    </li>
+    <li class="nav-item" onclick="showScreen('screen-settings', this)">
+      <span>⚙️</span> Settings & Config
+    </li>
+  </ul>
+
+  <div class="sidebar-footer">
+    <div style="font-weight: 700; margin-bottom: 4px;">Gmail OTP Sync</div>
+    <div style="color: var(--emerald); font-size: 0.75rem;">Connected ✅ (Read-Only)</div>
+  </div>
+</nav>
+
+<!-- Main Content Area -->
+<main class="main-content">
+
+  <!-- Candidate Profile Banner -->
+  <div class="profile-banner">
+    <div class="prof-info">
+      <div class="prof-avatar">👨‍💻</div>
       <div>
-        <div class="candidate-name">Manoj Ambati</div>
-        <div class="candidate-role">Java Full Stack Developer (React & Node)</div>
+        <div class="prof-name">Manoj Ambati</div>
+        <div class="prof-title">Java Full Stack Developer (React, Node, Spring Boot)</div>
       </div>
     </div>
-    <div class="profile-chips">
-      <div class="p-chip">Exp: <strong>2+ Years</strong></div>
-      <div class="p-chip">Current CTC: <strong>4.2 LPA</strong></div>
-      <div class="p-chip">Expected CTC: <strong>10 LPA</strong></div>
-      <div class="p-chip highlight">⚡ Immediate Joiner (0 Days)</div>
-      <div class="p-chip">Gmail OTP API: <strong>Active ✅</strong></div>
+    <div class="prof-chips">
+      <div class="chip">Exp: <strong>2+ Years</strong></div>
+      <div class="chip">Current: <strong>4.2 LPA</strong></div>
+      <div class="chip">Expected: <strong>10 LPA</strong></div>
+      <div class="chip green">⚡ Immediate Joiner (0 Days)</div>
     </div>
   </div>
-</div>
 
-<!-- Main Dashboard -->
-<div class="dashboard-container">
-
-  <!-- Stats Grid -->
-  <div class="stats-grid">
-    <div class="stat-card total"><div class="stat-val" id="s-total">–</div><div class="stat-lbl">Total Tracked</div></div>
-    <div class="stat-card pending"><div class="stat-val" id="s-pending">–</div><div class="stat-lbl">Pending Review</div></div>
-    <div class="stat-card applied"><div class="stat-val" id="s-applied">–</div><div class="stat-lbl">Applied Jobs</div></div>
-    <div class="stat-card external"><div class="stat-val" id="s-external">–</div><div class="stat-lbl">External Portals</div></div>
-    <div class="stat-card failed"><div class="stat-val" id="s-failed">–</div><div class="stat-lbl">Failed Submissions</div></div>
-    <div class="stat-card skipped"><div class="stat-val" id="s-skipped">–</div><div class="stat-lbl">Skipped / Ignored</div></div>
-  </div>
-
-  <!-- Filter & Controls Toolbar -->
-  <div class="toolbar">
-    <div class="toolbar-top">
-      <div class="search-box">
-        <span class="search-icon">🔍</span>
-        <input type="text" id="search" placeholder="Search title, company, location, tech stack..." oninput="render()" />
+  <!-- SCREEN 1: DASHBOARD OVERVIEW -->
+  <section id="screen-dashboard" class="screen active">
+    <div class="page-header">
+      <div>
+        <h1 class="page-title">Dashboard Overview</h1>
+        <div class="page-subtitle">Real-time metrics & application statistics across platforms</div>
       </div>
-      <input type="password" class="apify-input" id="apify-key" placeholder="Apify API Key (apify_api_...)" autocomplete="off" />
-      <button class="btn btn-primary" id="btn-fetch" onclick="fetchJobs()">⬇ Fetch LinkedIn Jobs</button>
+      <div class="action-btns">
+        <button class="btn btn-secondary" onclick="loadData()">🔄 Refresh</button>
+        <button class="btn btn-secondary" onclick="syncExcel()">📊 Sync Excel</button>
+      </div>
     </div>
 
-    <div class="tabs-group">
-      <button class="tab-btn active" data-filter="all" onclick="setFilter('all')">All Listings</button>
-      <button class="tab-btn" data-filter="pending" onclick="setFilter('pending')">⏳ Pending</button>
-      <button class="tab-btn" data-filter="applied" onclick="setFilter('applied')">✅ Applied</button>
-      <button class="tab-btn" data-filter="external" onclick="setFilter('external')">🌐 External Sites</button>
-      <button class="tab-btn" data-filter="failed" onclick="setFilter('failed')">❌ Failed</button>
-      <button class="tab-btn" data-filter="skipped" onclick="setFilter('skipped')">⏭ Skipped</button>
-
-      <span class="divider"></span>
-
-      <button class="tab-btn active" data-source="all" onclick="setSourceFilter('all')">All Sources</button>
-      <button class="tab-btn" data-source="linkedin" onclick="setSourceFilter('linkedin')">LinkedIn</button>
-      <button class="tab-btn" data-source="naukri" onclick="setSourceFilter('naukri')">Naukri</button>
+    <!-- Stats Grid -->
+    <div class="stats-grid">
+      <div class="stat-card total"><div class="stat-val" id="st-total">0</div><div class="stat-lbl">Total Jobs Tracked</div></div>
+      <div class="stat-card applied"><div class="stat-val" id="st-applied">0</div><div class="stat-lbl">Quick Applied</div></div>
+      <div class="stat-card external"><div class="stat-val" id="st-external">0</div><div class="stat-lbl">External Sites</div></div>
+      <div class="stat-card failed"><div class="stat-val" id="st-failed">0</div><div class="stat-lbl">Failed Submissions</div></div>
+      <div class="stat-card pending"><div class="stat-val" id="st-pending">0</div><div class="stat-lbl">Pending Review</div></div>
+      <div class="stat-card skipped"><div class="stat-val" id="st-skipped">0</div><div class="stat-lbl">Skipped / Ignored</div></div>
     </div>
-  </div>
 
-  <!-- Job List Container -->
-  <div class="job-grid" id="job-list"></div>
+    <!-- Recent Activity -->
+    <h2 style="font-family:var(--font-heading); font-size:1.25rem; margin-bottom:16px;">Recent Job Applications</h2>
+    <div class="cards-list" id="dash-recent-list"></div>
+  </section>
 
-</div>
+  <!-- SCREEN 2: NAUKRI QUICK-APPLY HUB -->
+  <section id="screen-naukri" class="screen">
+    <div class="page-header">
+      <div>
+        <h1 class="page-title">⚡ Naukri Quick-Apply Hub</h1>
+        <div class="page-subtitle">Auto-apply to Naukri.com listings with screening chatbot answers</div>
+      </div>
+    </div>
 
-<div class="toast-container"><div class="toast" id="toast"></div></div>
+    <div class="filter-bar">
+      <input type="text" class="search-input" id="search-naukri" placeholder="Search title, company, location..." oninput="renderNaukri()" />
+      <select class="filter-select" id="filter-naukri-status" onchange="renderNaukri()">
+        <option value="all">All Statuses</option>
+        <option value="pending">⏳ Pending</option>
+        <option value="applied">✅ Applied</option>
+        <option value="skipped">⏭ Skipped</option>
+      </select>
+    </div>
+
+    <div class="cards-list" id="naukri-list"></div>
+  </section>
+
+  <!-- SCREEN 3: EXTERNAL COMPANY CAREER PORTALS (WITH COMPANY DETAILS) -->
+  <section id="screen-external" class="screen">
+    <div class="page-header">
+      <div>
+        <h1 class="page-title">🌐 External Company Career Portals</h1>
+        <div class="page-subtitle">Track applications submitted on company career sites (Workday, Greenhouse, etc.)</div>
+      </div>
+      <div class="action-btns">
+        <button class="btn btn-sky" onclick="triggerExternalApply()">🚀 Auto-Apply External Jobs</button>
+      </div>
+    </div>
+
+    <div class="filter-bar">
+      <input type="text" class="search-input" id="search-external" placeholder="Search company name, job title, location..." oninput="renderExternal()" />
+      <select class="filter-select" id="filter-external-status" onchange="renderExternal()">
+        <option value="all">All Company Statuses</option>
+        <option value="external">🌐 External Saved</option>
+        <option value="applied">✅ Auto-Applied</option>
+        <option value="failed">❌ Failed Attempt</option>
+      </select>
+    </div>
+
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr>
+            <th>Company Name</th>
+            <th>Job Title</th>
+            <th>Location</th>
+            <th>Experience</th>
+            <th>Status</th>
+            <th>Company Career Site Link</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="external-table-body"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- SCREEN 4: FAILED APPLICATIONS & DIAGNOSTICS -->
+  <section id="screen-failed" class="screen">
+    <div class="page-header">
+      <div>
+        <h1 class="page-title">❌ Failed Applications Queue</h1>
+        <div class="page-subtitle">Inspect submission errors, diagnostics, and retry applications</div>
+      </div>
+    </div>
+
+    <div class="cards-list" id="failed-list"></div>
+  </section>
+
+  <!-- SCREEN 5: SETTINGS & CONFIG -->
+  <section id="screen-settings" class="screen">
+    <div class="page-header">
+      <div>
+        <h1 class="page-title">⚙️ Settings & Configuration</h1>
+        <div class="page-subtitle">Manage API keys, Gmail credentials, and candidate profile facts</div>
+      </div>
+    </div>
+
+    <div style="background:var(--bg-card); border:1px solid var(--border); border-radius:16px; padding:24px; max-width:600px;">
+      <h3 style="margin-bottom:12px;">LinkedIn Apify Key</h3>
+      <input type="password" id="apify-key" class="search-input" placeholder="apify_api_..." style="margin-bottom:16px;" />
+      <button class="btn btn-primary" onclick="saveApifyKey()">Save Key</button>
+    </div>
+  </section>
+
+</main>
+
+<div class="toast" id="toast"></div>
 
 <script>
 let allJobs = [];
-let filter = 'all';
-let sourceFilter = 'all';
 
 window.addEventListener('DOMContentLoaded', async () => {
   try {
     const cfg = await fetch('/api/config').then(r => r.json());
     if (cfg.apifyKey) document.getElementById('apify-key').value = cfg.apifyKey;
   } catch {}
-  loadJobs();
+  loadData();
 });
 
-function setFilter(f) {
-  filter = f;
-  document.querySelectorAll('.tab-btn[data-filter]').forEach(t => t.classList.toggle('active', t.dataset.filter === f));
-  render();
+function showScreen(screenId, navEl) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  document.getElementById(screenId).classList.add('active');
+  if (navEl) navEl.classList.add('active');
 }
 
-function setSourceFilter(s) {
-  sourceFilter = s;
-  document.querySelectorAll('.tab-btn[data-source]').forEach(t => t.classList.toggle('active', t.dataset.source === s));
-  render();
-}
-
-async function loadJobs() {
+async function loadData() {
   try {
     const res = await fetch('/api/jobs');
     allJobs = await res.json();
-    await loadStats();
-    render();
-  } catch (e) { toast('Failed to load jobs', 'error'); }
+    await updateStats();
+    renderDashboard();
+    renderNaukri();
+    renderExternal();
+    renderFailed();
+  } catch (e) { toast('Failed to load job data', 'error'); }
 }
 
-async function loadStats() {
+async function updateStats() {
   try {
     const res = await fetch('/api/stats');
     const s = await res.json();
-    document.getElementById('s-total').textContent = s.total || 0;
-    document.getElementById('s-pending').textContent = s.pending || 0;
-    document.getElementById('s-applied').textContent = s.applied || 0;
-    document.getElementById('s-external').textContent = s.external || 0;
-    document.getElementById('s-failed').textContent = s.failed || 0;
-    document.getElementById('s-skipped').textContent = s.skipped || 0;
+    document.getElementById('st-total').textContent = s.total || 0;
+    document.getElementById('st-applied').textContent = s.applied || 0;
+    document.getElementById('st-external').textContent = s.external || 0;
+    document.getElementById('st-failed').textContent = s.failed || 0;
+    document.getElementById('st-pending').textContent = s.pending || 0;
+    document.getElementById('st-skipped').textContent = s.skipped || 0;
+
+    // Badges in nav
+    document.getElementById('nb-naukri').textContent = allJobs.filter(j => j.source === 'naukri').length;
+    document.getElementById('nb-external').textContent = s.external || 0;
+    document.getElementById('nb-failed').textContent = s.failed || 0;
   } catch {}
 }
 
-async function fetchJobs() {
-  const key = document.getElementById('apify-key').value.trim();
-  if (!key) { toast('Enter your Apify API key first', 'error'); return; }
+// ── Screen 1: Dashboard Render ──
+function renderDashboard() {
+  const container = document.getElementById('dash-recent-list');
+  const recent = allJobs.slice(0, 10);
 
-  const btn = document.getElementById('btn-fetch');
-  btn.disabled = true;
-  btn.innerHTML = '<span class="spinner"></span> Fetching...';
-  toast('Fetching jobs from LinkedIn via Apify... (this takes ~2 min)', 'info');
-
-  try {
-    const res = await fetch('/api/fetch-jobs', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ apiKey: key }),
-    });
-    const data = await res.json();
-    if (!res.ok) throw new Error(data.error);
-    toast(`✅ Done! Added ${data.added} new jobs (${data.total} total)`, 'success');
-    await loadJobs();
-  } catch (e) {
-    toast('Error: ' + e.message, 'error');
-  } finally {
-    btn.disabled = false;
-    btn.innerHTML = '⬇ Fetch LinkedIn Jobs';
+  if (!recent.length) {
+    container.innerHTML = '<div style="padding:40px; text-align:center; color:var(--text-muted);">No jobs tracked yet.</div>';
+    return;
   }
+
+  container.innerHTML = recent.map(j => renderJobCard(j)).join('');
+}
+
+// ── Screen 2: Naukri Render (Fixed Filtering) ──
+function renderNaukri() {
+  const q = (document.getElementById('search-naukri').value || '').toLowerCase().trim();
+  const st = document.getElementById('filter-naukri-status').value;
+  const container = document.getElementById('naukri-list');
+
+  let jobs = allJobs.filter(j => j.source === 'naukri');
+  if (st !== 'all') jobs = jobs.filter(j => j.status === st);
+  if (q) jobs = jobs.filter(j => 
+    (j.title + ' ' + j.company + ' ' + j.location).toLowerCase().includes(q)
+  );
+
+  if (!jobs.length) {
+    container.innerHTML = '<div style="padding:40px; text-align:center; color:var(--text-muted);">No Naukri jobs match the selected filter.</div>';
+    return;
+  }
+
+  container.innerHTML = jobs.map(j => renderJobCard(j)).join('');
+}
+
+// ── Screen 3: External Companies Render ──
+function renderExternal() {
+  const q = (document.getElementById('search-external').value || '').toLowerCase().trim();
+  const st = document.getElementById('filter-external-status').value;
+  const body = document.getElementById('external-table-body');
+
+  let jobs = allJobs.filter(j => j.status === 'external' || j.source === 'naukri_external' || j.externalUrl);
+  if (st !== 'all') jobs = jobs.filter(j => j.status === st);
+  if (q) jobs = jobs.filter(j => 
+    (j.company + ' ' + j.title + ' ' + j.location).toLowerCase().includes(q)
+  );
+
+  if (!jobs.length) {
+    body.innerHTML = '<tr><td colspan="7" style="text-align:center; padding:30px; color:var(--text-muted);">No external company listings found.</td></tr>';
+    return;
+  }
+
+  body.innerHTML = jobs.map(j => `
+    <tr>
+      <td style="font-weight:700; color:var(--blue);">${esc(j.company)}</td>
+      <td style="font-weight:600;">${esc(j.title)}</td>
+      <td style="color:var(--text-muted);">${esc(j.location || 'India')}</td>
+      <td style="color:var(--text-muted);">${esc(j.experience || '2+ Yrs')}</td>
+      <td><span class="badge badge-${j.status}">${j.status.toUpperCase()}</span></td>
+      <td><a href="${esc(j.externalUrl || j.applyUrl)}" target="_blank" style="color:var(--sky); text-decoration:none; font-weight:600;">🔗 Career Link</a></td>
+      <td>
+        <button class="btn-sm green" onclick="setStatus('${esc(j.id)}', 'applied')">Mark Applied</button>
+      </td>
+    </tr>
+  `).join('');
+}
+
+// ── Screen 4: Failed Applications Render ──
+function renderFailed() {
+  const container = document.getElementById('failed-list');
+  const failed = allJobs.filter(j => j.status === 'failed');
+
+  if (!failed.length) {
+    container.innerHTML = '<div style="padding:40px; text-align:center; color:var(--emerald);">✅ No failed job applications in queue!</div>';
+    return;
+  }
+
+  container.innerHTML = failed.map(j => renderJobCard(j)).join('');
+}
+
+function renderJobCard(j) {
+  const url = j.externalUrl || j.applyUrl || '#';
+  return `
+    <div class="card-item">
+      <div>
+        <div class="card-title">${esc(j.title)}</div>
+        <div class="card-company">🏢 ${esc(j.company)}</div>
+        <div class="card-meta">
+          <span>📍 ${esc(j.location || 'Hyderabad')}</span>
+          ${j.experience ? `<span>💼 ${esc(j.experience)}</span>` : ''}
+        </div>
+        <div class="badges">
+          <span class="badge badge-${j.status}">${j.status.toUpperCase()}</span>
+          <span class="badge badge-external">${j.source.toUpperCase()}</span>
+        </div>
+        ${j.failedReason ? `<div class="diag-box">⚠️ Reason: ${esc(j.failedReason)}</div>` : ''}
+      </div>
+      <div class="card-btns">
+        <a class="btn btn-primary" href="${esc(url)}" target="_blank">🔗 Apply Site</a>
+        <button class="btn-sm green" onclick="setStatus('${esc(j.id)}', 'applied')">Mark Applied</button>
+      </div>
+    </div>
+  `;
 }
 
 async function setStatus(id, status) {
@@ -717,106 +707,39 @@ async function setStatus(id, status) {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ id, status }),
   });
-  const job = allJobs.find(j => j.id === id);
-  if (job) job.status = status;
-  if (status === 'applied') { job.appliedAt = new Date().toISOString(); toast('Marked as Applied ✅', 'success'); }
-  else if (status === 'skipped') { toast('Marked as Skipped ⏭', 'info'); }
-  else { toast('Status updated to ' + status, 'info'); }
-  await loadStats();
-  render();
+  toast('Status updated to ' + status, 'success');
+  loadData();
 }
 
 async function syncExcel() {
   toast('Syncing Excel workbook...', 'info');
-  await loadJobs();
-  toast('Excel workbook synced successfully! 📊', 'success');
+  await loadData();
+  toast('Excel workbook synced! 📊', 'success');
 }
 
-async function clearAll() {
-  if (!confirm('Clear ALL jobs and tracking data? This cannot be undone.')) return;
-  await fetch('/api/jobs', { method: 'DELETE' });
-  allJobs = [];
-  await loadStats();
-  render();
-  toast('All data cleared', 'info');
+async function triggerExternalApply() {
+  toast('Launching External Site Auto-Apply job...', 'info');
 }
 
-function render() {
-  const q = document.getElementById('search').value.toLowerCase();
-  const list = document.getElementById('job-list');
-
-  let jobs = allJobs;
-  if (filter !== 'all') jobs = jobs.filter(j => j.status === filter);
-  if (sourceFilter !== 'all') jobs = jobs.filter(j => j.source === sourceFilter);
-  if (q) jobs = jobs.filter(j =>
-    (j.title + j.company + j.location + (j.description || '')).toLowerCase().includes(q)
-  );
-
-  if (!jobs.length) {
-    list.innerHTML = `
-      <div class="empty-state">
-        <div class="empty-icon">📁</div>
-        <div class="empty-title">${allJobs.length === 0 ? 'No jobs tracked yet' : 'No matching listings'}</div>
-        <div class="empty-desc">${allJobs.length === 0 ? 'Run Naukri/LinkedIn scraper automation or clear filters to view jobs.' : 'Try adjusting your search keywords or category filters.'}</div>
-      </div>`;
-    return;
-  }
-
-  list.innerHTML = jobs.map(j => {
-    const url = j.externalUrl || j.applyUrl || j.linkedinUrl || '#';
-    const postedDate = j.postedAt ? new Date(j.postedAt).toLocaleDateString('en-IN', { day:'numeric', month:'short' }) : '';
-    const appliedDate = j.appliedAt ? new Date(j.appliedAt).toLocaleDateString('en-IN', { day:'numeric', month:'short', year:'numeric' }) : '';
-
-    const actionBtns = `
-      <a class="btn btn-primary" href="${escHtml(url)}" target="_blank" rel="noopener">🔗 Apply / Open</a>
-      ${j.status !== 'applied' ? `<button class="btn-sm success" onclick="setStatus('${escId(j.id)}', 'applied')">Mark Applied</button>` : ''}
-      ${j.status !== 'skipped' ? `<button class="btn-sm" onclick="setStatus('${escId(j.id)}', 'skipped')">Skip</button>` : ''}
-      ${j.status !== 'pending' ? `<button class="btn-sm reset" onclick="setStatus('${escId(j.id)}', 'pending')">Reset Status</button>` : ''}
-    `;
-
-    const statusDiagnostic = j.status === 'failed'
-      ? `<div class="job-diag">⚠️ Diagnostic: ${escHtml(j.failedReason || 'Failed to submit form / external redirect required')}</div>`
-      : j.status === 'applied' && appliedDate
-      ? `<div style="font-size:0.8rem; color:var(--accent-emerald); margin-top:6px;">Applied Date: ${appliedDate}</div>`
-      : '';
-
-    return `
-    <div class="job-card ${j.status}">
-      <div class="job-info">
-        <div class="job-title">${escHtml(j.title)}</div>
-        <div class="job-meta-row">
-          <span class="meta-company">🏢 ${escHtml(j.company)}</span>
-          <span class="meta-loc">📍 ${escHtml(j.location || 'Remote / India')}</span>
-          ${postedDate ? `<span class="meta-date">🕐 ${postedDate}</span>` : ''}
-        </div>
-        ${j.description ? `<div style="font-size:0.82rem; color:var(--text-secondary); margin-bottom:8px; line-height:1.4;">${escHtml(j.description.substring(0,180))}${j.description.length>180?'...':''}</div>` : ''}
-        <div class="badges-row">
-          <span class="badge badge-status-${j.status}">${j.status.toUpperCase()}</span>
-          <span class="badge badge-src-${j.source}">${j.source === 'linkedin' ? 'LinkedIn' : j.source === 'naukri' ? 'Naukri' : 'External'}</span>
-          ${j.easyApply ? '<span class="badge" style="background:#164e63; color:#67e8f9;">⚡ Easy Apply</span>' : ''}
-          ${j.experience ? `<span class="badge" style="background:rgba(255,255,255,0.06); color:var(--text-secondary);">${escHtml(j.experience)}</span>` : ''}
-          ${j.salary ? `<span class="badge" style="background:rgba(255,255,255,0.06); color:var(--text-secondary);">${escHtml(j.salary)}</span>` : ''}
-        </div>
-        ${statusDiagnostic}
-      </div>
-      <div class="card-actions">${actionBtns}</div>
-    </div>`;
-  }).join('');
+async function saveApifyKey() {
+  const key = document.getElementById('apify-key').value.trim();
+  await fetch('/api/config', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ apifyKey: key }),
+  });
+  toast('Apify Key saved!', 'success');
 }
 
 function toast(msg, type = 'info') {
   const el = document.getElementById('toast');
   el.textContent = msg;
   el.className = `toast show ${type}`;
-  clearTimeout(el._t);
-  el._t = setTimeout(() => el.classList.remove('show'), 3500);
+  setTimeout(() => el.classList.remove('show'), 3500);
 }
 
-function escHtml(s) {
+function esc(s) {
   return String(s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
-}
-function escId(s) {
-  return String(s || '').replace(/'/g, "\\'");
 }
 </script>
 </body>

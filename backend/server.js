@@ -33,40 +33,77 @@ const loadNaukriExt  = () => fs.existsSync(NAUKRI_EXT_FILE) ? readJson(NAUKRI_EX
 const loadTracker    = () => fs.existsSync(TRACKER_FILE)    ? readJson(TRACKER_FILE,   { applied:{}, skipped:{}, external:{}, failed:{} })             : { applied:{}, skipped:{}, external:{}, failed:{} };
 const loadConfig     = () => fs.existsSync(CONFIG_FILE)     ? readJson(CONFIG_FILE,    {})                                                             : {};
 
-// Build a unified job list: LinkedIn jobs + Naukri external jobs.
-// Each entry gets a `source` field. Status comes from tracker (applied/skipped/pending).
+// Build a unified job list: LinkedIn jobs + Naukri external jobs + tracker store.
 function loadAllJobs() {
-  const linkedin = loadJobs().map((j, idx) => ({
-    title:       j.title || '',
-    company:     j.company || '',
-    location:    j.location || '',
-    description: j.description || '',
-    postedAt:    j.postedAt || '',
-    applyUrl:    j.applyUrl || j.linkedinUrl || '',
-    linkedinUrl: j.linkedinUrl || '',
-    easyApply:   !!j.easyApply,
-    easyApplyUrl: j.easyApplyUrl || '',
-    source:      'linkedin',
-    _key:        j.applyUrl || j.linkedinUrl || `linkedin-${idx}`,
-  }));
+  const tracker = loadTracker();
+  const allMap = new Map();
 
-  const naukri = loadNaukriExt().map((j, idx) => ({
-    title:       j.title || '',
-    company:     j.company || '',
-    location:    j.location || '',
-    description: '',
-    postedAt:    j.postedAt || j.capturedAt || '',
-    experience:  j.experience || '',
-    salary:      j.salary || '',
-    // Prefer captured externalUrl when present; fall back to the Naukri JD URL.
-    applyUrl:    j.externalUrl || j.applyUrl || '',
-    naukriUrl:   j.applyUrl || '',
-    externalUrl: j.externalUrl || '',
-    source:      'naukri',
-    _key:        j.applyUrl || `naukri-${idx}`,
-  }));
+  // Load LinkedIn jobs
+  loadJobs().forEach((j, idx) => {
+    const key = j.applyUrl || j.linkedinUrl || `linkedin-${idx}`;
+    allMap.set(key, {
+      id: key,
+      title: j.title || '',
+      company: j.company || '',
+      location: j.location || '',
+      description: j.description || '',
+      postedAt: j.postedAt || '',
+      applyUrl: j.applyUrl || j.linkedinUrl || '',
+      externalUrl: j.applyUrl || j.linkedinUrl || '',
+      easyApply: !!j.easyApply,
+      source: 'linkedin',
+      _key: key,
+    });
+  });
 
-  return [...linkedin, ...naukri];
+  // Load Naukri External jobs
+  loadNaukriExt().forEach((j, idx) => {
+    const key = j.applyUrl || j.externalUrl || `naukri-${idx}`;
+    allMap.set(key, {
+      id: key,
+      title: j.title || '',
+      company: j.company || '',
+      location: j.location || '',
+      description: '',
+      postedAt: j.postedAt || j.capturedAt || '',
+      experience: j.experience || '',
+      salary: j.salary || '',
+      applyUrl: j.applyUrl || '',
+      externalUrl: j.externalUrl || j.applyUrl || '',
+      source: j.source || 'naukri',
+      _key: key,
+    });
+  });
+
+  // Include any extra entries present in tracker categories
+  const categories = [
+    { cat: 'applied', status: 'applied' },
+    { cat: 'external', status: 'external' },
+    { cat: 'failed', status: 'failed' },
+    { cat: 'skipped', status: 'skipped' },
+  ];
+
+  categories.forEach(({ cat }) => {
+    const obj = tracker[cat] || {};
+    Object.entries(obj).forEach(([url, item]) => {
+      if (!allMap.has(url)) {
+        allMap.set(url, {
+          id: url,
+          title: item.title || 'Job Posting',
+          company: item.company || 'Company',
+          location: item.location || '',
+          description: '',
+          postedAt: item.date || '',
+          applyUrl: url,
+          externalUrl: item.externalUrl || url,
+          source: item.source || 'naukri',
+          _key: url,
+        });
+      }
+    });
+  });
+
+  return Array.from(allMap.values());
 }
 
 // ── GET /api/config ───────────────────────────────────────────────────────────
@@ -83,7 +120,6 @@ app.post('/api/config', (req, res) => {
 });
 
 // ── GET /api/jobs ─────────────────────────────────────────────────────────────
-// Returns LinkedIn + Naukri-external entries, joined with the tracker.
 app.get('/api/jobs', (_req, res) => {
   const jobs    = loadAllJobs();
   const tracker = loadTracker();
