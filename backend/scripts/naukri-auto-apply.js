@@ -50,10 +50,10 @@ const EXTERNAL_FILE = path.join(__dirname, '../data', 'naukri-external-jobs.json
 
 const PROFILE = {
   name: 'Manoj Ambati', email: 'ambatimanoj2469@gmail.com', phone: '9347946872',
-  location: 'Hyderabad', currentCtc: '6', expectedCtc: '12', noticePeriod: '30',
-  totalExp: '2.5', javaExp: '2.5', springExp: '2.5', springBootExp: '2.5',
-  reactExp: '2.5', nodeExp: '2.5', jsExp: '2.5', tsExp: '2.5',
-  mysqlExp: '2.5', awsExp: '2.5', dockerExp: '2.5', defaultYears: '2.5',
+  location: 'Hyderabad', currentCtc: '4.2', expectedCtc: '7.5', noticePeriod: '60',
+  totalExp: '2', javaExp: '2', springExp: '2', springBootExp: '2',
+  reactExp: '2', nodeExp: '2', jsExp: '2', tsExp: '2',
+  mysqlExp: '2', awsExp: '2', dockerExp: '2', defaultYears: '2',
 };
 
 function answerForQuestion(q) {
