@@ -300,32 +300,37 @@
     width: 100%;
     background: #000000;
     border: 1px solid var(--border);
-    border-radius: 10px;
+    border-radius: 12px;
     padding: 12px 16px 12px 44px;
     font-size: 0.92rem;
     color: #ffffff;
     outline: none;
-    transition: all 0.2s;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
-  .search-input:focus { border-color: #ffffff; box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.1); }
+  .search-input:focus { border-color: #ffffff; box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.12); }
 
-  /* ── Premium Flatpickr Date Picker Component Styles ── */
+  /* ── Premium Styled Flatpickr Date Picker Component ── */
   .date-picker-wrapper {
     display: flex;
     align-items: center;
     gap: 10px;
     background: #000000;
     border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 6px 14px;
+    border-radius: 12px;
+    padding: 10px 18px;
     position: relative;
-    transition: all 0.2s;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .date-picker-wrapper:hover {
+    border-color: var(--border-hover);
+    background: #0a0a0c;
   }
 
   .date-picker-wrapper:focus-within {
     border-color: #ffffff;
-    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.12);
   }
 
   .date-picker-wrapper i.fa-calendar-days {
@@ -340,8 +345,8 @@
     color: #ffffff;
     font-family: var(--font-body);
     font-size: 0.88rem;
-    font-weight: 600;
-    width: 130px;
+    font-weight: 700;
+    width: 140px;
     cursor: pointer;
   }
 
@@ -359,26 +364,82 @@
     transition: all 0.2s;
   }
 
-  .date-clear-btn:hover { color: #ffffff; background: rgba(255, 255, 255, 0.1); }
+  .date-clear-btn:hover { color: #ffffff; background: rgba(255, 255, 255, 0.15); transform: scale(1.1); }
 
-  /* Flatpickr Custom Dark Overrides */
+  /* Glassmorphism Flatpickr Custom Dark Popup */
   .flatpickr-calendar.dark {
-    background: #09090b !important;
-    border: 1px solid #27272a !important;
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.8) !important;
-    border-radius: 14px !important;
-    padding: 8px !important;
+    background: #0d0d10 !important;
+    border: 1px solid rgba(255, 255, 255, 0.18) !important;
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.95), 0 0 0 1px rgba(255, 255, 255, 0.08) !important;
+    border-radius: 18px !important;
+    padding: 14px !important;
+    font-family: var(--font-body) !important;
+    width: 320px !important;
+  }
+
+  .flatpickr-calendar.dark .flatpickr-months {
+    padding-bottom: 10px !important;
+    border-bottom: 1px solid var(--border) !important;
+    margin-bottom: 10px !important;
+  }
+
+  .flatpickr-calendar.dark .flatpickr-current-month {
+    font-family: var(--font-heading) !important;
+    font-size: 1.1rem !important;
+    font-weight: 800 !important;
+    color: #ffffff !important;
+  }
+
+  .flatpickr-calendar.dark .flatpickr-monthDropdown-months {
+    background: #000000 !important;
+    color: #ffffff !important;
+    font-weight: 700 !important;
+    border-radius: 8px !important;
+    padding: 4px 8px !important;
+  }
+
+  .flatpickr-calendar.dark .numInputWrapper input {
+    color: #ffffff !important;
+    font-weight: 800 !important;
+  }
+
+  .flatpickr-calendar.dark span.flatpickr-weekday {
+    color: var(--text-muted) !important;
+    font-size: 0.78rem !important;
+    font-weight: 800 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.05em !important;
+  }
+
+  .flatpickr-day {
+    border-radius: 10px !important;
+    color: #e4e4e7 !important;
+    font-weight: 600 !important;
+    font-size: 0.88rem !important;
+    height: 38px !important;
+    line-height: 38px !important;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    border: 1px solid transparent !important;
+  }
+
+  .flatpickr-day:hover {
+    background: rgba(255, 255, 255, 0.12) !important;
+    color: #ffffff !important;
+    border-color: rgba(255, 255, 255, 0.2) !important;
+    transform: scale(1.05) !important;
+  }
+
+  .flatpickr-day.today {
+    border-color: #ffffff !important;
+    font-weight: 800 !important;
   }
 
   .flatpickr-day.selected, .flatpickr-day.startRange, .flatpickr-day.endRange {
     background: #ffffff !important;
     color: #000000 !important;
-    font-weight: 800 !important;
+    font-weight: 900 !important;
     border-color: #ffffff !important;
-  }
-
-  .flatpickr-day:hover {
-    background: rgba(255, 255, 255, 0.15) !important;
+    box-shadow: 0 4px 14px rgba(255, 255, 255, 0.25) !important;
   }
 
   /* ── Button Component ── */
