@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Job Automation Studio - Black & White Theme</title>
+<title>Job Automation Studio - Black & White Edition</title>
 
 <!-- Google Fonts: Outfit & Inter -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -22,9 +22,6 @@
     --text-main: #ffffff;
     --text-muted: #a3a3a3;
     --text-dim: #737373;
-    
-    --accent-white: #ffffff;
-    --accent-black: #000000;
 
     --font-heading: 'Outfit', sans-serif;
     --font-body: 'Inter', sans-serif;
@@ -110,7 +107,6 @@
     cursor: pointer;
     transition: all 0.2s;
     user-select: none;
-    border: 1px solid transparent;
   }
 
   .nav-item:hover {
@@ -295,9 +291,6 @@
   .btn-secondary { background: #000000; color: #ffffff; border-color: var(--border); }
   .btn-secondary:hover { border-color: #ffffff; }
 
-  .btn-danger { background: #000000; border-color: #737373; color: #a3a3a3; }
-  .btn-danger:hover { border-color: #ffffff; color: #ffffff; }
-
   /* ── Cards & Table Display ── */
   .cards-list {
     display: flex;
@@ -440,7 +433,7 @@
     </div>
 
     <!-- Recent Activity -->
-    <h2 style="font-family:var(--font-heading); font-size:1.25rem; margin-bottom:16px; color:#ffffff;">Recent Job Applications</h2>
+    <h2 style="font-family:var(--font-heading); font-size:1.25rem; margin-bottom:16px; color:#ffffff;">Tracked Job Listings & Applications</h2>
     <div class="cards-list" id="dash-recent-list"></div>
   </section>
 
@@ -471,7 +464,7 @@
     <div class="page-header">
       <div>
         <h1 class="page-title">External Company Career Portals</h1>
-        <div class="page-subtitle">Track applications submitted on company career sites (Workday, Greenhouse, etc.)</div>
+        <div class="page-subtitle">Track applications submitted on company career sites (Accenture, IBM, TCS, etc.)</div>
       </div>
       <div class="action-btns">
         <button class="btn btn-primary" onclick="triggerExternalApply()">🚀 Auto-Apply External Jobs</button>
@@ -579,20 +572,27 @@ async function updateStats() {
     document.getElementById('st-pending').textContent = s.pending || 0;
     document.getElementById('st-skipped').textContent = s.skipped || 0;
 
-    document.getElementById('nb-naukri').textContent = allJobs.filter(j => j.source === 'naukri').length;
-    document.getElementById('nb-external').textContent = s.external || 0;
-    document.getElementById('nb-failed').textContent = s.failed || 0;
+    const naukriJobs = allJobs.filter(j => j.source === 'naukri');
+    const externalJobs = allJobs.filter(j => j.source === 'external' || j.status === 'external');
+    const failedJobs = allJobs.filter(j => j.status === 'failed');
+
+    document.getElementById('nb-naukri').textContent = naukriJobs.length;
+    document.getElementById('nb-external').textContent = externalJobs.length;
+    document.getElementById('nb-failed').textContent = failedJobs.length;
   } catch {}
 }
 
 function renderDashboard() {
   const container = document.getElementById('dash-recent-list');
-  const recent = allJobs.slice(0, 10);
-  if (!recent.length) {
+  // Show active applications first, followed by pending
+  const activeJobs = allJobs.filter(j => j.status === 'applied' || j.status === 'external' || j.status === 'failed');
+  const displayList = activeJobs.length ? activeJobs : allJobs.slice(0, 20);
+
+  if (!displayList.length) {
     container.innerHTML = '<div style="padding:40px; text-align:center; color:var(--text-muted);">No jobs tracked yet.</div>';
     return;
   }
-  container.innerHTML = recent.map(j => renderJobCard(j)).join('');
+  container.innerHTML = displayList.map(j => renderJobCard(j)).join('');
 }
 
 function renderNaukri() {
@@ -616,7 +616,7 @@ function renderExternal() {
   const st = document.getElementById('filter-external-status').value;
   const body = document.getElementById('external-table-body');
 
-  let jobs = allJobs.filter(j => j.status === 'external' || j.source === 'naukri_external' || j.externalUrl);
+  let jobs = allJobs.filter(j => j.source === 'external' || j.status === 'external' || j.externalUrl);
   if (st !== 'all') jobs = jobs.filter(j => j.status === st);
   if (q) jobs = jobs.filter(j => (j.company + ' ' + j.title + ' ' + j.location).toLowerCase().includes(q));
 

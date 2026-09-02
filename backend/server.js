@@ -70,33 +70,40 @@ function loadAllJobs() {
       salary: j.salary || '',
       applyUrl: j.applyUrl || '',
       externalUrl: j.externalUrl || j.applyUrl || '',
-      source: j.source || 'naukri',
+      source: 'external',
       _key: key,
     });
   });
 
   // Include any extra entries present in tracker categories
   const categories = [
-    { cat: 'applied', status: 'applied' },
-    { cat: 'external', status: 'external' },
-    { cat: 'failed', status: 'failed' },
-    { cat: 'skipped', status: 'skipped' },
+    { cat: 'applied', defaultSource: 'naukri' },
+    { cat: 'external', defaultSource: 'external' },
+    { cat: 'failed', defaultSource: 'external' },
+    { cat: 'skipped', defaultSource: 'naukri' },
   ];
 
-  categories.forEach(({ cat }) => {
+  categories.forEach(({ cat, defaultSource }) => {
     const obj = tracker[cat] || {};
     Object.entries(obj).forEach(([url, item]) => {
-      if (!allMap.has(url)) {
+      const existing = allMap.get(url);
+      if (existing) {
+        if (item.title && item.title !== 'Job Posting') existing.title = item.title;
+        if (item.company && item.company !== 'Company') existing.company = item.company;
+        if (item.location) existing.location = item.location;
+        if (item.externalUrl) existing.externalUrl = item.externalUrl;
+        if (cat === 'external') existing.source = 'external';
+      } else {
         allMap.set(url, {
           id: url,
-          title: item.title || 'Job Posting',
+          title: item.title || 'Job Application',
           company: item.company || 'Company',
           location: item.location || '',
           description: '',
           postedAt: item.date || '',
           applyUrl: url,
           externalUrl: item.externalUrl || url,
-          source: item.source || 'naukri',
+          source: item.source || defaultSource,
           _key: url,
         });
       }
