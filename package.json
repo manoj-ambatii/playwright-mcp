@@ -10,6 +10,7 @@
     "cleanup": "node backend/scripts/cleanup-jobs.js",
     "generate-pdf": "node backend/scripts/generate-resume-pdf.js",
     "apply-external": "node backend/scripts/apply-external-jobs.js",
+    "log-manual": "node backend/scripts/log-manual-job.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],

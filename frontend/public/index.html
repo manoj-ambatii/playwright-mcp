@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Job Automation Studio - Black & White Edition</title>
+<title>Job Application Tracker - Pure Tracking System</title>
 
 <!-- Google Fonts: Outfit & Inter -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -182,12 +182,6 @@
     margin-top: 2px;
   }
 
-  .action-btns {
-    display: flex;
-    gap: 10px;
-    align-items: center;
-  }
-
   /* ── Candidate Profile Banner ── */
   .profile-banner {
     background: #0f0f0f;
@@ -214,7 +208,7 @@
   /* ── Stats Grid ── */
   .stats-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 16px;
     margin-bottom: 28px;
   }
@@ -259,17 +253,6 @@
 
   .search-input:focus { border-color: #ffffff; }
 
-  .filter-select {
-    background: #000000;
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 10px 14px;
-    font-size: 0.85rem;
-    color: #ffffff;
-    outline: none;
-  }
-
-  /* ── Buttons ── */
   .btn {
     border: 1px solid #ffffff;
     border-radius: 8px;
@@ -287,52 +270,10 @@
 
   .btn-primary { background: #ffffff; color: #000000; }
   .btn-primary:hover { background: #e5e5e5; }
-
   .btn-secondary { background: #000000; color: #ffffff; border-color: var(--border); }
   .btn-secondary:hover { border-color: #ffffff; }
 
-  /* ── Cards & Table Display ── */
-  .cards-list {
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-  }
-
-  .card-item {
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    border-radius: 14px;
-    padding: 20px 24px;
-    display: grid;
-    grid-template-columns: 1fr auto;
-    gap: 20px;
-    align-items: center;
-    transition: all 0.2s;
-  }
-
-  .card-item:hover {
-    background: var(--bg-card-hover);
-    border-color: var(--border-hover);
-  }
-
-  .card-title { font-family: var(--font-heading); font-size: 1.15rem; font-weight: 700; color: #ffffff; margin-bottom: 4px; }
-  .card-company { font-weight: 600; color: var(--text-muted); font-size: 0.9rem; }
-  .card-meta { display: flex; gap: 12px; margin: 8px 0; color: var(--text-dim); font-size: 0.85rem; flex-wrap: wrap; }
-
-  .badges { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 8px; }
-  .badge { font-size: 0.72rem; font-weight: 700; padding: 3px 10px; border-radius: 6px; text-transform: uppercase; border: 1px solid var(--border); background: #000000; color: #ffffff; }
-
-  .badge-applied { background: #ffffff; color: #000000; border-color: #ffffff; }
-  .badge-external { background: #1f1f1f; color: #ffffff; border-color: #404040; }
-  .badge-failed { background: #262626; color: #a3a3a3; border-color: #525252; }
-
-  .diag-box { font-size: 0.8rem; color: #a3a3a3; background: #0a0a0a; border: 1px solid var(--border); border-radius: 6px; padding: 8px 12px; margin-top: 8px; }
-
-  .card-btns { display: flex; flex-direction: column; gap: 8px; align-items: flex-end; }
-  .btn-sm { padding: 6px 12px; font-size: 0.78rem; font-weight: 600; border-radius: 6px; border: 1px solid var(--border); background: #000000; color: #ffffff; cursor: pointer; transition: all 0.2s; }
-  .btn-sm:hover { border-color: #ffffff; }
-
-  /* ── External Companies Table ── */
+  /* ── Table & Cards Display ── */
   .table-wrapper {
     background: var(--bg-card);
     border: 1px solid var(--border);
@@ -345,6 +286,25 @@
   td { padding: 16px 20px; font-size: 0.88rem; border-bottom: 1px solid var(--border); color: #ffffff; }
   tr:hover td { background: rgba(255, 255, 255, 0.03); }
 
+  .badge { font-size: 0.72rem; font-weight: 700; padding: 3px 10px; border-radius: 6px; text-transform: uppercase; border: 1px solid var(--border); background: #000000; color: #ffffff; }
+  .badge-success { background: #ffffff; color: #000000; border-color: #ffffff; }
+  .badge-failed { background: #262626; color: #a3a3a3; border-color: #525252; }
+  .badge-external { background: #1f1f1f; color: #ffffff; border-color: #404040; }
+
+  .diag-text { font-size: 0.8rem; color: #a3a3a3; background: #0a0a0a; border: 1px solid var(--border); border-radius: 6px; padding: 6px 10px; margin-top: 4px; }
+
+  /* ── Form Controls ── */
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 16px;
+  }
+
+  .form-label { font-size: 0.85rem; font-weight: 600; color: var(--text-muted); }
+  .form-control { background: #000000; border: 1px solid var(--border); border-radius: 8px; padding: 10px 14px; font-size: 0.9rem; color: #ffffff; outline: none; }
+  .form-control:focus { border-color: #ffffff; }
+
   /* ── Toast ── */
   .toast { position: fixed; bottom: 24px; right: 24px; background: #ffffff; color: #000000; font-weight: 700; border-radius: 8px; padding: 12px 20px; font-size: 0.88rem; z-index: 1000; opacity: 0; transform: translateY(40px); transition: all 0.3s; }
   .toast.show { opacity: 1; transform: translateY(0); }
@@ -355,10 +315,10 @@
 <!-- Sidebar Navigation -->
 <nav class="sidebar">
   <div class="brand">
-    <div class="brand-icon">JS</div>
+    <div class="brand-icon">JT</div>
     <div>
-      <div class="brand-name">Job Studio</div>
-      <div class="brand-sub">Black & White Edition</div>
+      <div class="brand-name">Job Tracker</div>
+      <div class="brand-sub">Pure Tracking System</div>
     </div>
   </div>
 
@@ -367,19 +327,19 @@
       <span>📊</span> Dashboard
     </li>
     <li class="nav-item" onclick="showScreen('screen-naukri', this)">
-      <span>⚡</span> Naukri Quick-Apply
+      <span>⚡</span> Naukri Quick Apply
       <span class="nav-badge" id="nb-naukri">0</span>
     </li>
     <li class="nav-item" onclick="showScreen('screen-external', this)">
-      <span>🌐</span> External Companies
+      <span>🌐</span> Naukri External Jobs
       <span class="nav-badge" id="nb-external">0</span>
     </li>
     <li class="nav-item" onclick="showScreen('screen-failed', this)">
-      <span>❌</span> Failed Queue
+      <span>❌</span> Failed Jobs
       <span class="nav-badge" id="nb-failed">0</span>
     </li>
-    <li class="nav-item" onclick="showScreen('screen-settings', this)">
-      <span>⚙️</span> Settings & Config
+    <li class="nav-item" onclick="showScreen('screen-manual', this)">
+      <span>➕</span> Add Manual Job
     </li>
   </ul>
 
@@ -413,73 +373,83 @@
   <section id="screen-dashboard" class="screen active">
     <div class="page-header">
       <div>
-        <h1 class="page-title">Dashboard Overview</h1>
-        <div class="page-subtitle">Real-time metrics & application statistics across platforms</div>
+        <h1 class="page-title">Application Tracker Dashboard</h1>
+        <div class="page-subtitle">Tracked application history and real-time status log</div>
       </div>
-      <div class="action-btns">
-        <button class="btn btn-secondary" onclick="loadData()">🔄 Refresh</button>
-        <button class="btn btn-secondary" onclick="syncExcel()">📊 Sync Excel</button>
+      <div style="display:flex; gap:10px;">
+        <button class="btn btn-secondary" onclick="loadData()">🔄 Refresh Tracker</button>
       </div>
     </div>
 
     <!-- Stats Grid -->
     <div class="stats-grid">
-      <div class="stat-card"><div class="stat-val" id="st-total">0</div><div class="stat-lbl">Total Jobs Tracked</div></div>
-      <div class="stat-card"><div class="stat-val" id="st-applied">0</div><div class="stat-lbl">Quick Applied</div></div>
-      <div class="stat-card"><div class="stat-val" id="st-external">0</div><div class="stat-lbl">External Sites</div></div>
-      <div class="stat-card"><div class="stat-val" id="st-failed">0</div><div class="stat-lbl">Failed Submissions</div></div>
-      <div class="stat-card"><div class="stat-val" id="st-pending">0</div><div class="stat-lbl">Pending Review</div></div>
-      <div class="stat-card"><div class="stat-val" id="st-skipped">0</div><div class="stat-lbl">Skipped / Ignored</div></div>
+      <div class="stat-card"><div class="stat-val" id="st-applied">0</div><div class="stat-lbl">Naukri Successful Applies</div></div>
+      <div class="stat-card"><div class="stat-val" id="st-external">0</div><div class="stat-lbl">Naukri External Jobs</div></div>
+      <div class="stat-card"><div class="stat-val" id="st-failed">0</div><div class="stat-lbl">Failed Application Attempts</div></div>
+      <div class="stat-card"><div class="stat-val" id="st-total">0</div><div class="stat-lbl">Total Tracked Entries</div></div>
     </div>
 
-    <!-- Recent Activity -->
-    <h2 style="font-family:var(--font-heading); font-size:1.25rem; margin-bottom:16px; color:#ffffff;">Tracked Job Listings & Applications</h2>
-    <div class="cards-list" id="dash-recent-list"></div>
+    <!-- Application Log Table -->
+    <h2 style="font-family:var(--font-heading); font-size:1.25rem; margin-bottom:16px; color:#ffffff;">Recent Application Audit Log</h2>
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr>
+            <th>Applied Date & Time</th>
+            <th>Company Name</th>
+            <th>Job Title</th>
+            <th>Location</th>
+            <th>Category / Source</th>
+            <th>Status</th>
+            <th>Job Link</th>
+          </tr>
+        </thead>
+        <tbody id="dash-table-body"></tbody>
+      </table>
+    </div>
   </section>
 
-  <!-- SCREEN 2: NAUKRI QUICK-APPLY HUB -->
+  <!-- SCREEN 2: NAUKRI QUICK APPLY (ONLY SUCCESSFUL APPLIED JOBS) -->
   <section id="screen-naukri" class="screen">
     <div class="page-header">
       <div>
-        <h1 class="page-title">Naukri Quick-Apply Hub</h1>
-        <div class="page-subtitle">Auto-apply to Naukri.com listings with screening chatbot answers</div>
+        <h1 class="page-title">⚡ Naukri Quick Apply</h1>
+        <div class="page-subtitle">Successfully submitted Naukri quick applications</div>
       </div>
     </div>
 
     <div class="filter-bar">
-      <input type="text" class="search-input" id="search-naukri" placeholder="Search title, company, location..." autocomplete="off" name="search_naukri_no_autofill" oninput="renderNaukri()" />
-      <select class="filter-select" id="filter-naukri-status" onchange="renderNaukri()">
-        <option value="all">All Statuses</option>
-        <option value="pending">Pending</option>
-        <option value="applied">Applied</option>
-        <option value="skipped">Skipped</option>
-      </select>
+      <input type="text" class="search-input" id="search-naukri" placeholder="Search company name, title, location..." autocomplete="off" name="search_naukri_clean" oninput="renderNaukri()" />
     </div>
 
-    <div class="cards-list" id="naukri-list"></div>
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr>
+            <th>Applied Date & Time</th>
+            <th>Company Name</th>
+            <th>Job Title</th>
+            <th>Location</th>
+            <th>Status</th>
+            <th>Naukri Posting Link</th>
+          </tr>
+        </thead>
+        <tbody id="naukri-table-body"></tbody>
+      </table>
+    </div>
   </section>
 
-  <!-- SCREEN 3: EXTERNAL COMPANY CAREER PORTALS -->
+  <!-- SCREEN 3: NAUKRI EXTERNAL JOBS -->
   <section id="screen-external" class="screen">
     <div class="page-header">
       <div>
-        <h1 class="page-title">External Company Career Portals</h1>
-        <div class="page-subtitle">Track applications submitted on company career sites (Accenture, IBM, TCS, etc.)</div>
-      </div>
-      <div class="action-btns">
-        <button class="btn btn-primary" onclick="triggerExternalApply()">🚀 Auto-Apply External Jobs</button>
+        <h1 class="page-title">🌐 Naukri External Jobs</h1>
+        <div class="page-subtitle">Track external company career site listings (Accenture, IBM, TCS, etc.)</div>
       </div>
     </div>
 
     <div class="filter-bar">
-      <input type="text" class="search-input" id="search-external" placeholder="Search company name, job title, location..." autocomplete="off" name="search_company_no_autofill" oninput="renderExternal()" />
-      <select class="filter-select" id="filter-external-status" onchange="renderExternal()">
-        <option value="all">All Company Statuses</option>
-        <option value="pending">⏳ Pending / Saved</option>
-        <option value="external">🌐 External Status</option>
-        <option value="applied">✅ Auto-Applied</option>
-        <option value="failed">❌ Failed Attempt</option>
-      </select>
+      <input type="text" class="search-input" id="search-external" placeholder="Search company name, job title, location..." autocomplete="off" name="search_external_clean" oninput="renderExternal()" />
     </div>
 
     <div class="table-wrapper">
@@ -490,9 +460,8 @@
             <th>Job Title</th>
             <th>Location</th>
             <th>Experience</th>
-            <th>Status</th>
-            <th>Company Career Site Link</th>
-            <th>Actions</th>
+            <th>Tracked / Captured Date</th>
+            <th>Company Career Link</th>
           </tr>
         </thead>
         <tbody id="external-table-body"></tbody>
@@ -500,31 +469,65 @@
     </div>
   </section>
 
-  <!-- SCREEN 4: FAILED APPLICATIONS -->
+  <!-- SCREEN 4: FAILED JOBS -->
   <section id="screen-failed" class="screen">
     <div class="page-header">
       <div>
-        <h1 class="page-title">Failed Applications Queue</h1>
-        <div class="page-subtitle">Inspect submission errors, diagnostics, and retry applications</div>
+        <h1 class="page-title">❌ Failed Jobs Queue</h1>
+        <div class="page-subtitle">Audit failed application attempts and exact error diagnostics</div>
       </div>
     </div>
 
-    <div class="cards-list" id="failed-list"></div>
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr>
+            <th>Attempt Date & Time</th>
+            <th>Company Name</th>
+            <th>Job Title</th>
+            <th>Location</th>
+            <th>Failure Reason / Diagnostic</th>
+            <th>Link</th>
+          </tr>
+        </thead>
+        <tbody id="failed-table-body"></tbody>
+      </table>
+    </div>
   </section>
 
-  <!-- SCREEN 5: SETTINGS & CONFIG -->
-  <section id="screen-settings" class="screen">
+  <!-- SCREEN 5: ADD MANUAL EXTERNAL JOB -->
+  <section id="screen-manual" class="screen">
     <div class="page-header">
       <div>
-        <h1 class="page-title">Settings & Configuration</h1>
-        <div class="page-subtitle">Manage API keys, Gmail credentials, and candidate profile facts</div>
+        <h1 class="page-title">➕ Add Manual External Job</h1>
+        <div class="page-subtitle">Record a job application applied manually or via terminal script</div>
       </div>
     </div>
 
-    <div style="background:var(--bg-card); border:1px solid var(--border); border-radius:14px; padding:24px; max-width:600px;">
-      <h3 style="margin-bottom:12px; color:#ffffff;">LinkedIn Apify Key</h3>
-      <input type="password" id="apify-key" class="search-input" placeholder="apify_api_..." style="margin-bottom:16px;" />
-      <button class="btn btn-primary" onclick="saveApifyKey()">Save Key</button>
+    <div style="background:var(--bg-card); border:1px solid var(--border); border-radius:14px; padding:28px; max-width:650px;">
+      <form onsubmit="submitManualJob(event)">
+        <div class="form-group">
+          <label class="form-label">Job Title *</label>
+          <input type="text" id="m-title" class="form-control" placeholder="e.g. Senior Java Backend Developer" required />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Company Name *</label>
+          <input type="text" id="m-company" class="form-control" placeholder="e.g. Google / Microsoft / Oracle" required />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Location</label>
+          <input type="text" id="m-location" class="form-control" placeholder="e.g. Hyderabad / Remote" value="Hyderabad" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">External Career Site URL</label>
+          <input type="url" id="m-url" class="form-control" placeholder="https://company.com/careers/job/123" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Notes</label>
+          <input type="text" id="m-notes" class="form-control" placeholder="e.g. Applied manually via company career page" />
+        </div>
+        <button type="submit" class="btn btn-primary" style="margin-top:10px;">💾 Record Application</button>
+      </form>
     </div>
   </section>
 
@@ -535,11 +538,7 @@
 <script>
 let allJobs = [];
 
-window.addEventListener('DOMContentLoaded', async () => {
-  try {
-    const cfg = await fetch('/api/config').then(r => r.json());
-    if (cfg.apifyKey) document.getElementById('apify-key').value = cfg.apifyKey;
-  } catch {}
+window.addEventListener('DOMContentLoaded', () => {
   loadData();
 });
 
@@ -549,7 +548,6 @@ function showScreen(screenId, navEl) {
   document.getElementById(screenId).classList.add('active');
   if (navEl) navEl.classList.add('active');
 
-  // Trigger reactive re-rendering when switching tabs
   if (screenId === 'screen-dashboard') renderDashboard();
   else if (screenId === 'screen-naukri') renderNaukri();
   else if (screenId === 'screen-external') renderExternal();
@@ -560,78 +558,97 @@ async function loadData() {
   try {
     const res = await fetch('/api/jobs');
     allJobs = await res.json();
-    await updateStats();
+    updateStats();
     renderDashboard();
     renderNaukri();
     renderExternal();
     renderFailed();
-  } catch (e) { toast('Failed to load job data'); }
+  } catch (e) { toast('Failed to load tracking data'); }
 }
 
-async function updateStats() {
-  try {
-    const res = await fetch('/api/stats');
-    const s = await res.json();
-    document.getElementById('st-total').textContent = s.total || 0;
-    document.getElementById('st-applied').textContent = s.applied || 0;
-    document.getElementById('st-external').textContent = s.external || 0;
-    document.getElementById('st-failed').textContent = s.failed || 0;
-    document.getElementById('st-pending').textContent = s.pending || 0;
-    document.getElementById('st-skipped').textContent = s.skipped || 0;
+function updateStats() {
+  const naukriApplied = allJobs.filter(j => j.source === 'naukri' && j.status === 'applied');
+  const externalJobs  = allJobs.filter(j => j.source === 'external' || j.source === 'manual_external');
+  const failedJobs    = allJobs.filter(j => j.status === 'failed');
 
-    const naukriJobs = allJobs.filter(j => j.source === 'naukri');
-    const externalJobs = allJobs.filter(j => j.source === 'external');
-    const failedJobs = allJobs.filter(j => j.status === 'failed');
+  document.getElementById('st-applied').textContent = naukriApplied.length;
+  document.getElementById('st-external').textContent = externalJobs.length;
+  document.getElementById('st-failed').textContent = failedJobs.length;
+  document.getElementById('st-total').textContent = allJobs.length;
 
-    document.getElementById('nb-naukri').textContent = naukriJobs.length;
-    document.getElementById('nb-external').textContent = externalJobs.length;
-    document.getElementById('nb-failed').textContent = failedJobs.length;
-  } catch {}
+  document.getElementById('nb-naukri').textContent = naukriApplied.length;
+  document.getElementById('nb-external').textContent = externalJobs.length;
+  document.getElementById('nb-failed').textContent = failedJobs.length;
 }
 
+// ── Screen 1: Dashboard Overview Table ──
 function renderDashboard() {
-  const container = document.getElementById('dash-recent-list');
-  const activeJobs = allJobs.filter(j => j.status === 'applied' || j.status === 'external' || j.status === 'failed');
-  const displayList = activeJobs.length ? activeJobs : allJobs.slice(0, 25);
+  const body = document.getElementById('dash-table-body');
+  const activeJobs = allJobs.filter(j => j.status === 'applied' || j.status === 'failed');
+  const displayList = activeJobs.length ? activeJobs : allJobs.slice(0, 30);
 
   if (!displayList.length) {
-    container.innerHTML = '<div style="padding:40px; text-align:center; color:var(--text-muted);">No jobs tracked yet.</div>';
+    body.innerHTML = '<tr><td colspan="7" style="text-align:center; padding:30px; color:var(--text-muted);">No tracked application history yet.</td></tr>';
     return;
   }
-  container.innerHTML = displayList.map(j => renderJobCard(j)).join('');
+
+  body.innerHTML = displayList.map(j => {
+    const dateStr = j.appliedAt ? new Date(j.appliedAt).toLocaleString('en-IN', { day:'numeric', month:'short', year:'numeric', hour:'2-digit', minute:'2-digit' }) : (j.postedAt || 'Recently');
+    const badgeCls = j.status === 'applied' ? 'badge-success' : j.status === 'failed' ? 'badge-failed' : 'badge-external';
+    return `
+      <tr>
+        <td style="font-weight:600; color:var(--text-muted);">${dateStr}</td>
+        <td style="font-weight:700; color:#ffffff;">${esc(j.company)}</td>
+        <td style="font-weight:600;">${esc(j.title)}</td>
+        <td style="color:var(--text-muted);">${esc(j.location || 'Hyderabad')}</td>
+        <td><span class="badge badge-external">${j.source.toUpperCase()}</span></td>
+        <td><span class="badge ${badgeCls}">${j.status.toUpperCase()}</span></td>
+        <td><a href="${esc(j.externalUrl || j.applyUrl)}" target="_blank" style="color:#ffffff; font-weight:600;">🔗 View Link</a></td>
+      </tr>
+    `;
+  }).join('');
 }
 
+// ── Screen 2: Naukri Quick Apply (Only Successfully Applied Jobs) ──
 function renderNaukri() {
-  const q = (document.getElementById('search-naukri').value || '').toLowerCase().trim();
-  const st = document.getElementById('filter-naukri-status').value;
-  const container = document.getElementById('naukri-list');
+  let q = (document.getElementById('search-naukri').value || '').toLowerCase().trim();
+  if (q.includes('@')) { document.getElementById('search-naukri').value = ''; q = ''; }
+  const body = document.getElementById('naukri-table-body');
 
-  let jobs = allJobs.filter(j => j.source === 'naukri');
-  if (st !== 'all') jobs = jobs.filter(j => j.status === st);
-  if (q) jobs = jobs.filter(j => (j.title + ' ' + j.company + ' ' + j.location).toLowerCase().includes(q));
-
-  if (!jobs.length) {
-    container.innerHTML = '<div style="padding:40px; text-align:center; color:var(--text-muted);">No Naukri jobs match the selected filter.</div>';
-    return;
-  }
-  container.innerHTML = jobs.map(j => renderJobCard(j)).join('');
-}
-
-function renderExternal() {
-  let q = (document.getElementById('search-external').value || '').toLowerCase().trim();
-  if (q.includes('@')) {
-    document.getElementById('search-external').value = '';
-    q = '';
-  }
-  const st = document.getElementById('filter-external-status').value;
-  const body = document.getElementById('external-table-body');
-
-  let jobs = allJobs.filter(j => j.source === 'external');
-  if (st !== 'all') jobs = jobs.filter(j => j.status === st);
+  let jobs = allJobs.filter(j => j.source === 'naukri' && j.status === 'applied');
   if (q) jobs = jobs.filter(j => (j.company + ' ' + j.title + ' ' + j.location).toLowerCase().includes(q));
 
   if (!jobs.length) {
-    body.innerHTML = '<tr><td colspan="7" style="text-align:center; padding:30px; color:var(--text-muted);">No external company listings match the filter.</td></tr>';
+    body.innerHTML = '<tr><td colspan="6" style="text-align:center; padding:30px; color:var(--text-muted);">No successful Naukri quick applies tracked yet.</td></tr>';
+    return;
+  }
+
+  body.innerHTML = jobs.map(j => {
+    const dateStr = j.appliedAt ? new Date(j.appliedAt).toLocaleString('en-IN', { day:'numeric', month:'short', year:'numeric', hour:'2-digit', minute:'2-digit' }) : 'Applied';
+    return `
+      <tr>
+        <td style="font-weight:600; color:var(--text-muted);">${dateStr}</td>
+        <td style="font-weight:700; color:#ffffff;">${esc(j.company)}</td>
+        <td style="font-weight:600;">${esc(j.title)}</td>
+        <td style="color:var(--text-muted);">${esc(j.location || 'Hyderabad')}</td>
+        <td><span class="badge badge-success">SUCCESS</span></td>
+        <td><a href="${esc(j.applyUrl || j.externalUrl)}" target="_blank" style="color:#ffffff; font-weight:600;">🔗 View Posting</a></td>
+      </tr>
+    `;
+  }).join('');
+}
+
+// ── Screen 3: Naukri External Jobs ──
+function renderExternal() {
+  let q = (document.getElementById('search-external').value || '').toLowerCase().trim();
+  if (q.includes('@')) { document.getElementById('search-external').value = ''; q = ''; }
+  const body = document.getElementById('external-table-body');
+
+  let jobs = allJobs.filter(j => j.source === 'external' || j.source === 'manual_external');
+  if (q) jobs = jobs.filter(j => (j.company + ' ' + j.title + ' ' + j.location).toLowerCase().includes(q));
+
+  if (!jobs.length) {
+    body.innerHTML = '<tr><td colspan="6" style="text-align:center; padding:30px; color:var(--text-muted);">No external company jobs tracked yet.</td></tr>';
     return;
   }
 
@@ -641,79 +658,63 @@ function renderExternal() {
       <td style="font-weight:600;">${esc(j.title)}</td>
       <td style="color:var(--text-muted);">${esc(j.location || 'Hyderabad / India')}</td>
       <td style="color:var(--text-muted);">${esc(j.experience || '2+ Yrs')}</td>
-      <td><span class="badge badge-${j.status}">${j.status.toUpperCase()}</span></td>
+      <td style="color:var(--text-muted);">${esc(j.postedAt || 'Tracked')}</td>
       <td><a href="${esc(j.externalUrl || j.applyUrl)}" target="_blank" style="color:#ffffff; font-weight:600;">🔗 Career Link</a></td>
-      <td>
-        <button class="btn-sm" onclick="setStatus('${esc(j.id)}', 'applied')">Mark Applied</button>
-      </td>
     </tr>
   `).join('');
 }
 
+// ── Screen 4: Failed Jobs ──
 function renderFailed() {
-  const container = document.getElementById('failed-list');
+  const body = document.getElementById('failed-table-body');
   const failed = allJobs.filter(j => j.status === 'failed');
 
   if (!failed.length) {
-    container.innerHTML = '<div style="padding:40px; text-align:center; color:var(--text-muted);">No failed job applications in queue.</div>';
+    body.innerHTML = '<tr><td colspan="6" style="text-align:center; padding:30px; color:var(--text-muted);">No failed job applications recorded.</td></tr>';
     return;
   }
-  container.innerHTML = failed.map(j => renderJobCard(j)).join('');
+
+  body.innerHTML = failed.map(j => {
+    const dateStr = j.appliedAt ? new Date(j.appliedAt).toLocaleString('en-IN', { day:'numeric', month:'short', year:'numeric', hour:'2-digit', minute:'2-digit' }) : 'Attempted';
+    return `
+      <tr>
+        <td style="font-weight:600; color:var(--text-muted);">${dateStr}</td>
+        <td style="font-weight:700; color:#ffffff;">${esc(j.company)}</td>
+        <td style="font-weight:600;">${esc(j.title)}</td>
+        <td style="color:var(--text-muted);">${esc(j.location || 'Hyderabad')}</td>
+        <td><div class="diag-text">${esc(j.failedReason || 'Failed form submission')}</div></td>
+        <td><a href="${esc(j.externalUrl || j.applyUrl)}" target="_blank" style="color:#ffffff; font-weight:600;">🔗 View Link</a></td>
+      </tr>
+    `;
+  }).join('');
 }
 
-function renderJobCard(j) {
-  const url = j.externalUrl || j.applyUrl || '#';
-  return `
-    <div class="card-item">
-      <div>
-        <div class="card-title">${esc(j.title)}</div>
-        <div class="card-company">🏢 ${esc(j.company)}</div>
-        <div class="card-meta">
-          <span>📍 ${esc(j.location || 'Hyderabad')}</span>
-          ${j.experience ? `<span>💼 ${esc(j.experience)}</span>` : ''}
-        </div>
-        <div class="badges">
-          <span class="badge badge-${j.status}">${j.status.toUpperCase()}</span>
-          <span class="badge badge-external">${j.source.toUpperCase()}</span>
-        </div>
-        ${j.failedReason ? `<div class="diag-box">Reason: ${esc(j.failedReason)}</div>` : ''}
-      </div>
-      <div class="card-btns">
-        <a class="btn btn-primary" href="${esc(url)}" target="_blank">Apply Site</a>
-        <button class="btn-sm" onclick="setStatus('${esc(j.id)}', 'applied')">Mark Applied</button>
-      </div>
-    </div>
-  `;
-}
+// ── Screen 5: Submit Manual Job ──
+async function submitManualJob(e) {
+  e.preventDefault();
+  const title = document.getElementById('m-title').value.trim();
+  const company = document.getElementById('m-company').value.trim();
+  const location = document.getElementById('m-location').value.trim();
+  const externalUrl = document.getElementById('m-url').value.trim();
+  const notes = document.getElementById('m-notes').value.trim();
 
-async function setStatus(id, status) {
-  await fetch('/api/status', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ id, status }),
-  });
-  toast('Status updated');
-  loadData();
-}
-
-async function syncExcel() {
-  toast('Syncing Excel workbook...');
-  await loadData();
-  toast('Excel workbook synced!');
-}
-
-async function triggerExternalApply() {
-  toast('Launching External Site Auto-Apply job...');
-}
-
-async function saveApifyKey() {
-  const key = document.getElementById('apify-key').value.trim();
-  await fetch('/api/config', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ apifyKey: key }),
-  });
-  toast('Apify Key saved!');
+  try {
+    const res = await fetch('/api/manual-job', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ title, company, location, externalUrl, notes }),
+    });
+    if (!res.ok) throw new Error('Failed to record job');
+    toast('Manual job application recorded! 💾');
+    document.getElementById('m-title').value = '';
+    document.getElementById('m-company').value = '';
+    document.getElementById('m-url').value = '';
+    document.getElementById('m-notes').value = '';
+    await loadData();
+    showScreen('screen-dashboard', document.querySelectorAll('.nav-item')[0]);
+  } catch (err) {
+    toast(err.message);
+  }
 }
 
 function toast(msg) {

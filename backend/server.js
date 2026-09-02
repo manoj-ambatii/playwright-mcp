@@ -121,9 +121,27 @@ function loadAllJobs() {
   return Array.from(allMap.values());
 }
 
-// ── GET /api/config ───────────────────────────────────────────────────────────
-app.get('/api/config', (_req, res) => {
-  res.json(loadConfig());
+// ── POST /api/manual-job ──────────────────────────────────────────────────────
+app.post('/api/manual-job', (req, res) => {
+  const { title, company, location, externalUrl, notes } = req.body;
+  if (!title || !company) {
+    return res.status(400).json({ error: 'Company and Job Title are required' });
+  }
+
+  const tracker = loadTracker();
+  const key = externalUrl || `manual-${Date.now()}`;
+  tracker.applied[key] = {
+    date: new Date().toISOString(),
+    source: 'manual_external',
+    title,
+    company,
+    location: location || 'Hyderabad / Remote',
+    externalUrl: externalUrl || '',
+    notes: notes || 'Manual external application',
+  };
+
+  writeJson(TRACKER_FILE, tracker);
+  res.json({ ok: true, id: key });
 });
 
 // ── POST /api/config ──────────────────────────────────────────────────────────
