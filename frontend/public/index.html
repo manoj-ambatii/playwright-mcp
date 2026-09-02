@@ -580,7 +580,7 @@ async function updateStats() {
     document.getElementById('st-skipped').textContent = s.skipped || 0;
 
     const naukriJobs = allJobs.filter(j => j.source === 'naukri');
-    const externalJobs = allJobs.filter(j => j.source === 'external' || j.status === 'external' || j.externalUrl);
+    const externalJobs = allJobs.filter(j => j.source === 'external');
     const failedJobs = allJobs.filter(j => j.status === 'failed');
 
     document.getElementById('nb-naukri').textContent = naukriJobs.length;
@@ -626,7 +626,7 @@ function renderExternal() {
   const st = document.getElementById('filter-external-status').value;
   const body = document.getElementById('external-table-body');
 
-  let jobs = allJobs.filter(j => j.source === 'external' || j.status === 'external' || j.externalUrl);
+  let jobs = allJobs.filter(j => j.source === 'external');
   if (st !== 'all') jobs = jobs.filter(j => j.status === st);
   if (q) jobs = jobs.filter(j => (j.company + ' ' + j.title + ' ' + j.location).toLowerCase().includes(q));
 
