@@ -230,7 +230,7 @@
   .prof-chips { display: flex; gap: 12px; flex-wrap: wrap; }
   .chip { background: rgba(255, 255, 255, 0.04); border: 1px solid var(--border); border-radius: 10px; padding: 8px 16px; font-size: 0.85rem; color: var(--text-muted); }
   .chip strong { color: #ffffff; }
-  .chip.highlight { background: #ffffff; color: #000000; border-color: #ffffff; font-weight: 800; }
+  .chip highlight { background: #ffffff; color: #000000; border-color: #ffffff; font-weight: 800; }
 
   /* ── Stat Card Component Grid ── */
   .stats-grid {
@@ -540,22 +540,22 @@
   </div>
 
   <ul class="nav-menu">
-    <li class="nav-item active" onclick="showScreen('screen-dashboard', this)">
+    <li class="nav-item active" data-screen="screen-dashboard" onclick="showScreen('screen-dashboard', this)">
       <i class="fa-solid fa-chart-pie"></i> Dashboard
     </li>
-    <li class="nav-item" onclick="showScreen('screen-naukri', this)">
+    <li class="nav-item" data-screen="screen-naukri" onclick="showScreen('screen-naukri', this)">
       <i class="fa-solid fa-bolt"></i> Naukri Quick Apply
       <span class="nav-badge" id="nb-naukri">0</span>
     </li>
-    <li class="nav-item" onclick="showScreen('screen-external', this)">
+    <li class="nav-item" data-screen="screen-external" onclick="showScreen('screen-external', this)">
       <i class="fa-solid fa-globe"></i> Naukri External Jobs
       <span class="nav-badge" id="nb-external">0</span>
     </li>
-    <li class="nav-item" onclick="showScreen('screen-failed', this)">
+    <li class="nav-item" data-screen="screen-failed" onclick="showScreen('screen-failed', this)">
       <i class="fa-solid fa-circle-xmark"></i> Failed Jobs
       <span class="nav-badge" id="nb-failed">0</span>
     </li>
-    <li class="nav-item" onclick="showScreen('screen-manual', this)">
+    <li class="nav-item" data-screen="screen-manual" onclick="showScreen('screen-manual', this)">
       <i class="fa-solid fa-square-plus"></i> Add Manual Job
     </li>
   </ul>
@@ -793,7 +793,22 @@ let fpFailed = null;
 
 window.addEventListener('DOMContentLoaded', () => {
   initFlatpickrs();
+  
+  // Restore screen state on refresh from URL hash or localStorage
+  const hash = window.location.hash ? window.location.hash.replace('#', '') : '';
+  const savedScreen = localStorage.getItem('activeScreen');
+  const targetScreen = hash || savedScreen || 'screen-dashboard';
+  
+  const navItem = document.querySelector(`.nav-item[data-screen="${targetScreen}"]`) || document.querySelectorAll('.nav-item')[0];
+  showScreen(targetScreen, navItem, false);
+
   loadData();
+});
+
+window.addEventListener('hashchange', () => {
+  const hash = window.location.hash ? window.location.hash.replace('#', '') : 'screen-dashboard';
+  const navItem = document.querySelector(`.nav-item[data-screen="${hash}"]`);
+  showScreen(hash, navItem, false);
 });
 
 function initFlatpickrs() {
@@ -827,16 +842,28 @@ function clearDateFilter(type) {
   else if (type === 'failed' && fpFailed) { fpFailed.clear(); renderFailed(); }
 }
 
-function showScreen(screenId, navEl) {
+function showScreen(screenId, navEl, updateHistory = true) {
+  const validScreen = document.getElementById(screenId) ? screenId : 'screen-dashboard';
+
   document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
   document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-  document.getElementById(screenId).classList.add('active');
-  if (navEl) navEl.classList.add('active');
 
-  if (screenId === 'screen-dashboard') renderDashboard();
-  else if (screenId === 'screen-naukri') renderNaukri();
-  else if (screenId === 'screen-external') renderExternal();
-  else if (screenId === 'screen-failed') renderFailed();
+  const activeScreenEl = document.getElementById(validScreen);
+  if (activeScreenEl) activeScreenEl.classList.add('active');
+
+  const activeNavEl = navEl || document.querySelector(`.nav-item[data-screen="${validScreen}"]`);
+  if (activeNavEl) activeNavEl.classList.add('active');
+
+  // Persist state in localStorage and URL hash
+  localStorage.setItem('activeScreen', validScreen);
+  if (updateHistory) {
+    history.replaceState(null, '', `#${validScreen}`);
+  }
+
+  if (validScreen === 'screen-dashboard') renderDashboard();
+  else if (validScreen === 'screen-naukri') renderNaukri();
+  else if (validScreen === 'screen-external') renderExternal();
+  else if (validScreen === 'screen-failed') renderFailed();
 }
 
 async function loadData() {
@@ -844,10 +871,12 @@ async function loadData() {
     const res = await fetch('/api/jobs');
     allJobs = await res.json();
     updateStats();
-    renderDashboard();
-    renderNaukri();
-    renderExternal();
-    renderFailed();
+    
+    const currentScreen = localStorage.getItem('activeScreen') || 'screen-dashboard';
+    if (currentScreen === 'screen-dashboard') renderDashboard();
+    else if (currentScreen === 'screen-naukri') renderNaukri();
+    else if (currentScreen === 'screen-external') renderExternal();
+    else if (currentScreen === 'screen-failed') renderFailed();
   } catch (e) { toast('Failed to load tracking data'); }
 }
 
