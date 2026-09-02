@@ -389,24 +389,6 @@
       <div class="stat-card"><div class="stat-val" id="st-total">0</div><div class="stat-lbl">Total Tracked Entries</div></div>
     </div>
 
-    <!-- Application Log Table -->
-    <h2 style="font-family:var(--font-heading); font-size:1.25rem; margin-bottom:16px; color:#ffffff;">Recent Application Audit Log</h2>
-    <div class="table-wrapper">
-      <table>
-        <thead>
-          <tr>
-            <th>Applied Date & Time</th>
-            <th>Company Name</th>
-            <th>Job Title</th>
-            <th>Location</th>
-            <th>Category / Source</th>
-            <th>Status</th>
-            <th>Job Link</th>
-          </tr>
-        </thead>
-        <tbody id="dash-table-body"></tbody>
-      </table>
-    </div>
   </section>
 
   <!-- SCREEN 2: NAUKRI QUICK APPLY (ONLY SUCCESSFUL APPLIED JOBS) -->
@@ -581,35 +563,7 @@ function updateStats() {
   document.getElementById('nb-failed').textContent = failedJobs.length;
 }
 
-// ── Screen 1: Dashboard Overview Table ──
-function renderDashboard() {
-  const body = document.getElementById('dash-table-body');
-  const activeJobs = allJobs
-    .filter(j => j.status === 'applied' || j.status === 'failed')
-    .sort((a, b) => new Date(b.appliedAt || 0) - new Date(a.appliedAt || 0));
-  const displayList = activeJobs.length ? activeJobs : allJobs.slice(0, 30);
-
-  if (!displayList.length) {
-    body.innerHTML = '<tr><td colspan="7" style="text-align:center; padding:30px; color:var(--text-muted);">No tracked application history yet.</td></tr>';
-    return;
-  }
-
-  body.innerHTML = displayList.map(j => {
-    const dateStr = j.appliedAt ? new Date(j.appliedAt).toLocaleString('en-IN', { day:'numeric', month:'short', year:'numeric', hour:'2-digit', minute:'2-digit' }) : (j.postedAt || 'Recently');
-    const badgeCls = j.status === 'applied' ? 'badge-success' : j.status === 'failed' ? 'badge-failed' : 'badge-external';
-    return `
-      <tr>
-        <td style="font-weight:600; color:var(--text-muted);">${dateStr}</td>
-        <td style="font-weight:700; color:#ffffff;">${esc(j.company)}</td>
-        <td style="font-weight:600;">${esc(j.title)}</td>
-        <td style="color:var(--text-muted);">${esc(j.location || 'Hyderabad')}</td>
-        <td><span class="badge badge-external">${j.source.toUpperCase()}</span></td>
-        <td><span class="badge ${badgeCls}">${j.status.toUpperCase()}</span></td>
-        <td><a href="${esc(j.externalUrl || j.applyUrl)}" target="_blank" style="color:#ffffff; font-weight:600;">🔗 View Link</a></td>
-      </tr>
-    `;
-  }).join('');
-}
+function renderDashboard() {}
 
 // ── Screen 2: Naukri Quick Apply (Only Successfully Applied Jobs) ──
 function renderNaukri() {
