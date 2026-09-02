@@ -76,19 +76,20 @@ function loadAllJobs() {
       applyUrl: j.applyUrl || '',
       externalUrl: j.externalUrl || j.applyUrl || '',
       source: 'external',
+      status: 'pending',
       _key: key,
     });
   });
 
   // Include any extra entries present in tracker categories
   const categories = [
-    { cat: 'applied' },
-    { cat: 'external' },
-    { cat: 'failed' },
-    { cat: 'skipped' },
+    { cat: 'applied', status: 'applied' },
+    { cat: 'external', status: 'external' },
+    { cat: 'failed', status: 'failed' },
+    { cat: 'skipped', status: 'skipped' },
   ];
 
-  categories.forEach(({ cat }) => {
+  categories.forEach(({ cat, status }) => {
     const obj = tracker[cat] || {};
     Object.entries(obj).forEach(([url, item]) => {
       const isExt = extSet.has(url) || (item.source && String(item.source).includes('external')) || cat === 'external' || cat === 'failed';
@@ -101,6 +102,9 @@ function loadAllJobs() {
         if (item.location) existing.location = item.location;
         if (item.externalUrl) existing.externalUrl = item.externalUrl;
         existing.source = source;
+        existing.status = status;
+        existing.appliedAt = item.date || existing.appliedAt || null;
+        if (item.notes || item.reason) existing.failedReason = item.notes || item.reason;
       } else {
         allMap.set(url, {
           id: url,
@@ -112,6 +116,9 @@ function loadAllJobs() {
           applyUrl: url,
           externalUrl: item.externalUrl || url,
           source: source,
+          status: status,
+          appliedAt: item.date || null,
+          failedReason: item.notes || item.reason || null,
           _key: url,
         });
       }
@@ -120,6 +127,11 @@ function loadAllJobs() {
 
   return Array.from(allMap.values());
 }
+
+// ── GET /api/config ───────────────────────────────────────────────────────────
+app.get('/api/config', (_req, res) => {
+  res.json(loadConfig());
+});
 
 // ── POST /api/manual-job ──────────────────────────────────────────────────────
 app.post('/api/manual-job', (req, res) => {
@@ -154,31 +166,7 @@ app.post('/api/config', (req, res) => {
 
 // ── GET /api/jobs ─────────────────────────────────────────────────────────────
 app.get('/api/jobs', (_req, res) => {
-  const jobs    = loadAllJobs();
-  const tracker = loadTracker();
-  res.json(jobs.map((j) => {
-    const key = j._key;
-    const inApplied  = tracker.applied[key];
-    const inExternal = tracker.external[key];
-    const inFailed   = tracker.failed[key];
-    const inSkipped  = tracker.skipped[key];
-    
-    let status = 'pending';
-    if (inApplied) status = 'applied';
-    else if (inFailed) status = 'failed';
-    else if (inExternal) status = 'external';
-    else if (inSkipped) status = 'skipped';
-
-    return {
-      ...j,
-      id:          key,
-      status,
-      appliedAt:   inApplied?.date || null,
-      failedReason: inFailed?.notes || inFailed?.reason || null,
-      skippedAt:   inSkipped?.date || null,
-      notes:       inApplied?.notes || inExternal?.notes || inFailed?.notes || inSkipped?.notes || '',
-    };
-  }));
+  res.json(loadAllJobs());
 });
 
 // ── GET /api/stats ────────────────────────────────────────────────────────────
