@@ -5,9 +5,32 @@ const path = require('path');
 try { require('dotenv').config({ path: path.join(__dirname, '../.env') }); } catch {}
 
 const { ApifyClient } = require('apify-client');
+const trackerHelper = require('./scripts/track-jobs');
 
 const app = express();
 app.use(express.json());
+
+// ── POST /api/log-applied ───────────────────────────────────────────────────
+app.post('/api/log-applied', (req, res) => {
+  const { title, company, location, url, applyUrl, source = 'naukri', notes } = req.body;
+  if (!title || !company) {
+    return res.status(400).json({ error: 'Title and Company are required' });
+  }
+
+  const jobUrl = url || applyUrl || `naukri-quick-${Date.now()}`;
+  trackerHelper.logApplied({
+    title,
+    company,
+    location: location || 'Hyderabad',
+    url: jobUrl,
+    externalUrl: applyUrl || jobUrl,
+    source: source || 'naukri',
+    notes: notes || 'Naukri quick-apply (auto)',
+  });
+  trackerHelper.save();
+
+  res.json({ ok: true, url: jobUrl, message: 'Successfully logged Naukri quick apply application' });
+});
 
 const JOBS_FILE       = path.join(__dirname, 'data', 'linkedin-jobs.json');
 const NAUKRI_EXT_FILE = path.join(__dirname, 'data', 'naukri-external-jobs.json');
