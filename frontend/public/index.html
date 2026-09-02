@@ -3,14 +3,14 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Job Application Tracker - Premium Component UI</title>
+<title>Job Application Tracker - Clean Single Date Filter</title>
 
 <!-- Google Fonts: Outfit & Inter -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
 
-<!-- Font Awesome 6 Pro / Free CDN for Component Icons -->
+<!-- Font Awesome 6 Pro / Free CDN -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 <style>
@@ -42,7 +42,7 @@
     -webkit-font-smoothing: antialiased;
   }
 
-  /* ── Sidebar Component Navigation ── */
+  /* ── Sidebar Navigation ── */
   .sidebar {
     width: 270px;
     background: var(--bg-sidebar);
@@ -328,10 +328,10 @@
     background: #000000;
     border: 1px solid var(--border);
     border-radius: 10px;
-    padding: 6px 14px;
+    padding: 8px 16px;
   }
 
-  .date-lbl { font-size: 0.82rem; font-weight: 700; color: var(--text-muted); display: flex; align-items: center; gap: 6px; }
+  .date-lbl { font-size: 0.85rem; font-weight: 700; color: var(--text-muted); display: flex; align-items: center; gap: 8px; }
 
   /* ── Button Component ── */
   .btn {
@@ -520,15 +520,10 @@
         <i class="fa-solid fa-magnifying-glass"></i>
         <input type="text" class="search-input" id="search-naukri" placeholder="Search company name, job title, location..." autocomplete="off" name="search_naukri_clean" oninput="renderNaukri()" />
       </div>
-      <select class="filter-select" id="date-naukri" onchange="document.getElementById('exact-date-naukri').value=''; renderNaukri();">
-        <option value="all">📅 All Preset Dates</option>
-        <option value="today">Today</option>
-        <option value="7days">Last 7 Days</option>
-        <option value="30days">Last 30 Days</option>
-      </select>
       <div class="date-group">
-        <span class="date-lbl"><i class="fa-regular fa-calendar-days"></i> Exact Date:</span>
-        <input type="date" class="filter-select" style="border:none; padding:6px;" id="exact-date-naukri" onchange="renderNaukri()" />
+        <span class="date-lbl"><i class="fa-regular fa-calendar-days"></i> Filter by Date:</span>
+        <input type="date" class="filter-select" style="border:none; padding:4px;" id="exact-date-naukri" onchange="renderNaukri()" />
+        <button class="btn btn-secondary" style="padding:4px 10px; font-size:0.75rem; border:none;" onclick="document.getElementById('exact-date-naukri').value=''; renderNaukri();" title="Clear Date">Clear</button>
       </div>
     </div>
 
@@ -563,15 +558,10 @@
         <i class="fa-solid fa-magnifying-glass"></i>
         <input type="text" class="search-input" id="search-external" placeholder="Search company name, job title, location..." autocomplete="off" name="search_external_clean" oninput="renderExternal()" />
       </div>
-      <select class="filter-select" id="date-external" onchange="document.getElementById('exact-date-external').value=''; renderExternal();">
-        <option value="all">📅 All Preset Dates</option>
-        <option value="today">Today</option>
-        <option value="7days">Last 7 Days</option>
-        <option value="30days">Last 30 Days</option>
-      </select>
       <div class="date-group">
-        <span class="date-lbl"><i class="fa-regular fa-calendar-days"></i> Exact Date:</span>
-        <input type="date" class="filter-select" style="border:none; padding:6px;" id="exact-date-external" onchange="renderExternal()" />
+        <span class="date-lbl"><i class="fa-regular fa-calendar-days"></i> Filter by Date:</span>
+        <input type="date" class="filter-select" style="border:none; padding:4px;" id="exact-date-external" onchange="renderExternal()" />
+        <button class="btn btn-secondary" style="padding:4px 10px; font-size:0.75rem; border:none;" onclick="document.getElementById('exact-date-external').value=''; renderExternal();" title="Clear Date">Clear</button>
       </div>
     </div>
 
@@ -606,15 +596,10 @@
         <i class="fa-solid fa-magnifying-glass"></i>
         <input type="text" class="search-input" id="search-failed" placeholder="Search company name, title, reason..." autocomplete="off" name="search_failed_clean" oninput="renderFailed()" />
       </div>
-      <select class="filter-select" id="date-failed" onchange="document.getElementById('exact-date-failed').value=''; renderFailed();">
-        <option value="all">📅 All Preset Dates</option>
-        <option value="today">Today</option>
-        <option value="7days">Last 7 Days</option>
-        <option value="30days">Last 30 Days</option>
-      </select>
       <div class="date-group">
-        <span class="date-lbl"><i class="fa-regular fa-calendar-days"></i> Exact Date:</span>
-        <input type="date" class="filter-select" style="border:none; padding:6px;" id="exact-date-failed" onchange="renderFailed()" />
+        <span class="date-lbl"><i class="fa-regular fa-calendar-days"></i> Filter by Date:</span>
+        <input type="date" class="filter-select" style="border:none; padding:4px;" id="exact-date-failed" onchange="renderFailed()" />
+        <button class="btn btn-secondary" style="padding:4px 10px; font-size:0.75rem; border:none;" onclick="document.getElementById('exact-date-failed').value=''; renderFailed();" title="Clear Date">Clear</button>
       </div>
     </div>
 
@@ -721,42 +706,20 @@ function updateStats() {
   document.getElementById('nb-failed').textContent = failedJobs.length;
 }
 
-function filterByDate(jobs, datePreset, exactDateVal) {
-  if (exactDateVal) {
-    return jobs.filter(j => {
-      const rawDate = j.appliedAt || j.postedAt || j.capturedAt;
-      if (!rawDate) return false;
-      const d = new Date(rawDate);
-      if (isNaN(d.getTime())) return false;
-
-      const year = d.getFullYear();
-      const month = String(d.getMonth() + 1).padStart(2, '0');
-      const day = String(d.getDate()).padStart(2, '0');
-      const jobDateStr = `${year}-${month}-${day}`;
-
-      return jobDateStr === exactDateVal;
-    });
-  }
-
-  if (!datePreset || datePreset === 'all') return jobs;
-  const now = new Date();
-  const todayStart = new Date(now.getFullYear(), now.getMonth(), now.getDate()).getTime();
-
+function filterByDate(jobs, exactDateVal) {
+  if (!exactDateVal) return jobs;
   return jobs.filter(j => {
     const rawDate = j.appliedAt || j.postedAt || j.capturedAt;
-    if (!rawDate) return true;
+    if (!rawDate) return false;
+    const d = new Date(rawDate);
+    if (isNaN(d.getTime())) return false;
 
-    const jobTime = new Date(rawDate).getTime();
-    if (isNaN(jobTime)) return true;
+    const year = d.getFullYear();
+    const month = String(d.getMonth() + 1).padStart(2, '0');
+    const day = String(d.getDate()).padStart(2, '0');
+    const jobDateStr = `${year}-${month}-${day}`;
 
-    if (datePreset === 'today') {
-      return jobTime >= todayStart;
-    } else if (datePreset === '7days') {
-      return jobTime >= (todayStart - 7 * 24 * 60 * 60 * 1000);
-    } else if (datePreset === '30days') {
-      return jobTime >= (todayStart - 30 * 24 * 60 * 60 * 1000);
-    }
-    return true;
+    return jobDateStr === exactDateVal;
   });
 }
 
@@ -766,7 +729,6 @@ function renderDashboard() {}
 function renderNaukri() {
   let q = (document.getElementById('search-naukri').value || '').toLowerCase().trim();
   if (q.includes('@')) { document.getElementById('search-naukri').value = ''; q = ''; }
-  const datePreset = document.getElementById('date-naukri').value;
   const exactDateVal = document.getElementById('exact-date-naukri').value;
   const body = document.getElementById('naukri-table-body');
 
@@ -774,7 +736,7 @@ function renderNaukri() {
     .filter(j => j.status === 'applied')
     .sort((a, b) => new Date(b.appliedAt || 0) - new Date(a.appliedAt || 0));
 
-  jobs = filterByDate(jobs, datePreset, exactDateVal);
+  jobs = filterByDate(jobs, exactDateVal);
 
   if (q) jobs = jobs.filter(j => (j.company + ' ' + j.title + ' ' + j.location).toLowerCase().includes(q));
 
@@ -802,12 +764,11 @@ function renderNaukri() {
 function renderExternal() {
   let q = (document.getElementById('search-external').value || '').toLowerCase().trim();
   if (q.includes('@')) { document.getElementById('search-external').value = ''; q = ''; }
-  const datePreset = document.getElementById('date-external').value;
   const exactDateVal = document.getElementById('exact-date-external').value;
   const body = document.getElementById('external-table-body');
 
   let jobs = allJobs.filter(j => j.source === 'external' || j.source === 'manual_external');
-  jobs = filterByDate(jobs, datePreset, exactDateVal);
+  jobs = filterByDate(jobs, exactDateVal);
 
   if (q) jobs = jobs.filter(j => (j.company + ' ' + j.title + ' ' + j.location).toLowerCase().includes(q));
 
@@ -832,12 +793,11 @@ function renderExternal() {
 function renderFailed() {
   let q = (document.getElementById('search-failed') ? document.getElementById('search-failed').value : '').toLowerCase().trim();
   if (q.includes('@')) { if(document.getElementById('search-failed')) document.getElementById('search-failed').value = ''; q = ''; }
-  const datePreset = document.getElementById('date-failed') ? document.getElementById('date-failed').value : 'all';
   const exactDateVal = document.getElementById('exact-date-failed') ? document.getElementById('exact-date-failed').value : '';
   const body = document.getElementById('failed-table-body');
 
   let failed = allJobs.filter(j => j.status === 'failed');
-  failed = filterByDate(failed, datePreset, exactDateVal);
+  failed = filterByDate(failed, exactDateVal);
 
   if (q) failed = failed.filter(j => (j.company + ' ' + j.title + ' ' + j.location + ' ' + (j.failedReason||'')).toLowerCase().includes(q));
 
