@@ -253,6 +253,16 @@
 
   .search-input:focus { border-color: #ffffff; }
 
+  .filter-select {
+    background: #000000;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 0.85rem;
+    color: #ffffff;
+    outline: none;
+  }
+
   .btn {
     border: 1px solid #ffffff;
     border-radius: 8px;
@@ -273,7 +283,7 @@
   .btn-secondary { background: #000000; color: #ffffff; border-color: var(--border); }
   .btn-secondary:hover { border-color: #ffffff; }
 
-  /* ── Table & Cards Display ── */
+  /* ── Table Display ── */
   .table-wrapper {
     background: var(--bg-card);
     border: 1px solid var(--border);
@@ -289,7 +299,6 @@
   .badge { font-size: 0.72rem; font-weight: 700; padding: 3px 10px; border-radius: 6px; text-transform: uppercase; border: 1px solid var(--border); background: #000000; color: #ffffff; }
   .badge-success { background: #ffffff; color: #000000; border-color: #ffffff; }
   .badge-failed { background: #262626; color: #a3a3a3; border-color: #525252; }
-  .badge-external { background: #1f1f1f; color: #ffffff; border-color: #404040; }
 
   .diag-text { font-size: 0.8rem; color: #a3a3a3; background: #0a0a0a; border: 1px solid var(--border); border-radius: 6px; padding: 6px 10px; margin-top: 4px; }
 
@@ -388,7 +397,6 @@
       <div class="stat-card"><div class="stat-val" id="st-failed">0</div><div class="stat-lbl">Failed Application Attempts</div></div>
       <div class="stat-card"><div class="stat-val" id="st-total">0</div><div class="stat-lbl">Total Tracked Entries</div></div>
     </div>
-
   </section>
 
   <!-- SCREEN 2: NAUKRI QUICK APPLY (ONLY SUCCESSFUL APPLIED JOBS) -->
@@ -402,6 +410,12 @@
 
     <div class="filter-bar">
       <input type="text" class="search-input" id="search-naukri" placeholder="Search company name, title, location..." autocomplete="off" name="search_naukri_clean" oninput="renderNaukri()" />
+      <select class="filter-select" id="date-naukri" onchange="renderNaukri()">
+        <option value="all">📅 All Dates</option>
+        <option value="today">Today</option>
+        <option value="7days">Last 7 Days</option>
+        <option value="30days">Last 30 Days</option>
+      </select>
     </div>
 
     <div class="table-wrapper">
@@ -432,6 +446,12 @@
 
     <div class="filter-bar">
       <input type="text" class="search-input" id="search-external" placeholder="Search company name, job title, location..." autocomplete="off" name="search_external_clean" oninput="renderExternal()" />
+      <select class="filter-select" id="date-external" onchange="renderExternal()">
+        <option value="all">📅 All Dates</option>
+        <option value="today">Today</option>
+        <option value="7days">Last 7 Days</option>
+        <option value="30days">Last 30 Days</option>
+      </select>
     </div>
 
     <div class="table-wrapper">
@@ -458,6 +478,16 @@
         <h1 class="page-title">❌ Failed Jobs Queue</h1>
         <div class="page-subtitle">Audit failed application attempts and exact error diagnostics</div>
       </div>
+    </div>
+
+    <div class="filter-bar">
+      <input type="text" class="search-input" id="search-failed" placeholder="Search company name, title, reason..." autocomplete="off" name="search_failed_clean" oninput="renderFailed()" />
+      <select class="filter-select" id="date-failed" onchange="renderFailed()">
+        <option value="all">📅 All Dates</option>
+        <option value="today">Today</option>
+        <option value="7days">Last 7 Days</option>
+        <option value="30days">Last 30 Days</option>
+      </select>
     </div>
 
     <div class="table-wrapper">
@@ -563,22 +593,48 @@ function updateStats() {
   document.getElementById('nb-failed').textContent = failedJobs.length;
 }
 
+function filterByDate(jobs, dateVal) {
+  if (!dateVal || dateVal === 'all') return jobs;
+  const now = new Date();
+  const todayStart = new Date(now.getFullYear(), now.getMonth(), now.getDate()).getTime();
+
+  return jobs.filter(j => {
+    const rawDate = j.appliedAt || j.postedAt || j.capturedAt;
+    if (!rawDate) return true;
+
+    const jobTime = new Date(rawDate).getTime();
+    if (isNaN(jobTime)) return true;
+
+    if (dateVal === 'today') {
+      return jobTime >= todayStart;
+    } else if (dateVal === '7days') {
+      return jobTime >= (todayStart - 7 * 24 * 60 * 60 * 1000);
+    } else if (dateVal === '30days') {
+      return jobTime >= (todayStart - 30 * 24 * 60 * 60 * 1000);
+    }
+    return true;
+  });
+}
+
 function renderDashboard() {}
 
 // ── Screen 2: Naukri Quick Apply (Only Successfully Applied Jobs) ──
 function renderNaukri() {
   let q = (document.getElementById('search-naukri').value || '').toLowerCase().trim();
   if (q.includes('@')) { document.getElementById('search-naukri').value = ''; q = ''; }
+  const dateVal = document.getElementById('date-naukri').value;
   const body = document.getElementById('naukri-table-body');
 
   let jobs = allJobs
     .filter(j => j.status === 'applied')
     .sort((a, b) => new Date(b.appliedAt || 0) - new Date(a.appliedAt || 0));
 
+  jobs = filterByDate(jobs, dateVal);
+
   if (q) jobs = jobs.filter(j => (j.company + ' ' + j.title + ' ' + j.location).toLowerCase().includes(q));
 
   if (!jobs.length) {
-    body.innerHTML = '<tr><td colspan="6" style="text-align:center; padding:30px; color:var(--text-muted);">No successful Naukri quick applies tracked yet.</td></tr>';
+    body.innerHTML = '<tr><td colspan="6" style="text-align:center; padding:30px; color:var(--text-muted);">No successful Naukri quick applies match the selected filters.</td></tr>';
     return;
   }
 
@@ -601,13 +657,16 @@ function renderNaukri() {
 function renderExternal() {
   let q = (document.getElementById('search-external').value || '').toLowerCase().trim();
   if (q.includes('@')) { document.getElementById('search-external').value = ''; q = ''; }
+  const dateVal = document.getElementById('date-external').value;
   const body = document.getElementById('external-table-body');
 
   let jobs = allJobs.filter(j => j.source === 'external' || j.source === 'manual_external');
+  jobs = filterByDate(jobs, dateVal);
+
   if (q) jobs = jobs.filter(j => (j.company + ' ' + j.title + ' ' + j.location).toLowerCase().includes(q));
 
   if (!jobs.length) {
-    body.innerHTML = '<tr><td colspan="6" style="text-align:center; padding:30px; color:var(--text-muted);">No external company jobs tracked yet.</td></tr>';
+    body.innerHTML = '<tr><td colspan="6" style="text-align:center; padding:30px; color:var(--text-muted);">No external company jobs match the selected filters.</td></tr>';
     return;
   }
 
@@ -625,11 +684,18 @@ function renderExternal() {
 
 // ── Screen 4: Failed Jobs ──
 function renderFailed() {
+  let q = (document.getElementById('search-failed') ? document.getElementById('search-failed').value : '').toLowerCase().trim();
+  if (q.includes('@')) { if(document.getElementById('search-failed')) document.getElementById('search-failed').value = ''; q = ''; }
+  const dateVal = document.getElementById('date-failed') ? document.getElementById('date-failed').value : 'all';
   const body = document.getElementById('failed-table-body');
-  const failed = allJobs.filter(j => j.status === 'failed');
+
+  let failed = allJobs.filter(j => j.status === 'failed');
+  failed = filterByDate(failed, dateVal);
+
+  if (q) failed = failed.filter(j => (j.company + ' ' + j.title + ' ' + j.location + ' ' + (j.failedReason||'')).toLowerCase().includes(q));
 
   if (!failed.length) {
-    body.innerHTML = '<tr><td colspan="6" style="text-align:center; padding:30px; color:var(--text-muted);">No failed job applications recorded.</td></tr>';
+    body.innerHTML = '<tr><td colspan="6" style="text-align:center; padding:30px; color:var(--text-muted);">No failed job applications match the selected filters.</td></tr>';
     return;
   }
 
