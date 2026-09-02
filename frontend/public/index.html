@@ -618,7 +618,7 @@ function renderNaukri() {
   const body = document.getElementById('naukri-table-body');
 
   let jobs = allJobs
-    .filter(j => j.status === 'applied' && (j.source === 'naukri' || (j.notes && j.notes.includes('quick-apply'))))
+    .filter(j => j.status === 'applied')
     .sort((a, b) => new Date(b.appliedAt || 0) - new Date(a.appliedAt || 0));
 
   if (q) jobs = jobs.filter(j => (j.company + ' ' + j.title + ' ' + j.location).toLowerCase().includes(q));
