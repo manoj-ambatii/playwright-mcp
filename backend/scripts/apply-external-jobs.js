@@ -162,7 +162,7 @@ async function attemptExternalApply(page, job) {
   });
   const page = await context.newPage();
 
-  const maxToProcess = parseInt(process.env.TARGET || '20', 10);
+  const maxToProcess = parseInt(process.env.TARGET || '50', 10);
   let processed = 0;
 
   for (let i = 0; i < jobs.length && processed < maxToProcess; i++) {
