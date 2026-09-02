@@ -230,7 +230,7 @@
   .prof-chips { display: flex; gap: 12px; flex-wrap: wrap; }
   .chip { background: rgba(255, 255, 255, 0.04); border: 1px solid var(--border); border-radius: 10px; padding: 8px 16px; font-size: 0.85rem; color: var(--text-muted); }
   .chip strong { color: #ffffff; }
-  .chip highlight { background: #ffffff; color: #000000; border-color: #ffffff; font-weight: 800; }
+  .chip.highlight { background: #ffffff; color: #000000; border-color: #ffffff; font-weight: 800; }
 
   /* ── Stat Card Component Grid ── */
   .stats-grid {
@@ -512,21 +512,6 @@
 
   .diag-text { font-size: 0.82rem; color: #a1a1aa; background: #09090b; border: 1px solid var(--border); border-radius: 8px; padding: 8px 12px; margin-top: 4px; line-height: 1.4; }
 
-  /* ── Form Component ── */
-  .form-card {
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    padding: 32px;
-    max-width: 680px;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
-  }
-
-  .form-group { display: flex; flex-direction: column; gap: 8px; margin-bottom: 20px; }
-  .form-label { font-size: 0.88rem; font-weight: 700; color: var(--text-muted); }
-  .form-control { background: #000000; border: 1px solid var(--border); border-radius: 12px; height: 48px; padding: 0 16px; font-size: 0.92rem; color: #ffffff; outline: none; transition: all 0.2s; }
-  .form-control:focus { border-color: #ffffff; box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.1); }
-
   /* ── Toast Component ── */
   .toast { position: fixed; bottom: 28px; right: 28px; background: #ffffff; color: #000000; font-weight: 800; border-radius: 12px; padding: 14px 24px; font-size: 0.9rem; z-index: 1000; opacity: 0; transform: translateY(40px); transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); box-shadow: 0 10px 40px rgba(0,0,0,0.8); display: flex; align-items: center; gap: 10px; }
   .toast.show { opacity: 1; transform: translateY(0); }
@@ -551,6 +536,10 @@
     <li class="nav-item" data-screen="screen-naukri" onclick="showScreen('screen-naukri', this)">
       <i class="fa-solid fa-bolt"></i> Naukri Quick Apply
       <span class="nav-badge" id="nb-naukri">0</span>
+    </li>
+    <li class="nav-item" data-screen="screen-career-applied" onclick="showScreen('screen-career-applied', this)">
+      <i class="fa-solid fa-building-user"></i> Career Page Applied
+      <span class="nav-badge" id="nb-career-applied">0</span>
     </li>
     <li class="nav-item" data-screen="screen-external" onclick="showScreen('screen-external', this)">
       <i class="fa-solid fa-globe"></i> Naukri External Jobs
@@ -591,6 +580,7 @@
         <div class="chip highlight"><i class="fa-solid fa-bolt"></i> Immediate Joiner (0 Days)</div>
       </div>
     </div>
+
     <div class="page-header">
       <div>
         <h1 class="page-title">Application Tracker Dashboard</h1>
@@ -607,6 +597,11 @@
         <i class="fa-solid fa-circle-check stat-icon-bg"></i>
         <div class="stat-val" id="st-applied">0</div>
         <div class="stat-lbl">Naukri Successful Applies</div>
+      </div>
+      <div class="stat-card">
+        <i class="fa-solid fa-building-user stat-icon-bg"></i>
+        <div class="stat-val" id="st-career-applied">0</div>
+        <div class="stat-lbl">Career Page Applied Jobs</div>
       </div>
       <div class="stat-card">
         <i class="fa-solid fa-globe stat-icon-bg"></i>
@@ -665,7 +660,46 @@
     </div>
   </section>
 
-  <!-- SCREEN 3: NAUKRI EXTERNAL JOBS -->
+  <!-- SCREEN 3: CAREER PAGE APPLIED JOBS -->
+  <section id="screen-career-applied" class="screen">
+    <div class="page-header">
+      <div>
+        <h1 class="page-title">🏢 Career Page Applied Jobs</h1>
+        <div class="page-subtitle">Successfully submitted applications on external company career portals</div>
+      </div>
+    </div>
+
+    <div class="filter-bar">
+      <div class="search-box">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input type="text" class="search-input" id="search-career-applied" placeholder="Search company name, job title, location..." autocomplete="off" name="search_career_applied_clean" oninput="renderCareerApplied()" />
+      </div>
+      <div class="date-picker-wrapper">
+        <input type="text" id="exact-date-career-applied" class="date-picker-input" placeholder="Select Date..." readonly />
+        <button class="date-clear-btn" onclick="clearDateFilter('career-applied')" title="Clear Date Filter">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+    </div>
+
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr>
+            <th>Applied Date & Time</th>
+            <th>Company Name</th>
+            <th>Job Title</th>
+            <th>Location</th>
+            <th>Status</th>
+            <th>Career Site Link</th>
+          </tr>
+        </thead>
+        <tbody id="career-applied-table-body"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- SCREEN 4: NAUKRI EXTERNAL JOBS -->
   <section id="screen-external" class="screen">
     <div class="page-header">
       <div>
@@ -704,7 +738,7 @@
     </div>
   </section>
 
-  <!-- SCREEN 4: FAILED JOBS -->
+  <!-- SCREEN 5: FAILED JOBS -->
   <section id="screen-failed" class="screen">
     <div class="page-header">
       <div>
@@ -743,8 +777,6 @@
     </div>
   </section>
 
-
-
 </main>
 
 <div class="toast" id="toast"></div>
@@ -752,13 +784,13 @@
 <script>
 let allJobs = [];
 let fpNaukri = null;
+let fpCareerApplied = null;
 let fpExternal = null;
 let fpFailed = null;
 
 window.addEventListener('DOMContentLoaded', () => {
   initFlatpickrs();
   
-  // Restore screen state on refresh from URL hash or localStorage
   const hash = window.location.hash ? window.location.hash.replace('#', '') : '';
   const savedScreen = localStorage.getItem('activeScreen');
   const targetScreen = hash || savedScreen || 'screen-dashboard';
@@ -789,6 +821,11 @@ function initFlatpickrs() {
     onChange: function() { renderNaukri(); }
   });
 
+  fpCareerApplied = flatpickr('#exact-date-career-applied', {
+    ...fpConfig,
+    onChange: function() { renderCareerApplied(); }
+  });
+
   fpExternal = flatpickr('#exact-date-external', {
     ...fpConfig,
     onChange: function() { renderExternal(); }
@@ -802,6 +839,7 @@ function initFlatpickrs() {
 
 function clearDateFilter(type) {
   if (type === 'naukri' && fpNaukri) { fpNaukri.clear(); renderNaukri(); }
+  else if (type === 'career-applied' && fpCareerApplied) { fpCareerApplied.clear(); renderCareerApplied(); }
   else if (type === 'external' && fpExternal) { fpExternal.clear(); renderExternal(); }
   else if (type === 'failed' && fpFailed) { fpFailed.clear(); renderFailed(); }
 }
@@ -818,7 +856,6 @@ function showScreen(screenId, navEl, updateHistory = true) {
   const activeNavEl = navEl || document.querySelector(`.nav-item[data-screen="${validScreen}"]`);
   if (activeNavEl) activeNavEl.classList.add('active');
 
-  // Persist state in localStorage and URL hash
   localStorage.setItem('activeScreen', validScreen);
   if (updateHistory) {
     history.replaceState(null, '', `#${validScreen}`);
@@ -826,6 +863,7 @@ function showScreen(screenId, navEl, updateHistory = true) {
 
   if (validScreen === 'screen-dashboard') renderDashboard();
   else if (validScreen === 'screen-naukri') renderNaukri();
+  else if (validScreen === 'screen-career-applied') renderCareerApplied();
   else if (validScreen === 'screen-external') renderExternal();
   else if (validScreen === 'screen-failed') renderFailed();
 }
@@ -839,22 +877,26 @@ async function loadData() {
     const currentScreen = localStorage.getItem('activeScreen') || 'screen-dashboard';
     if (currentScreen === 'screen-dashboard') renderDashboard();
     else if (currentScreen === 'screen-naukri') renderNaukri();
+    else if (currentScreen === 'screen-career-applied') renderCareerApplied();
     else if (currentScreen === 'screen-external') renderExternal();
     else if (currentScreen === 'screen-failed') renderFailed();
   } catch (e) { toast('Failed to load tracking data'); }
 }
 
 function updateStats() {
-  const naukriApplied = allJobs.filter(j => j.status === 'applied' && (j.source === 'naukri' || (j.notes && j.notes.includes('quick-apply'))));
+  const naukriApplied = allJobs.filter(j => j.status === 'applied' && j.source === 'naukri');
+  const careerApplied = allJobs.filter(j => j.status === 'applied' && (j.source === 'external' || j.source === 'manual_external'));
   const externalJobs  = allJobs.filter(j => j.source === 'external' || j.source === 'manual_external');
   const failedJobs    = allJobs.filter(j => j.status === 'failed');
 
   document.getElementById('st-applied').textContent = naukriApplied.length;
+  document.getElementById('st-career-applied').textContent = careerApplied.length;
   document.getElementById('st-external').textContent = externalJobs.length;
   document.getElementById('st-failed').textContent = failedJobs.length;
   document.getElementById('st-total').textContent = allJobs.length;
 
   document.getElementById('nb-naukri').textContent = naukriApplied.length;
+  document.getElementById('nb-career-applied').textContent = careerApplied.length;
   document.getElementById('nb-external').textContent = externalJobs.length;
   document.getElementById('nb-failed').textContent = failedJobs.length;
 }
@@ -886,7 +928,7 @@ function renderNaukri() {
   const body = document.getElementById('naukri-table-body');
 
   let jobs = allJobs
-    .filter(j => j.status === 'applied')
+    .filter(j => j.status === 'applied' && j.source === 'naukri')
     .sort((a, b) => new Date(b.appliedAt || 0) - new Date(a.appliedAt || 0));
 
   jobs = filterByDate(jobs, exactDateVal);
@@ -913,7 +955,42 @@ function renderNaukri() {
   }).join('');
 }
 
-// ── Screen 3: Naukri External Jobs ──
+// ── Screen 3: Career Page Applied Jobs ──
+function renderCareerApplied() {
+  let q = (document.getElementById('search-career-applied').value || '').toLowerCase().trim();
+  if (q.includes('@')) { document.getElementById('search-career-applied').value = ''; q = ''; }
+  const exactDateVal = document.getElementById('exact-date-career-applied').value;
+  const body = document.getElementById('career-applied-table-body');
+
+  let jobs = allJobs
+    .filter(j => j.status === 'applied' && (j.source === 'external' || j.source === 'manual_external'))
+    .sort((a, b) => new Date(b.appliedAt || 0) - new Date(a.appliedAt || 0));
+
+  jobs = filterByDate(jobs, exactDateVal);
+
+  if (q) jobs = jobs.filter(j => (j.company + ' ' + j.title + ' ' + j.location).toLowerCase().includes(q));
+
+  if (!jobs.length) {
+    body.innerHTML = '<tr><td colspan="6" style="text-align:center; padding:36px; color:var(--text-muted);"><i class="fa-solid fa-folder-open" style="font-size:1.8rem; margin-bottom:10px; display:block;"></i>No career page applied jobs match the selected filters.</td></tr>';
+    return;
+  }
+
+  body.innerHTML = jobs.map(j => {
+    const dateStr = j.appliedAt ? new Date(j.appliedAt).toLocaleString('en-IN', { day:'numeric', month:'short', year:'numeric', hour:'2-digit', minute:'2-digit' }) : 'Applied';
+    return `
+      <tr>
+        <td style="font-weight:600; color:var(--text-muted);"><i class="fa-regular fa-clock" style="margin-right:6px;"></i>${dateStr}</td>
+        <td style="font-weight:700; color:#ffffff;">${esc(j.company)}</td>
+        <td style="font-weight:600;">${esc(j.title)}</td>
+        <td style="color:var(--text-muted);"><i class="fa-solid fa-location-dot" style="margin-right:4px;"></i>${esc(j.location || 'Hyderabad / Remote')}</td>
+        <td><span class="badge badge-success"><i class="fa-solid fa-check"></i> SUCCESS</span></td>
+        <td><a href="${esc(j.externalUrl || j.applyUrl)}" target="_blank" style="color:#ffffff; font-weight:700; text-decoration:none;"><i class="fa-solid fa-arrow-up-right-from-square"></i> Career Site</a></td>
+      </tr>
+    `;
+  }).join('');
+}
+
+// ── Screen 4: Naukri External Jobs ──
 function renderExternal() {
   let q = (document.getElementById('search-external').value || '').toLowerCase().trim();
   if (q.includes('@')) { document.getElementById('search-external').value = ''; q = ''; }
@@ -942,7 +1019,7 @@ function renderExternal() {
   `).join('');
 }
 
-// ── Screen 4: Failed Jobs ──
+// ── Screen 5: Failed Jobs ──
 function renderFailed() {
   let q = (document.getElementById('search-failed') ? document.getElementById('search-failed').value : '').toLowerCase().trim();
   if (q.includes('@')) { if(document.getElementById('search-failed')) document.getElementById('search-failed').value = ''; q = ''; }
@@ -972,34 +1049,6 @@ function renderFailed() {
       </tr>
     `;
   }).join('');
-}
-
-// ── Screen 5: Submit Manual Job ──
-async function submitManualJob(e) {
-  e.preventDefault();
-  const title = document.getElementById('m-title').value.trim();
-  const company = document.getElementById('m-company').value.trim();
-  const location = document.getElementById('m-location').value.trim();
-  const externalUrl = document.getElementById('m-url').value.trim();
-  const notes = document.getElementById('m-notes').value.trim();
-
-  try {
-    const res = await fetch('/api/manual-job', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ title, company, location, externalUrl, notes }),
-    });
-    if (!res.ok) throw new Error('Failed to record job');
-    toast('<i class="fa-solid fa-circle-check"></i> Manual job application recorded!');
-    document.getElementById('m-title').value = '';
-    document.getElementById('m-company').value = '';
-    document.getElementById('m-url').value = '';
-    document.getElementById('m-notes').value = '';
-    await loadData();
-    showScreen('screen-dashboard', document.querySelectorAll('.nav-item')[0]);
-  } catch (err) {
-    toast(err.message);
-  }
 }
 
 function toast(msg) {
