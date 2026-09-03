@@ -316,7 +316,7 @@
     box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.12);
   }
 
-  /* ── Date Picker Component (100% Consistent Layout & Border Radius) ── */
+  /* ── Date Picker Component ── */
   .date-picker-wrapper {
     display: flex;
     align-items: center;
@@ -489,7 +489,7 @@
 
   table { width: 100%; border-collapse: collapse; text-align: left; }
   th { background: #09090b; padding: 16px 24px; font-size: 0.8rem; text-transform: uppercase; color: var(--text-muted); font-weight: 700; letter-spacing: 0.05em; border-bottom: 1px solid var(--border); }
-  td { padding: 18px 24px; font-size: 0.9rem; border-bottom: 1px solid var(--border); color: #ffffff; }
+  td { padding: 18px 24px; font-size: 0.9rem; border-bottom: 1px solid var(--border); color: #ffffff; vertical-align: middle; }
   tr:last-child td { border-bottom: none; }
   tr:hover td { background: rgba(255, 255, 255, 0.03); }
 
@@ -508,9 +508,35 @@
   }
 
   .badge-success { background: #ffffff; color: #000000; border-color: #ffffff; }
+  .badge-linkedin { background: #0a66c2; color: #ffffff; border-color: #0a66c2; }
   .badge-failed { background: #1c1917; color: #f87171; border-color: #7f1d1d; }
 
-  .diag-text { font-size: 0.82rem; color: #a1a1aa; background: #09090b; border: 1px solid var(--border); border-radius: 8px; padding: 8px 12px; margin-top: 4px; line-height: 1.4; }
+  .email-btn {
+    background: #000000;
+    color: #ffffff;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 6px 12px;
+    font-size: 0.82rem;
+    font-weight: 700;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.2s;
+  }
+  .email-btn:hover { border-color: #ffffff; background: #1a1a1e; }
+
+  .jd-text {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    max-width: 320px;
+    line-height: 1.4;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
 
   /* ── Toast Component ── */
   .toast { position: fixed; bottom: 28px; right: 28px; background: #ffffff; color: #000000; font-weight: 800; border-radius: 12px; padding: 14px 24px; font-size: 0.9rem; z-index: 1000; opacity: 0; transform: translateY(40px); transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); box-shadow: 0 10px 40px rgba(0,0,0,0.8); display: flex; align-items: center; gap: 10px; }
@@ -533,6 +559,10 @@
     <li class="nav-item active" data-screen="screen-dashboard" onclick="showScreen('screen-dashboard', this)">
       <i class="fa-solid fa-chart-pie"></i> Dashboard
     </li>
+    <li class="nav-item" data-screen="screen-linkedin" onclick="showScreen('screen-linkedin', this)">
+      <i class="fa-brands fa-linkedin"></i> LinkedIn Jobs (15 Days)
+      <span class="nav-badge" id="nb-linkedin">0</span>
+    </li>
     <li class="nav-item" data-screen="screen-naukri" onclick="showScreen('screen-naukri', this)">
       <i class="fa-solid fa-bolt"></i> Naukri Quick Apply
       <span class="nav-badge" id="nb-naukri">0</span>
@@ -553,9 +583,9 @@
 
   <div class="sidebar-footer">
     <div style="font-weight: 800; margin-bottom: 4px; color: #ffffff; display: flex; align-items: center; gap: 8px;">
-      <i class="fa-solid fa-envelope"></i> Gmail OTP Sync
+      <i class="fa-solid fa-shield-halved"></i> Read-Only Scraping
     </div>
-    <div style="color: var(--text-muted); font-size: 0.78rem;">Active & Connected ✅</div>
+    <div style="color: var(--text-muted); font-size: 0.78rem;">No Actions Taken ✅</div>
   </div>
 </nav>
 
@@ -594,6 +624,11 @@
     <!-- Stats Component Grid -->
     <div class="stats-grid">
       <div class="stat-card">
+        <i class="fa-brands fa-linkedin stat-icon-bg"></i>
+        <div class="stat-val" id="st-linkedin">0</div>
+        <div class="stat-lbl">LinkedIn Read-Only Jobs (15 Days)</div>
+      </div>
+      <div class="stat-card">
         <i class="fa-solid fa-circle-check stat-icon-bg"></i>
         <div class="stat-val" id="st-applied">0</div>
         <div class="stat-lbl">Naukri Successful Applies</div>
@@ -609,11 +644,6 @@
         <div class="stat-lbl">Naukri External Jobs</div>
       </div>
       <div class="stat-card">
-        <i class="fa-solid fa-circle-exclamation stat-icon-bg"></i>
-        <div class="stat-val" id="st-failed">0</div>
-        <div class="stat-lbl">Failed Application Attempts</div>
-      </div>
-      <div class="stat-card">
         <i class="fa-solid fa-layer-group stat-icon-bg"></i>
         <div class="stat-val" id="st-total">0</div>
         <div class="stat-lbl">Total Tracked Entries</div>
@@ -621,7 +651,50 @@
     </div>
   </section>
 
-  <!-- SCREEN 2: NAUKRI QUICK APPLY -->
+  <!-- SCREEN 2: LINKEDIN READ-ONLY JOBS -->
+  <section id="screen-linkedin" class="screen">
+    <div class="page-header">
+      <div>
+        <h1 class="page-title">💼 LinkedIn Read-Only Jobs (Last 15 Days)</h1>
+        <div class="page-subtitle">Java Full Stack & MERN Full Stack Developer postings extracted for manual emailing</div>
+      </div>
+      <div>
+        <button class="btn btn-secondary" onclick="fetchLinkedInFeed()"><i class="fa-solid fa-sync"></i> Refresh LinkedIn Feed</button>
+      </div>
+    </div>
+
+    <div class="filter-bar">
+      <div class="search-box">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input type="text" class="search-input" id="search-linkedin" placeholder="Search company, job title, recruiter email, location..." autocomplete="off" oninput="renderLinkedIn()" />
+      </div>
+      <div class="date-picker-wrapper">
+        <input type="text" id="exact-date-linkedin" class="date-picker-input" placeholder="Select Date..." readonly />
+        <button class="date-clear-btn" onclick="clearDateFilter('linkedin')" title="Clear Date Filter">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+    </div>
+
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr>
+            <th>Posted Date</th>
+            <th>Company Name</th>
+            <th>Job Title</th>
+            <th>Location</th>
+            <th>Recruiter Email</th>
+            <th>Job Description (JD)</th>
+            <th>LinkedIn Post Link</th>
+          </tr>
+        </thead>
+        <tbody id="linkedin-table-body"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- SCREEN 3: NAUKRI QUICK APPLY -->
   <section id="screen-naukri" class="screen">
     <div class="page-header">
       <div>
@@ -633,7 +706,7 @@
     <div class="filter-bar">
       <div class="search-box">
         <i class="fa-solid fa-magnifying-glass"></i>
-        <input type="text" class="search-input" id="search-naukri" placeholder="Search company name, job title, location..." autocomplete="off" name="search_naukri_clean" oninput="renderNaukri()" />
+        <input type="text" class="search-input" id="search-naukri" placeholder="Search company name, job title, location..." autocomplete="off" oninput="renderNaukri()" />
       </div>
       <div class="date-picker-wrapper">
         <input type="text" id="exact-date-naukri" class="date-picker-input" placeholder="Select Date..." readonly />
@@ -660,7 +733,7 @@
     </div>
   </section>
 
-  <!-- SCREEN 3: CAREER PAGE APPLIED JOBS -->
+  <!-- SCREEN 4: CAREER PAGE APPLIED JOBS -->
   <section id="screen-career-applied" class="screen">
     <div class="page-header">
       <div>
@@ -672,7 +745,7 @@
     <div class="filter-bar">
       <div class="search-box">
         <i class="fa-solid fa-magnifying-glass"></i>
-        <input type="text" class="search-input" id="search-career-applied" placeholder="Search company name, job title, location..." autocomplete="off" name="search_career_applied_clean" oninput="renderCareerApplied()" />
+        <input type="text" class="search-input" id="search-career-applied" placeholder="Search company name, job title, location..." autocomplete="off" oninput="renderCareerApplied()" />
       </div>
       <div class="date-picker-wrapper">
         <input type="text" id="exact-date-career-applied" class="date-picker-input" placeholder="Select Date..." readonly />
@@ -699,7 +772,7 @@
     </div>
   </section>
 
-  <!-- SCREEN 4: NAUKRI EXTERNAL JOBS -->
+  <!-- SCREEN 5: NAUKRI EXTERNAL JOBS -->
   <section id="screen-external" class="screen">
     <div class="page-header">
       <div>
@@ -711,7 +784,7 @@
     <div class="filter-bar">
       <div class="search-box">
         <i class="fa-solid fa-magnifying-glass"></i>
-        <input type="text" class="search-input" id="search-external" placeholder="Search company name, job title, location..." autocomplete="off" name="search_external_clean" oninput="renderExternal()" />
+        <input type="text" class="search-input" id="search-external" placeholder="Search company name, job title, location..." autocomplete="off" oninput="renderExternal()" />
       </div>
       <div class="date-picker-wrapper">
         <input type="text" id="exact-date-external" class="date-picker-input" placeholder="Select Date..." readonly />
@@ -738,7 +811,7 @@
     </div>
   </section>
 
-  <!-- SCREEN 5: FAILED JOBS -->
+  <!-- SCREEN 6: FAILED JOBS -->
   <section id="screen-failed" class="screen">
     <div class="page-header">
       <div>
@@ -750,7 +823,7 @@
     <div class="filter-bar">
       <div class="search-box">
         <i class="fa-solid fa-magnifying-glass"></i>
-        <input type="text" class="search-input" id="search-failed" placeholder="Search company name, title, reason..." autocomplete="off" name="search_failed_clean" oninput="renderFailed()" />
+        <input type="text" class="search-input" id="search-failed" placeholder="Search company name, title, reason..." autocomplete="off" oninput="renderFailed()" />
       </div>
       <div class="date-picker-wrapper">
         <input type="text" id="exact-date-failed" class="date-picker-input" placeholder="Select Date..." readonly />
@@ -783,10 +856,12 @@
 
 <script>
 let allJobs = [];
+let linkedinFeedJobs = [];
 let fpNaukri = null;
 let fpCareerApplied = null;
 let fpExternal = null;
 let fpFailed = null;
+let fpLinkedin = null;
 
 window.addEventListener('DOMContentLoaded', () => {
   initFlatpickrs();
@@ -816,6 +891,11 @@ function initFlatpickrs() {
     allowInput: false,
   };
 
+  fpLinkedin = flatpickr('#exact-date-linkedin', {
+    ...fpConfig,
+    onChange: function() { renderLinkedIn(); }
+  });
+
   fpNaukri = flatpickr('#exact-date-naukri', {
     ...fpConfig,
     onChange: function() { renderNaukri(); }
@@ -838,7 +918,8 @@ function initFlatpickrs() {
 }
 
 function clearDateFilter(type) {
-  if (type === 'naukri' && fpNaukri) { fpNaukri.clear(); renderNaukri(); }
+  if (type === 'linkedin' && fpLinkedin) { fpLinkedin.clear(); renderLinkedIn(); }
+  else if (type === 'naukri' && fpNaukri) { fpNaukri.clear(); renderNaukri(); }
   else if (type === 'career-applied' && fpCareerApplied) { fpCareerApplied.clear(); renderCareerApplied(); }
   else if (type === 'external' && fpExternal) { fpExternal.clear(); renderExternal(); }
   else if (type === 'failed' && fpFailed) { fpFailed.clear(); renderFailed(); }
@@ -862,6 +943,7 @@ function showScreen(screenId, navEl, updateHistory = true) {
   }
 
   if (validScreen === 'screen-dashboard') renderDashboard();
+  else if (validScreen === 'screen-linkedin') renderLinkedIn();
   else if (validScreen === 'screen-naukri') renderNaukri();
   else if (validScreen === 'screen-career-applied') renderCareerApplied();
   else if (validScreen === 'screen-external') renderExternal();
@@ -870,17 +952,39 @@ function showScreen(screenId, navEl, updateHistory = true) {
 
 async function loadData() {
   try {
-    const res = await fetch('/api/jobs');
-    allJobs = await res.json();
+    const [resJobs, resLinkedin] = await Promise.all([
+      fetch('/api/jobs').then(r => r.json()),
+      fetch('/api/linkedin-jobs').then(r => r.json()).catch(() => [])
+    ]);
+
+    allJobs = resJobs;
+    linkedinFeedJobs = resLinkedin;
     updateStats();
     
     const currentScreen = localStorage.getItem('activeScreen') || 'screen-dashboard';
     if (currentScreen === 'screen-dashboard') renderDashboard();
+    else if (currentScreen === 'screen-linkedin') renderLinkedIn();
     else if (currentScreen === 'screen-naukri') renderNaukri();
     else if (currentScreen === 'screen-career-applied') renderCareerApplied();
     else if (currentScreen === 'screen-external') renderExternal();
     else if (currentScreen === 'screen-failed') renderFailed();
   } catch (e) { toast('Failed to load tracking data'); }
+}
+
+async function fetchLinkedInFeed() {
+  toast('<i class="fa-solid fa-spinner fa-spin"></i> Fetching Read-Only LinkedIn Jobs (Last 15 Days)...');
+  try {
+    const res = await fetch('/api/fetch-linkedin-jobs', { method: 'POST' });
+    const data = await res.json();
+    if (data.ok) {
+      toast('<i class="fa-solid fa-circle-check"></i> LinkedIn Jobs Updated!');
+      await loadData();
+    } else {
+      toast(data.error || 'Failed to fetch LinkedIn jobs');
+    }
+  } catch (e) {
+    toast('Error fetching LinkedIn jobs');
+  }
 }
 
 function updateStats() {
@@ -889,12 +993,13 @@ function updateStats() {
   const externalJobs  = allJobs.filter(j => j.source === 'external' || j.source === 'manual_external');
   const failedJobs    = allJobs.filter(j => j.status === 'failed');
 
+  document.getElementById('st-linkedin').textContent = linkedinFeedJobs.length;
   document.getElementById('st-applied').textContent = naukriApplied.length;
   document.getElementById('st-career-applied').textContent = careerApplied.length;
   document.getElementById('st-external').textContent = externalJobs.length;
-  document.getElementById('st-failed').textContent = failedJobs.length;
-  document.getElementById('st-total').textContent = allJobs.length;
+  document.getElementById('st-total').textContent = allJobs.length + linkedinFeedJobs.length;
 
+  document.getElementById('nb-linkedin').textContent = linkedinFeedJobs.length;
   document.getElementById('nb-naukri').textContent = naukriApplied.length;
   document.getElementById('nb-career-applied').textContent = careerApplied.length;
   document.getElementById('nb-external').textContent = externalJobs.length;
@@ -920,7 +1025,49 @@ function filterByDate(jobs, exactDateVal) {
 
 function renderDashboard() {}
 
-// ── Screen 2: Naukri Quick Apply ──
+// ── Screen: LinkedIn Read-Only Jobs ──
+function renderLinkedIn() {
+  let q = (document.getElementById('search-linkedin').value || '').toLowerCase().trim();
+  const exactDateVal = document.getElementById('exact-date-linkedin').value;
+  const body = document.getElementById('linkedin-table-body');
+
+  let jobs = [...linkedinFeedJobs];
+  jobs = filterByDate(jobs, exactDateVal);
+
+  if (q) {
+    jobs = jobs.filter(j => {
+      const emailStr = (j.emails || []).join(' ');
+      return (j.company + ' ' + j.title + ' ' + j.location + ' ' + j.description + ' ' + emailStr).toLowerCase().includes(q);
+    });
+  }
+
+  if (!jobs.length) {
+    body.innerHTML = '<tr><td colspan="7" style="text-align:center; padding:36px; color:var(--text-muted);"><i class="fa-brands fa-linkedin" style="font-size:1.8rem; margin-bottom:10px; display:block;"></i>No LinkedIn jobs match the selected filters. Click "Refresh LinkedIn Feed" to scan.</td></tr>';
+    return;
+  }
+
+  body.innerHTML = jobs.map(j => {
+    const dateStr = j.postedAt ? (isNaN(new Date(j.postedAt).getTime()) ? j.postedAt : new Date(j.postedAt).toLocaleDateString('en-IN', { day:'numeric', month:'short', year:'numeric' })) : 'Last 15 Days';
+    const emailList = (j.emails && j.emails.length > 0) ? j.emails : [];
+    const emailHtml = emailList.length > 0 
+      ? emailList.map(em => `<a href="mailto:${esc(em)}?subject=Application%20for%20${encodeURIComponent(j.title)}%20-%20Manoj%20Ambati" class="email-btn" title="Click to mail resume"><i class="fa-solid fa-paper-plane"></i> ${esc(em)}</a>`).join('<br>')
+      : '<span style="color:var(--text-dim); font-size:0.82rem;">Not specified</span>';
+
+    return `
+      <tr>
+        <td style="font-weight:600; color:var(--text-muted);"><i class="fa-regular fa-calendar" style="margin-right:6px;"></i>${esc(dateStr)}</td>
+        <td style="font-weight:700; color:#ffffff;">${esc(j.company)}</td>
+        <td style="font-weight:600;"><span class="badge badge-linkedin" style="margin-right:6px;"><i class="fa-brands fa-linkedin"></i></span>${esc(j.title)}</td>
+        <td style="color:var(--text-muted);"><i class="fa-solid fa-location-dot" style="margin-right:4px;"></i>${esc(j.location || 'India')}</td>
+        <td>${emailHtml}</td>
+        <td><div class="jd-text" title="${esc(j.description)}">${esc(j.description || 'Full JD available on post')}</div></td>
+        <td><a href="${esc(j.postUrl)}" target="_blank" style="color:#ffffff; font-weight:700; text-decoration:none;"><i class="fa-solid fa-arrow-up-right-from-square"></i> View Post Link</a></td>
+      </tr>
+    `;
+  }).join('');
+}
+
+// ── Screen: Naukri Quick Apply ──
 function renderNaukri() {
   let q = (document.getElementById('search-naukri').value || '').toLowerCase().trim();
   if (q.includes('@')) { document.getElementById('search-naukri').value = ''; q = ''; }
@@ -955,7 +1102,7 @@ function renderNaukri() {
   }).join('');
 }
 
-// ── Screen 3: Career Page Applied Jobs ──
+// ── Screen: Career Page Applied Jobs ──
 function renderCareerApplied() {
   let q = (document.getElementById('search-career-applied').value || '').toLowerCase().trim();
   if (q.includes('@')) { document.getElementById('search-career-applied').value = ''; q = ''; }
@@ -990,7 +1137,7 @@ function renderCareerApplied() {
   }).join('');
 }
 
-// ── Screen 4: Naukri External Jobs ──
+// ── Screen: Naukri External Jobs ──
 function renderExternal() {
   let q = (document.getElementById('search-external').value || '').toLowerCase().trim();
   if (q.includes('@')) { document.getElementById('search-external').value = ''; q = ''; }
@@ -1019,7 +1166,7 @@ function renderExternal() {
   `).join('');
 }
 
-// ── Screen 5: Failed Jobs ──
+// ── Screen: Failed Jobs ──
 function renderFailed() {
   let q = (document.getElementById('search-failed') ? document.getElementById('search-failed').value : '').toLowerCase().trim();
   if (q.includes('@')) { if(document.getElementById('search-failed')) document.getElementById('search-failed').value = ''; q = ''; }

@@ -43,7 +43,7 @@ async function fetchLatestOtp(maxAgeSeconds = 180) {
   try {
     const res = await gmail.users.messages.list({
       userId: 'me',
-      q: 'subject:(verification OR OTP OR code OR confirm)',
+      q: 'LinkedIn OR subject:(verification OR OTP OR code OR PIN OR confirm)',
       maxResults: 5,
     });
 

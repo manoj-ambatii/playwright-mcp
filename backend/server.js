@@ -32,10 +32,11 @@ app.post('/api/log-applied', (req, res) => {
   res.json({ ok: true, url: jobUrl, message: 'Successfully logged Naukri quick apply application' });
 });
 
-const JOBS_FILE       = path.join(__dirname, 'data', 'linkedin-jobs.json');
-const NAUKRI_EXT_FILE = path.join(__dirname, 'data', 'naukri-external-jobs.json');
-const TRACKER_FILE    = path.join(__dirname, 'data', 'job-tracker.json');
-const CONFIG_FILE     = path.join(__dirname, 'data', 'config.json');
+const JOBS_FILE              = path.join(__dirname, 'data', 'linkedin-jobs.json');
+const NAUKRI_EXT_FILE        = path.join(__dirname, 'data', 'naukri-external-jobs.json');
+const TRACKER_FILE           = path.join(__dirname, 'data', 'job-tracker.json');
+const CONFIG_FILE            = path.join(__dirname, 'data', 'config.json');
+const LINKEDIN_FEED_JOBS_FILE = path.join(__dirname, 'data', 'linkedin-feed-jobs.json');
 
 const SEARCH_URLS = [
   'https://www.linkedin.com/jobs/search/?keywords=Full%20Stack%20Developer&location=India&f_TPR=r86400&sortBy=DD',
@@ -150,6 +151,27 @@ function loadAllJobs() {
 
   return Array.from(allMap.values());
 }
+
+// ── GET /api/linkedin-jobs ───────────────────────────────────────────────────
+app.get('/api/linkedin-jobs', (_req, res) => {
+  const jobs = fs.existsSync(LINKEDIN_FEED_JOBS_FILE) ? readJson(LINKEDIN_FEED_JOBS_FILE, []) : [];
+  res.json(jobs);
+});
+
+// ── POST /api/fetch-linkedin-jobs ─────────────────────────────────────────────
+app.post('/api/fetch-linkedin-jobs', (req, res) => {
+  const { exec } = require('child_process');
+  const scriptPath = path.join(__dirname, 'scripts', 'fetch-linkedin-feed-jobs.js');
+  
+  exec(`node "${scriptPath}"`, (error, stdout, stderr) => {
+    if (error) {
+      console.error('LinkedIn fetch error:', error);
+      return res.status(500).json({ error: 'Failed to fetch LinkedIn jobs' });
+    }
+    const jobs = fs.existsSync(LINKEDIN_FEED_JOBS_FILE) ? readJson(LINKEDIN_FEED_JOBS_FILE, []) : [];
+    res.json({ ok: true, count: jobs.length, jobs });
+  });
+});
 
 // ── GET /api/config ───────────────────────────────────────────────────────────
 app.get('/api/config', (_req, res) => {
