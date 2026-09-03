@@ -1009,9 +1009,8 @@ function updateStats() {
 function filterByDate(jobs, exactDateVal) {
   if (!exactDateVal) return jobs;
   return jobs.filter(j => {
-    const rawDate = j.appliedAt || j.postedAt || j.capturedAt;
-    if (!rawDate) return false;
-    const d = new Date(rawDate);
+    let d = new Date(j.capturedAt || j.appliedAt);
+    if (isNaN(d.getTime())) d = new Date(j.postedAt);
     if (isNaN(d.getTime())) return false;
 
     const year = d.getFullYear();

@@ -14,12 +14,12 @@ const DATA_FILE = path.join(__dirname, '../data', 'linkedin-feed-jobs.json');
 
 const SEARCH_QUERIES = [
   {
-    role: 'Java Full Stack Developer (Jobs)',
+    role: 'Java Full Stack Developer',
     type: 'jobs',
     url: 'https://www.linkedin.com/jobs/search/?keywords=Java%20Full%20Stack%20Developer&location=India&f_TPR=r1296000&sortBy=DD'
   },
   {
-    role: 'MERN Full Stack Developer (Jobs)',
+    role: 'MERN Full Stack Developer',
     type: 'jobs',
     url: 'https://www.linkedin.com/jobs/search/?keywords=MERN%20Full%20Stack%20Developer&location=India&f_TPR=r1296000&sortBy=DD'
   },
@@ -69,7 +69,7 @@ function saveData(data) {
 
   const page = browser.pages()[0] || await browser.newPage();
   const existingJobs = loadExistingData();
-  const jobMap = new Map(existingJobs.map(j => [j.id || j.postUrl, j]));
+  const jobMap = new Map();
 
   try {
     for (const query of SEARCH_QUERIES) {
@@ -87,19 +87,39 @@ function saveData(data) {
 
       if (query.type === 'jobs') {
         const jobsOnPage = await page.evaluate(() => {
-          const cards = Array.from(document.querySelectorAll('.job-card-container, .jobs-search-results__list-item, .base-card'));
+          const cards = Array.from(document.querySelectorAll('.jobs-search-results-list__list-item, .job-card-container, .jobs-search-results__list-item, div[data-job-id]'));
           return cards.map(c => {
-            const titleEl = c.querySelector('.job-card-list__title, .base-search-card__title, a[data-control-id]');
-            const compEl = c.querySelector('.job-card-container__primary-description, .base-search-card__subtitle');
-            const locEl = c.querySelector('.job-card-container__metadata-item, .job-search-card__location');
-            const timeEl = c.querySelector('time');
-            const linkEl = c.querySelector('a.job-card-list__title, a.base-card__full-link, a[href*="/jobs/view"]');
+            const linkEl = c.querySelector('a[href*="/jobs/view"]');
+            const fullText = c.innerText ? c.innerText.trim() : '';
+            const parts = fullText.split('\n').map(p => p.trim()).filter(Boolean);
+
+            let title = '';
+            let company = '';
+            let location = 'India';
+
+            if (parts.length > 0) title = parts[0].replace(/ with verification/gi, '');
+            if (parts.length > 1) {
+              const compCandidate = parts.find(p => !p.includes('verification') && !p.includes('ago') && !p.includes('alumni') && p !== title);
+              if (compCandidate) company = compCandidate;
+            }
+            if (parts.length > 2) {
+              const locCandidate = parts.find(p => (p.includes('India') || p.includes('Bengaluru') || p.includes('Hyderabad') || p.includes('Mumbai') || p.includes('Gurugram') || p.includes('Remote') || p.includes('Hybrid')) && p !== title && p !== company);
+              if (locCandidate) location = locCandidate;
+            }
+
+            // Fallback parsing via pipe separator if present
+            if (!company && fullText.includes('|')) {
+              const pipeParts = fullText.split('|').map(p => p.trim());
+              if (pipeParts[0]) title = pipeParts[0].replace(/ with verification/gi, '');
+              if (pipeParts[2]) company = pipeParts[2];
+              if (pipeParts[3]) location = pipeParts[3];
+            }
 
             return {
-              title: titleEl ? titleEl.innerText.trim() : '',
-              company: compEl ? compEl.innerText.trim() : '',
-              location: locEl ? locEl.innerText.trim() : 'India',
-              postedAt: timeEl ? timeEl.getAttribute('datetime') || timeEl.innerText.trim() : 'Last 15 days',
+              title: title || 'Full Stack Developer',
+              company: company || 'LinkedIn Employer',
+              location: location || 'India',
+              postedAt: new Date().toISOString(),
               postUrl: linkEl ? linkEl.href : '',
             };
           }).filter(j => j.title && j.postUrl);
@@ -111,76 +131,39 @@ function saveData(data) {
           const item = jobsOnPage[i];
           const key = item.postUrl;
 
-          if (jobMap.has(key) && jobMap.get(key).description) continue;
-
           try {
             await page.goto(item.postUrl, { waitUntil: 'domcontentloaded', timeout: 15000 });
             await sleep(2000);
 
             const fullDetails = await page.evaluate(() => {
-              const descEl = document.querySelector('.jobs-description, .description__text, .show-more-less-html__markup');
-              return descEl ? descEl.innerText.trim() : '';
+              const descEl = document.querySelector('.jobs-description, .description__text, .show-more-less-html__markup, .jobs-search__job-details');
+              const compHeaderEl = document.querySelector('.job-details-jobs-unified-top-card__company-name, .jobs-unified-top-card__company-name');
+              const realCompany = compHeaderEl ? compHeaderEl.innerText.trim() : '';
+              return {
+                description: descEl ? descEl.innerText.trim() : '',
+                realCompany: realCompany
+              };
             });
 
-            const emails = extractEmails(fullDetails);
+            const emails = extractEmails(fullDetails.description);
 
             jobMap.set(key, {
               id: key,
               title: item.title,
-              company: item.company,
+              company: fullDetails.realCompany || item.company,
               location: item.location,
-              postedAt: item.postedAt || new Date().toISOString(),
+              postedAt: item.postedAt,
               capturedAt: new Date().toISOString(),
               postUrl: item.postUrl,
-              description: fullDetails.substring(0, 1500),
+              description: fullDetails.description.substring(0, 1500),
               emails: emails,
               roleCategory: query.role,
             });
-            console.log(`   [${i+1}/${Math.min(jobsOnPage.length, 15)}] Extracted: "${item.title}" @ ${item.company} | Emails: [${emails.join(', ') || 'None'}]`);
+            console.log(`   [${i+1}/${Math.min(jobsOnPage.length, 15)}] Extracted: "${item.title}" @ ${fullDetails.realCompany || item.company} | Emails: [${emails.join(', ') || 'None'}]`);
           } catch (e) {
             console.log(`   [${i+1}] Error reading post: ${e.message}`);
           }
         }
-      } else if (query.type === 'feed') {
-        const feedItems = await page.evaluate(() => {
-          const posts = Array.from(document.querySelectorAll('.feed-shared-update-v2, .search-results-container .artdeco-card'));
-          return posts.map(p => {
-            const authorEl = p.querySelector('.update-components-actor__name, .feed-shared-actor__name');
-            const titleEl = p.querySelector('.update-components-actor__sub-description, .feed-shared-actor__sub-description');
-            const textEl = p.querySelector('.update-components-text, .feed-shared-text');
-            const linkEl = p.querySelector('a[href*="/feed/update/"], a[href*="/posts/"]');
-            const timeEl = p.querySelector('.update-components-actor__sub-description time, time');
-
-            return {
-              company: authorEl ? authorEl.innerText.trim() : 'Recruiter Post',
-              title: titleEl ? titleEl.innerText.trim() : 'Developer Hiring Post',
-              description: textEl ? textEl.innerText.trim() : '',
-              postUrl: linkEl ? linkEl.href : window.location.href,
-              postedAt: timeEl ? timeEl.innerText.trim() : 'Recent Post',
-            };
-          }).filter(p => p.description.length > 20);
-        });
-
-        console.log(`   Found ${feedItems.length} recruiter feed posts for "${query.role}"`);
-
-        feedItems.forEach((item, idx) => {
-          const key = item.postUrl + '_' + idx;
-          const emails = extractEmails(item.description);
-
-          jobMap.set(key, {
-            id: key,
-            title: item.title || 'Full Stack Developer Opportunity',
-            company: item.company || 'LinkedIn Recruiter',
-            location: 'India / Remote',
-            postedAt: item.postedAt || new Date().toISOString(),
-            capturedAt: new Date().toISOString(),
-            postUrl: item.postUrl,
-            description: item.description.substring(0, 1500),
-            emails: emails,
-            roleCategory: query.role,
-          });
-          console.log(`   [Feed ${idx+1}/${feedItems.length}] Scraped post by ${item.company} | Emails: [${emails.join(', ') || 'None'}]`);
-        });
       }
     }
 
@@ -188,8 +171,8 @@ function saveData(data) {
     saveData(updatedList);
 
     console.log('\n==================================================');
-    console.log(`✅ READ-ONLY LINKEDIN FETCH & FEED EXTRACTION COMPLETE!`);
-    console.log(`Total LinkedIn Jobs & Feed Posts Extracted: ${updatedList.length}`);
+    console.log(`✅ READ-ONLY LINKEDIN FETCH & EXTRACTION COMPLETE!`);
+    console.log(`Total LinkedIn Jobs Extracted: ${updatedList.length}`);
     console.log(`Saved to → ${DATA_FILE}`);
     console.log('==================================================');
 
