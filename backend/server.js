@@ -161,12 +161,12 @@ app.get('/api/linkedin-jobs', (_req, res) => {
 // ── POST /api/fetch-linkedin-jobs ─────────────────────────────────────────────
 app.post('/api/fetch-linkedin-jobs', (req, res) => {
   const { exec } = require('child_process');
-  const scriptPath = path.join(__dirname, 'scripts', 'fetch-linkedin-feed-jobs.js');
+  const scriptPath = path.join(__dirname, 'scripts', 'scrape-linkedin-feed-posts.js');
   
   exec(`node "${scriptPath}"`, (error, stdout, stderr) => {
     if (error) {
-      console.error('LinkedIn fetch error:', error);
-      return res.status(500).json({ error: 'Failed to fetch LinkedIn jobs' });
+      console.error('LinkedIn feed scrape error:', error);
+      return res.status(500).json({ error: 'Failed to scrape LinkedIn feed posts' });
     }
     const jobs = fs.existsSync(LINKEDIN_FEED_JOBS_FILE) ? readJson(LINKEDIN_FEED_JOBS_FILE, []) : [];
     res.json({ ok: true, count: jobs.length, jobs });
