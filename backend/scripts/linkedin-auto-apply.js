@@ -54,22 +54,28 @@ const PROFILE = {
   linkedinUrl: 'https://www.linkedin.com/in/manojambati2469/',
 };
 
-// Search URLs tailored for Java Full Stack, Java Backend, Java Developer, Spring Boot
+// Search URLs tailored for Java Full Stack, MERN Stack, Full Stack Developer, Spring Boot, Backend
 const SEARCH_URLS = [
   `https://www.linkedin.com/jobs/search/?keywords=Java%20Full%20Stack%20Developer&location=India&f_TPR=${FRESHNESS}&sortBy=DD`,
+  `https://www.linkedin.com/jobs/search/?keywords=MERN%20Stack%20Developer&location=India&f_TPR=${FRESHNESS}&sortBy=DD`,
+  `https://www.linkedin.com/jobs/search/?keywords=MERN%20Full%20Stack&location=India&f_TPR=${FRESHNESS}&sortBy=DD`,
+  `https://www.linkedin.com/jobs/search/?keywords=Full%20Stack%20Developer&location=India&f_TPR=${FRESHNESS}&sortBy=DD`,
   `https://www.linkedin.com/jobs/search/?keywords=Java%20Backend%20Developer&location=India&f_TPR=${FRESHNESS}&sortBy=DD`,
   `https://www.linkedin.com/jobs/search/?keywords=Spring%20Boot%20Developer&location=India&f_TPR=${FRESHNESS}&sortBy=DD`,
-  `https://www.linkedin.com/jobs/search/?keywords=Java%20Developer&location=India&f_TPR=${FRESHNESS}&sortBy=DD`,
   `https://www.linkedin.com/jobs/search/?keywords=Full%20Stack%20Developer%20Java&location=India&f_TPR=${FRESHNESS}&sortBy=DD`,
   `https://www.linkedin.com/jobs/search/?keywords=Java%20Full%20Stack&location=Hyderabad&f_TPR=${FRESHNESS}&sortBy=DD`,
   `https://www.linkedin.com/jobs/search/?keywords=Java%20Full%20Stack&location=Bengaluru&f_TPR=${FRESHNESS}&sortBy=DD`,
+  `https://www.linkedin.com/jobs/search/?keywords=MERN%20Stack&location=Hyderabad&f_TPR=${FRESHNESS}&sortBy=DD`,
+  `https://www.linkedin.com/jobs/search/?keywords=MERN%20Stack&location=Bengaluru&f_TPR=${FRESHNESS}&sortBy=DD`,
+  `https://www.linkedin.com/jobs/search/?keywords=Full%20Stack%20Developer&location=Hyderabad&f_TPR=${FRESHNESS}&sortBy=DD`,
+  `https://www.linkedin.com/jobs/search/?keywords=Full%20Stack%20Developer&location=Bengaluru&f_TPR=${FRESHNESS}&sortBy=DD`,
   `https://www.linkedin.com/jobs/search/?keywords=Java%20Backend&location=Hyderabad&f_TPR=${FRESHNESS}&sortBy=DD`,
   `https://www.linkedin.com/jobs/search/?keywords=Java%20Backend&location=Bengaluru&f_TPR=${FRESHNESS}&sortBy=DD`,
 ];
 
 // Strict Whitelist & Blacklist for matching roles
-const BLACKLIST_TITLE_REGEX = /\b(caller|telecaller|tele-caller|telesales|call\s*center|voice\s*process|non\s*voice|customer\s*support|bpo|kpo|data\s*entry|sales|hr\s*executive|recruiter|\.net|dot\s*net|dotnet|c#|c\+\+|php|ruby|golang|go\s*developer|python|ios|swift|android|flutter|qa\b|tester|testing|devops|salesforce|sap|mainframe|intern|internship)\b/i;
-const WHITELIST_TITLE_REGEX = /\b(java|spring|spring\s*boot|full\s*stack|fullstack|backend|back\s*end|software\s*engineer|software\s*developer|sde)\b/i;
+const BLACKLIST_TITLE_REGEX = /(?:\b(caller|telecaller|tele-caller|telesales|call\s*center|voice\s*process|non\s*voice|customer\s*support|bpo|kpo|data\s*entry|sales|hr\s*executive|recruiter|dot\s*net|dotnet|php|ruby|golang|go\s*developer|python|ios|swift|android|flutter|qa\b|tester|testing|devops|salesforce|sap|mainframe|intern|internship)\b|(?:\.net\b|c#|c\+\+))/i;
+const WHITELIST_TITLE_REGEX = /\b(java|spring|spring\s*boot|full\s*stack|fullstack|backend|back\s*end|mern|mean|react|node|software\s*engineer|software\s*developer|sde)\b/i;
 
 function isTargetJob(title) {
   if (!title) return false;
@@ -140,7 +146,9 @@ function answerQuestion(label, options = []) {
   if (/years?.*(experience|exp).*(spring|spring boot)/.test(t)) return PROFILE.springBootExp;
   if (/years?.*(experience|exp).*(microservices|micro\s*services)/.test(t)) return PROFILE.springBootExp;
   if (/years?.*(experience|exp).*(react)/.test(t)) return PROFILE.reactExp;
-  if (/years?.*(experience|exp).*(node|nodejs)/.test(t)) return PROFILE.nodeExp;
+  if (/years?.*(experience|exp).*(node|nodejs|express)/.test(t)) return PROFILE.nodeExp;
+  if (/years?.*(experience|exp).*(mern|mean|mongo|mongodb)/.test(t)) return PROFILE.totalExp;
+  if (/years?.*(experience|exp).*(typescript|ts|javascript|js)/.test(t)) return PROFILE.totalExp;
   if (/years?.*(experience|exp).*(sql|mysql)/.test(t)) return PROFILE.mysqlExp;
   if (/years?.*(experience|exp).*(docker)/.test(t)) return PROFILE.dockerExp;
   if (/years?.*(experience|exp).*(aws)/.test(t)) return PROFILE.awsExp;
