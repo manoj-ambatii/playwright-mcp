@@ -56,21 +56,30 @@ const PROFILE = {
 
 // Search URLs tailored for Java Full Stack, MERN Stack, Full Stack Developer, Spring Boot, Backend
 const SEARCH_URLS = [
+  // 1. Dedicated LinkedIn Easy Apply Searches (Guaranteed 1-Click / Modal Easy Apply)
+  `https://www.linkedin.com/jobs/search/?keywords=Java%20Full%20Stack%20Developer&location=India&f_TPR=${FRESHNESS}&f_AL=true&sortBy=DD`,
+  `https://www.linkedin.com/jobs/search/?keywords=MERN%20Stack%20Developer&location=India&f_TPR=${FRESHNESS}&f_AL=true&sortBy=DD`,
+  `https://www.linkedin.com/jobs/search/?keywords=Full%20Stack%20Developer&location=India&f_TPR=${FRESHNESS}&f_AL=true&sortBy=DD`,
+  `https://www.linkedin.com/jobs/search/?keywords=Java%20Backend%20Developer&location=India&f_TPR=${FRESHNESS}&f_AL=true&sortBy=DD`,
+  `https://www.linkedin.com/jobs/search/?keywords=Spring%20Boot%20Developer&location=India&f_TPR=${FRESHNESS}&f_AL=true&sortBy=DD`,
+  `https://www.linkedin.com/jobs/search/?keywords=React%20Node%20Developer&location=India&f_TPR=${FRESHNESS}&f_AL=true&sortBy=DD`,
+  `https://www.linkedin.com/jobs/search/?keywords=Java%20Full%20Stack&location=Hyderabad&f_TPR=${FRESHNESS}&f_AL=true&sortBy=DD`,
+  `https://www.linkedin.com/jobs/search/?keywords=Java%20Full%20Stack&location=Bengaluru&f_TPR=${FRESHNESS}&f_AL=true&sortBy=DD`,
+  `https://www.linkedin.com/jobs/search/?keywords=MERN%20Stack&location=Hyderabad&f_TPR=${FRESHNESS}&f_AL=true&sortBy=DD`,
+  `https://www.linkedin.com/jobs/search/?keywords=MERN%20Stack&location=Bengaluru&f_TPR=${FRESHNESS}&f_AL=true&sortBy=DD`,
+  `https://www.linkedin.com/jobs/search/?keywords=Full%20Stack%20Developer&location=Hyderabad&f_TPR=${FRESHNESS}&f_AL=true&sortBy=DD`,
+  `https://www.linkedin.com/jobs/search/?keywords=Full%20Stack%20Developer&location=Bengaluru&f_TPR=${FRESHNESS}&f_AL=true&sortBy=DD`,
+
+  // 2. All Searches (including External ATS Company Portals)
   `https://www.linkedin.com/jobs/search/?keywords=Java%20Full%20Stack%20Developer&location=India&f_TPR=${FRESHNESS}&sortBy=DD`,
   `https://www.linkedin.com/jobs/search/?keywords=MERN%20Stack%20Developer&location=India&f_TPR=${FRESHNESS}&sortBy=DD`,
-  `https://www.linkedin.com/jobs/search/?keywords=MERN%20Full%20Stack&location=India&f_TPR=${FRESHNESS}&sortBy=DD`,
   `https://www.linkedin.com/jobs/search/?keywords=Full%20Stack%20Developer&location=India&f_TPR=${FRESHNESS}&sortBy=DD`,
   `https://www.linkedin.com/jobs/search/?keywords=Java%20Backend%20Developer&location=India&f_TPR=${FRESHNESS}&sortBy=DD`,
   `https://www.linkedin.com/jobs/search/?keywords=Spring%20Boot%20Developer&location=India&f_TPR=${FRESHNESS}&sortBy=DD`,
-  `https://www.linkedin.com/jobs/search/?keywords=Full%20Stack%20Developer%20Java&location=India&f_TPR=${FRESHNESS}&sortBy=DD`,
   `https://www.linkedin.com/jobs/search/?keywords=Java%20Full%20Stack&location=Hyderabad&f_TPR=${FRESHNESS}&sortBy=DD`,
   `https://www.linkedin.com/jobs/search/?keywords=Java%20Full%20Stack&location=Bengaluru&f_TPR=${FRESHNESS}&sortBy=DD`,
   `https://www.linkedin.com/jobs/search/?keywords=MERN%20Stack&location=Hyderabad&f_TPR=${FRESHNESS}&sortBy=DD`,
   `https://www.linkedin.com/jobs/search/?keywords=MERN%20Stack&location=Bengaluru&f_TPR=${FRESHNESS}&sortBy=DD`,
-  `https://www.linkedin.com/jobs/search/?keywords=Full%20Stack%20Developer&location=Hyderabad&f_TPR=${FRESHNESS}&sortBy=DD`,
-  `https://www.linkedin.com/jobs/search/?keywords=Full%20Stack%20Developer&location=Bengaluru&f_TPR=${FRESHNESS}&sortBy=DD`,
-  `https://www.linkedin.com/jobs/search/?keywords=Java%20Backend&location=Hyderabad&f_TPR=${FRESHNESS}&sortBy=DD`,
-  `https://www.linkedin.com/jobs/search/?keywords=Java%20Backend&location=Bengaluru&f_TPR=${FRESHNESS}&sortBy=DD`,
 ];
 
 // Strict Whitelist & Blacklist for matching roles
@@ -499,12 +508,16 @@ async function collectLinkedInJobs(page, searchUrl) {
   await sleep(3500);
 
   // Progressive scroll to load occluded job cards
-  for (let i = 0; i < 5; i++) {
+  for (let i = 0; i < 8; i++) {
     await page.evaluate(() => {
-      const list = document.querySelector('.scaffold-layout__list, .jobs-search-results-list');
-      if (list) list.scrollBy(0, 1000);
+      const selectors = ['.scaffold-layout__list', '.jobs-search-results-list', 'div[tabindex="-1"].scaffold-layout__list'];
+      for (const sel of selectors) {
+        const el = document.querySelector(sel);
+        if (el) el.scrollBy(0, 1000);
+      }
+      window.scrollBy(0, 800);
     });
-    await sleep(600);
+    await sleep(700);
   }
 
   const jobs = await page.evaluate(() => {
