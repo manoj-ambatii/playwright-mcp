@@ -19,7 +19,7 @@ function getOAuthClient() {
   const oauth2Client = new google.auth.OAuth2(
     clientId,
     clientSecret,
-    'http://localhost:3000/oauth2callback'
+    'http://localhost:3001/oauth2callback'
   );
 
   oauth2Client.setCredentials({ refresh_token: refreshToken });

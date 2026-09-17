@@ -37,6 +37,7 @@ const NAUKRI_EXT_FILE        = path.join(__dirname, 'data', 'naukri-external-job
 const TRACKER_FILE           = path.join(__dirname, 'data', 'job-tracker.json');
 const CONFIG_FILE            = path.join(__dirname, 'data', 'config.json');
 const LINKEDIN_FEED_JOBS_FILE = path.join(__dirname, 'data', 'linkedin-feed-jobs.json');
+const COMPANY_TRACKER_FILE     = path.join(__dirname, 'data', 'company-career-tracker.json');
 
 const SEARCH_URLS = [
   'https://www.linkedin.com/jobs/search/?keywords=Full%20Stack%20Developer&location=India&f_TPR=r86400&sortBy=DD',
@@ -56,6 +57,7 @@ const loadJobs       = () => fs.existsSync(JOBS_FILE)       ? readJson(JOBS_FILE
 const loadNaukriExt  = () => fs.existsSync(NAUKRI_EXT_FILE) ? readJson(NAUKRI_EXT_FILE, [])                                                            : [];
 const loadTracker    = () => fs.existsSync(TRACKER_FILE)    ? readJson(TRACKER_FILE,   { applied:{}, skipped:{}, external:{}, failed:{} })             : { applied:{}, skipped:{}, external:{}, failed:{} };
 const loadConfig     = () => fs.existsSync(CONFIG_FILE)     ? readJson(CONFIG_FILE,    {})                                                             : {};
+const loadCompanyTracker = () => fs.existsSync(COMPANY_TRACKER_FILE) ? readJson(COMPANY_TRACKER_FILE, {})                                                 : {};
 
 // Build a unified job list: LinkedIn jobs + Naukri external jobs + tracker store.
 function loadAllJobs() {
@@ -176,6 +178,26 @@ app.post('/api/fetch-linkedin-jobs', (req, res) => {
 // ── GET /api/config ───────────────────────────────────────────────────────────
 app.get('/api/config', (_req, res) => {
   res.json(loadConfig());
+});
+
+// ── GET /api/company-tracker ─────────────────────────────────────────────────
+app.get('/api/company-tracker', (_req, res) => {
+  res.json(loadCompanyTracker());
+});
+
+// ── POST /api/run-company-careers ────────────────────────────────────────────
+app.post('/api/run-company-careers', (_req, res) => {
+  const { exec } = require('child_process');
+  const scriptPath = path.join(__dirname, 'scripts', 'company-career-apply.js');
+
+  const child = exec(`node "${scriptPath}"`, (error) => {
+    if (error) console.error('Company career apply error:', error.message);
+  });
+
+  child.stdout?.on('data', (d) => process.stdout.write(d));
+  child.stderr?.on('data', (d) => process.stderr.write(d));
+
+  res.json({ ok: true, message: 'Company career auto-apply process started' });
 });
 
 // ── POST /api/manual-job ──────────────────────────────────────────────────────

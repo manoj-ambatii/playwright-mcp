@@ -742,6 +742,29 @@
       </div>
     </div>
 
+    <!-- 🏢 Company Careers Pipeline Card & Live Order Tracker -->
+    <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 22px; margin-bottom: 24px;">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px; flex-wrap: wrap; gap: 12px;">
+        <div>
+          <h3 style="font-family: var(--font-heading); font-size: 1.15rem; font-weight: 700; color: #ffffff; display: flex; align-items: center; gap: 10px;">
+            <i class="fa-solid fa-building-circle-check" style="color: #3b82f6;"></i> Top Service Companies Pipeline (Java Full Stack)
+          </h3>
+          <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 4px;">
+            Sequential order runner • Auto-signups with Naukri credentials • Secret keys stored in .env • Live progress tracking
+          </p>
+        </div>
+        <div style="display: flex; gap: 12px; align-items: center;">
+          <span id="company-pipeline-summary" style="font-size: 0.82rem; color: var(--text-muted); font-weight: 600;">Loading company tracker...</span>
+          <button onclick="triggerCompanyApply()" id="btn-trigger-company-apply" style="background: #2563eb; hover: background: #1d4ed8; color: #ffffff; border: none; padding: 9px 18px; border-radius: 8px; font-weight: 700; font-size: 0.82rem; cursor: pointer; display: flex; align-items: center; gap: 8px; box-shadow: 0 4px 14px rgba(37,99,235,0.3);">
+            <i class="fa-solid fa-play"></i> Run Company Auto-Apply
+          </button>
+        </div>
+      </div>
+      <div id="company-cards-container" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(310px, 1fr)); gap: 14px;">
+        <!-- Filled dynamically by renderCompanyPipeline() -->
+      </div>
+    </div>
+
     <div class="filter-bar">
       <div class="search-box">
         <i class="fa-solid fa-magnifying-glass"></i>
@@ -1102,14 +1125,119 @@ function renderNaukri() {
 }
 
 // ── Screen: Career Page Applied Jobs ──
+async function renderCompanyPipeline() {
+  const container = document.getElementById('company-cards-container');
+  const summaryEl = document.getElementById('company-pipeline-summary');
+  if (!container) return;
+
+  try {
+    const res = await fetch('/api/company-tracker');
+    const data = await res.json();
+    if (!data || !data.companies) return;
+
+    const companies = Object.values(data.companies).sort((a, b) => a.order - b.order);
+    const summary = data.summary || { completedCompanies: 0, totalCompanies: 6, totalJobsApplied: 0 };
+    
+    if (summaryEl) {
+      summaryEl.innerHTML = `<span style="color:#60a5fa; font-weight:700;">${summary.completedCompanies} of ${summary.totalCompanies} Completed</span> • <span style="color:#34d399; font-weight:700;">${summary.totalJobsApplied} Jobs Applied</span>`;
+    }
+
+    container.innerHTML = companies.map(c => {
+      const isCurrent = data.currentCompany === c.name || c.status === 'in_progress';
+      let statusBadge = '';
+      let borderStyle = 'border: 1px solid var(--border);';
+      let bgStyle = 'background: rgba(255,255,255,0.02);';
+
+      if (isCurrent) {
+        statusBadge = '<span style="background: rgba(59,130,246,0.2); color:#60a5fa; border:1px solid #3b82f6; font-size:0.7rem; font-weight:800; padding:2px 8px; border-radius:12px; display:inline-flex; align-items:center; gap:4px;"><i class="fa-solid fa-spinner fa-spin"></i> RUNNING</span>';
+        borderStyle = 'border: 1px solid #3b82f6;';
+        bgStyle = 'background: rgba(59,130,246,0.05);';
+      } else if (c.status === 'completed') {
+        statusBadge = '<span style="background: rgba(16,185,129,0.15); color:#34d399; border:1px solid #10b981; font-size:0.7rem; font-weight:800; padding:2px 8px; border-radius:12px; display:inline-flex; align-items:center; gap:4px;"><i class="fa-solid fa-check"></i> COMPLETED</span>';
+      } else if (c.status === 'failed') {
+        statusBadge = '<span style="background: rgba(239,68,68,0.15); color:#f87171; border:1px solid #ef4444; font-size:0.7rem; font-weight:800; padding:2px 8px; border-radius:12px;"><i class="fa-solid fa-triangle-exclamation"></i> CHECK</span>';
+      } else {
+        statusBadge = '<span style="background: rgba(161,161,170,0.1); color:var(--text-muted); border:1px solid var(--border); font-size:0.7rem; font-weight:700; padding:2px 8px; border-radius:12px;"><i class="fa-solid fa-clock"></i> QUEUED</span>';
+      }
+
+      return `
+        <div style="${bgStyle} ${borderStyle} border-radius: 12px; padding: 14px 16px; display: flex; flex-direction: column; gap: 10px; transition: all 0.2s ease;">
+          <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+            <div>
+              <span style="font-size: 0.72rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;">Company #${c.order}</span>
+              <h4 style="font-size: 1.05rem; font-weight: 700; color: #ffffff; margin-top: 2px;">${esc(c.name)}</h4>
+            </div>
+            ${statusBadge}
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; background: rgba(0,0,0,0.3); padding: 8px 10px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.05);">
+            <div>
+              <div style="font-size: 0.68rem; color: var(--text-dim); text-transform: uppercase;">Jobs Found</div>
+              <div style="font-size: 1rem; font-weight: 800; color: #ffffff;">${c.jobsFound || 0}</div>
+            </div>
+            <div>
+              <div style="font-size: 0.68rem; color: var(--text-dim); text-transform: uppercase;">Applied / Filled</div>
+              <div style="font-size: 1rem; font-weight: 800; color: #34d399;">${c.jobsApplied || 0}</div>
+            </div>
+          </div>
+
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-top: auto; padding-top: 4px;">
+            <span style="font-size: 0.72rem; color: #a1a1aa; display: flex; align-items: center; gap: 5px;">
+              <i class="fa-solid fa-key" style="color: #f59e0b;"></i> ${c.envKey ? '.env Saved' : 'Naukri Creds'}
+            </span>
+            <a href="${esc(c.careersUrl)}" target="_blank" style="font-size: 0.75rem; color: #60a5fa; font-weight: 700; text-decoration: none; display: flex; align-items: center; gap: 4px;">
+              Careers <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 0.7rem;"></i>
+            </a>
+          </div>
+        </div>
+      `;
+    }).join('');
+  } catch (e) {
+    console.error('Failed to load company tracker:', e);
+  }
+}
+
+let companyPollInterval = null;
+
+async function triggerCompanyApply() {
+  const btn = document.getElementById('btn-trigger-company-apply');
+  if (btn) {
+    btn.disabled = true;
+    btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Running Pipeline...';
+    btn.style.opacity = '0.7';
+  }
+
+  try {
+    const res = await fetch('/api/run-company-careers', { method: 'POST' });
+    const result = await res.json();
+    if (result.ok) {
+      // Start polling for updates every 3 seconds
+      if (companyPollInterval) clearInterval(companyPollInterval);
+      companyPollInterval = setInterval(async () => {
+        await renderCompanyPipeline();
+        await fetchStats();
+      }, 3500);
+      renderCompanyPipeline();
+    }
+  } catch (err) {
+    alert('Failed to trigger company apply: ' + err.message);
+    if (btn) {
+      btn.disabled = false;
+      btn.innerHTML = '<i class="fa-solid fa-play"></i> Run Company Auto-Apply';
+      btn.style.opacity = '1';
+    }
+  }
+}
+
 function renderCareerApplied() {
+  renderCompanyPipeline();
   let q = (document.getElementById('search-career-applied').value || '').toLowerCase().trim();
   if (q.includes('@')) { document.getElementById('search-career-applied').value = ''; q = ''; }
   const exactDateVal = document.getElementById('exact-date-career-applied').value;
   const body = document.getElementById('career-applied-table-body');
 
   let jobs = allJobs
-    .filter(j => j.status === 'applied' && (j.source === 'external' || j.source === 'manual_external'))
+    .filter(j => j.status === 'applied' && (j.source === 'external' || j.source === 'manual_external' || j.source === 'company_career'))
     .sort((a, b) => new Date(b.appliedAt || 0) - new Date(a.appliedAt || 0));
 
   jobs = filterByDate(jobs, exactDateVal);

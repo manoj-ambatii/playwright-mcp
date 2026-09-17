@@ -1,0 +1,180 @@
+{
+  "updatedAt": "2026-09-10T10:58:26.094Z",
+  "currentCompany": null,
+  "companies": {
+    "epam": {
+      "order": 1,
+      "id": "epam",
+      "name": "EPAM Systems",
+      "careersUrl": "https://www.epam.com/careers/job-listings?query=Java+Full+Stack&country=India",
+      "status": "completed",
+      "signupStatus": "signed_up",
+      "envKey": "EPAM_PASSWORD",
+      "jobsFound": 3,
+      "jobsApplied": 3,
+      "jobsSkipped": 0,
+      "jobs": [
+        {
+          "title": "Software Engineer - Java Full Stack React",
+          "url": "https://careers.epam.com/en/vacancy/software-engineer-java-full-stack-react-blt1jr66036aesrrgj1_en",
+          "status": "tracked",
+          "date": "2026-09-10T10:54:23.354Z"
+        },
+        {
+          "title": "Software Developer Jobs",
+          "url": "https://careers.epam.com/en/jobs/software-developer-jobs",
+          "status": "tracked",
+          "date": "2026-09-10T10:54:59.478Z"
+        },
+        {
+          "title": "Full Stack Software Engineer Jobs",
+          "url": "https://careers.epam.com/en/jobs/full-stack-software-engineer",
+          "status": "tracked",
+          "date": "2026-09-10T10:55:35.523Z"
+        }
+      ],
+      "error": null,
+      "lastUpdated": "2026-09-10T10:55:37.526Z"
+    },
+    "infosys": {
+      "order": 2,
+      "id": "infosys",
+      "name": "Infosys",
+      "careersUrl": "https://career.infosys.com/joblist?keyword=Java%20Full%20Stack&country=India",
+      "status": "completed",
+      "signupStatus": "signed_up",
+      "envKey": "INFOSYS_PASSWORD",
+      "jobsFound": 1,
+      "jobsApplied": 1,
+      "jobsSkipped": 0,
+      "jobs": [
+        {
+          "title": "Java Full Stack Developer Opening",
+          "url": "https://career.infosys.com/joblist?keyword=Java%20Full%20Stack&country=India",
+          "status": "tracked",
+          "date": "2026-09-10T10:55:56.000Z"
+        }
+      ],
+      "error": null,
+      "lastUpdated": "2026-09-10T10:55:58.006Z"
+    },
+    "cognizant": {
+      "order": 3,
+      "id": "cognizant",
+      "name": "Cognizant",
+      "careersUrl": "https://careers.cognizant.com/global-en/jobs/?keyword=Java+Full+Stack&country=India",
+      "status": "completed",
+      "signupStatus": "signed_up",
+      "envKey": "COGNIZANT_PASSWORD",
+      "jobsFound": 7,
+      "jobsApplied": 5,
+      "jobsSkipped": 0,
+      "jobs": [
+        {
+          "title": "Java Full stack Developer with Angular",
+          "url": "https://careers.cognizant.com/global-en/jobs/00070474919/java-full-stack-developer-with-angular/",
+          "status": "tracked",
+          "date": "2026-09-10T10:56:19.156Z"
+        },
+        {
+          "title": "Java Full Stack Developer",
+          "url": "https://careers.cognizant.com/global-en/jobs/00063967073/java-full-stack-developer/",
+          "status": "tracked",
+          "date": "2026-09-10T10:56:32.961Z"
+        },
+        {
+          "title": "Java Full Stack Developer",
+          "url": "https://careers.cognizant.com/global-en/jobs/00066097842/java-full-stack-developer/",
+          "status": "tracked",
+          "date": "2026-09-10T10:56:46.758Z"
+        },
+        {
+          "title": "Java Fullstack Developer with Angular + AWS",
+          "url": "https://careers.cognizant.com/global-en/jobs/00069356551/java-fullstack-developer-with-angular-plus-aws/",
+          "status": "tracked",
+          "date": "2026-09-10T10:57:00.627Z"
+        },
+        {
+          "title": "Java fullstack developer with Angular + Graphql",
+          "url": "https://careers.cognizant.com/global-en/jobs/00069260651/java-fullstack-developer-with-angular-plus-graphql/",
+          "status": "tracked",
+          "date": "2026-09-10T10:57:14.404Z"
+        }
+      ],
+      "error": null,
+      "lastUpdated": "2026-09-10T10:57:16.409Z"
+    },
+    "accenture": {
+      "order": 4,
+      "id": "accenture",
+      "name": "Accenture",
+      "careersUrl": "https://www.accenture.com/in-en/careers/jobsearch?jk=Java%20Full%20Stack&sb=1",
+      "status": "completed",
+      "signupStatus": "signed_up",
+      "envKey": "ACCENTURE_PASSWORD",
+      "jobsFound": 1,
+      "jobsApplied": 1,
+      "jobsSkipped": 0,
+      "jobs": [
+        {
+          "title": "Java Full Stack Developer Opening",
+          "url": "https://www.accenture.com/in-en/careers/jobsearch?jk=Java%20Full%20Stack&sb=1",
+          "status": "tracked",
+          "date": "2026-09-10T10:57:34.204Z"
+        }
+      ],
+      "error": null,
+      "lastUpdated": "2026-09-10T10:57:36.207Z"
+    },
+    "wipro": {
+      "order": 5,
+      "id": "wipro",
+      "name": "Wipro",
+      "careersUrl": "https://careers.wipro.com/careers-home/jobs?keywords=Java%20Full%20Stack&location=India",
+      "status": "completed",
+      "signupStatus": "signed_up",
+      "envKey": "WIPRO_PASSWORD",
+      "jobsFound": 1,
+      "jobsApplied": 1,
+      "jobsSkipped": 0,
+      "jobs": [
+        {
+          "title": "Java Full Stack Developer Opening",
+          "url": "https://careers.wipro.com/careers-home/jobs?keywords=Java%20Full%20Stack&location=India",
+          "status": "tracked",
+          "date": "2026-09-10T10:57:56.149Z"
+        }
+      ],
+      "error": null,
+      "lastUpdated": "2026-09-10T10:57:58.152Z"
+    },
+    "capgemini": {
+      "order": 6,
+      "id": "capgemini",
+      "name": "Capgemini",
+      "careersUrl": "https://www.capgemini.com/in-en/careers/job-search/?country_code=en-in&keyword=Java%20Full%20Stack",
+      "status": "completed",
+      "signupStatus": "signed_up",
+      "envKey": "CAPGEMINI_PASSWORD",
+      "jobsFound": 1,
+      "jobsApplied": 1,
+      "jobsSkipped": 0,
+      "jobs": [
+        {
+          "title": "Java Full Stack Developer Opening",
+          "url": "https://www.capgemini.com/in-en/careers/job-search/?country_code=en-in&keyword=Java%20Full%20Stack",
+          "status": "tracked",
+          "date": "2026-09-10T10:58:20.953Z"
+        }
+      ],
+      "error": null,
+      "lastUpdated": "2026-09-10T10:58:22.954Z"
+    }
+  },
+  "summary": {
+    "totalCompanies": 6,
+    "completedCompanies": 6,
+    "totalJobsFound": 14,
+    "totalJobsApplied": 12
+  }
+}
